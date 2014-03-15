@@ -1,14 +1,19 @@
 # source brew-installed bash completion
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
+brew_prefix=''
+which brew > /dev/null
+if [ $? == 0 ]; then
+    brew_prefix=`brew --prefix`
+fi
+if [ -f $brew_prefix/etc/bash_completion ]; then
+    . $brew_prefix/etc/bash_completion
 fi
 
-if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
-    . `brew --prefix`/etc/bash_completion.d/git-completion.bash
+if [ -f $brew_prefix/etc/bash_completion.d/git-completion.bash ]; then
+    . $brew_prefix/etc/bash_completion.d/git-completion.bash
 fi
 
-if [ -f `brew --prefix`/etc/bash_completion.d/git-prompt.sh ]; then
-    . `brew --prefix`/etc/bash_completion.d/git-prompt.sh
+if [ -f $brew_prefix/etc/bash_completion.d/git-prompt.sh ]; then
+    . $brew_prefix/etc/bash_completion.d/git-prompt.sh
 fi
 
 

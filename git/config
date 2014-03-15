@@ -42,8 +42,8 @@
   default = current
 
 [user]
-	name = Jeremy Truelove
-	email = jtruelove@gmail.com
+	name = Braden Walker
+	email = braden.w@live.com
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
