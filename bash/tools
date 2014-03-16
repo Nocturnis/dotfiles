@@ -25,3 +25,7 @@ function modUp {
 todo() {
       git commit --allow-empty -m "TODO: $*"
 }
+
+nametab() {
+    echo -ne "\033]0;${1}\007"
+}
