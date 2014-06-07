@@ -77,6 +77,8 @@ alias gsp="git stash pop"
 alias jas="jasmine-node --color"
 alias mtr="sudo mtr"
 
+alias chrome="google-chrome"
+
 # postgres
 alias pg_start="pg_ctl -l /usr/local/var/postgres/server.log start"
 alias pg_stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
