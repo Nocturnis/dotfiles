@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
+# Set up dotfiles on a remote machine.
+# Usage:
+# ./setup_dotfiles_remote [remote machine address]
 
 TOP=$(cd $(dirname $0) && pwd)
 cd $TOP
 
+# Don't copy files beginning with ., e.g. .git
 scp -r [!.]* $1:~/.dotfiles
 ssh $1 "~/.dotfiles/setup_dotfiles"
