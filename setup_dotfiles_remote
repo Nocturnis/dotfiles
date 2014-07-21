@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+TOP=$(cd $(dirname $0) && pwd)
+cd $TOP
+
+scp -r [!.]* $1:~/.dotfiles
+ssh $1 "~/.dotfiles/setup_dotfiles"

@@ -2,6 +2,8 @@
 . ~/.dotfiles/bash/env
 . ~/.dotfiles/bash/aliases
 . ~/.dotfiles/bash/tools
+. ~/.dotfiles/bash/git-prompt.sh
+. ~/.dotfiles/bash/custom
 
 
 # Python
