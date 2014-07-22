@@ -6,6 +6,8 @@
 TOP=$(cd $(dirname $0) && pwd)
 cd $TOP
 
-# Don't copy files beginning with ., e.g. .git
-scp -r [!.]* $1:~/.dotfiles
-ssh $1 "~/.dotfiles/setup_dotfiles"
+cd
+tar -czf dotfiles-for-send.tar.gz .dotfiles/
+scp dotfiles-for-send.tar.gz $1:~/dotfiles.tar.gz
+rm dotfiles-for-send.tar.gz
+ssh $1 "cd && tar -xzf dotfiles.tar.gz && ~/.dotfiles/setup_dotfiles"
