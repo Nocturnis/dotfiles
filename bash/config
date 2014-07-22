@@ -1,18 +1,23 @@
+#!/usr/bin/env bash
+#
 . ~/.dotfiles/bash/colors
 
 HOST=`hostname -s`
 
-# Change prompt color based on hostname
-if [ $HOST = 'paris' ]; then
-  COLOR=$GREEN
-fi
-
 # http://jonisalonen.com/2012/your-bash-prompt-needs-this/
 GLUE="\[\033[G\]"
 
-function checkGit {
-    echo '$(__git_ps1 "%s")'
+function git-branch {
+    GIT_BRANCH=$(__git_ps1 "%s")
+    if [ -n "$GIT_BRANCH" ]; then
+        COLOR=$BRIGHT_BLUEF
+        if [ -n "$(git ls-files --other --error-unmatch --exclude-standard -md)" ]; then
+            COLOR=$BRIGHT_REDF
+        fi
+        printf " $COLOR$GIT_BRANCH"
+    fi
+    echo ""
 }
 
 # Set the prompt to: "[<user>@<host> <pwd> ] "
-export PS1="$GLUE$BRIGHT_BLACK[$COLOR\u$BRIGHT_BLACK@$BRIGHT_WHITE\h $BRIGHT_CYAN\w $BRIGHT_BLUE$(checkGit)$BRIGHT_BLACK] $RESET"
+export PS1="$GLUE$BRIGHT_BLACK[$COLOR\u$BRIGHT_BLACK@$BRIGHT_WHITE\h $BRIGHT_CYAN\w\$(git-branch)$BRIGHT_BLACK] $RESET"
