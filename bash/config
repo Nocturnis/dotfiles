@@ -7,7 +7,7 @@ HOST=`hostname -s`
 # http://jonisalonen.com/2012/your-bash-prompt-needs-this/
 GLUE="\[\033[G\]"
 
-function git-branch {
+function __git_branch {
     GIT_BRANCH=$(__git_ps1 "%s")
     if [ -n "$GIT_BRANCH" ]; then
         COLOR=$BRIGHT_BLUEF
@@ -20,4 +20,4 @@ function git-branch {
 }
 
 # Set the prompt to: "[<user>@<host> <pwd> ] "
-export PS1="$GLUE$BRIGHT_BLACK[$COLOR\u$BRIGHT_BLACK@$BRIGHT_WHITE\h $BRIGHT_CYAN\w\$(git-branch)$BRIGHT_BLACK] $RESET"
+export PS1="$GLUE$BRIGHT_BLACK[$COLOR\u$BRIGHT_BLACK@$BRIGHT_WHITE\h $BRIGHT_CYAN\w\$(__git_branch)$BRIGHT_BLACK] $RESET"
