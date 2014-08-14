@@ -1,29 +1,56 @@
-" How I prefer my tabs/spaces
-set ts=4 sts=4 sw=4 expandtab
+if filereadable(expand("~/.at_google"))
+  source /usr/share/vim/google/google.vim
+  source /usr/share/vim/google/gtags.vim
+  set runtimepath^=~/.vim/bundle/ctrlp.vim
+  Glug grok
+  Glug relatedfiles
+  Glug youcompleteme-google
+
+  " Speed up CtrlP with ag
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ --ignore .git5_specs
+      \ --ignore review
+      \ -g ""'
+  set ts=2 sts=2 sw=2 expandtab
+
+  " <C-]> opens Gtselect in a new window
+  nnoremap <C-]> <C-w>v:exe 'let searchtag= "' . expand('<cword>') . '"' \| :exe 'let @/= "' . searchtag . '"'<CR> \| :exe 'Gtselect ' . searchtag <CR>
+else
+  set ts=4 sts=4 sw=4 expandtab
+endif
+
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 if has('autocmd')
-  
+
   " turn filetype off per the pathogen instructions at
   " http://www.vim.org/scripts/script.php?script_id=2332
   filetype off
-  
+
   call pathogen#runtime_append_all_bundles()
-  
+
   " turn filetype back on after calling pathogen
   filetype on
   filetype plugin on
-  
+
   " set filetypes for a given extension
   au BufRead,BufNewFile *.R set ft=R
   au BufRead,BufNewFile *.snippets set ft=snippet
-  
+
   " local settings for specific filetypes
   au FileType make,snippet setlocal ts=8 sts=8 sw=8 noexpandtab
   au FileType python setlocal ts=4 sts=4 sw=4
-  
+
   " compile coffeescripts on save
   au BufWritePost,FileWritePost *.coffee :silent !coffee -c %
-  
+
 endif
 
 " set the leader key to the comma
@@ -37,6 +64,9 @@ nnoremap <silent> <leader>w :call StripTrailingWhitespaces()<cr>
 
 " toggle invisibles with ,i
 nmap <leader>i :set list!<cr>
+
+" toggle relative line numbering with ,r
+nmap <leader>r :set rnu!<cr>
 
 " toggle cursorline highlighting
 nmap <leader>c :set cursorline!<cr>
@@ -57,7 +87,7 @@ map <leader>v :view %%
 
 " a visual reminder of an 80-character line
 if exists('+colorcolumn')
-  set colorcolumn=140
+  set colorcolumn=81
 else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
@@ -65,6 +95,7 @@ endif
 " don't autofold, but still allow manual folding
 set foldlevel=100
 
+set t_Co=16
 set autoindent
 set smartindent
 set hidden
@@ -82,10 +113,12 @@ set backspace=indent,eol,start " backspace over everything
 
 " mimic TextMate's invisible characters
 set listchars=tab:▸\ ,eol:¬
+" hi NonText ctermfg=red
 
 " show current file (filetype) on the left and 
 " [cursor position line,colum] [number of lines] on the right
 set statusline=%F%m%r%h%w\ (%{&ft})\ %=[%l,%v]\ [%L\ lines]
+highlight StatusLine ctermfg=DarkGray ctermbg=Gray
 
 " show the status line
 set laststatus=2
@@ -93,24 +126,51 @@ set laststatus=2
 syntax enable
 syntax on
 
-colorscheme elflord
-
 "tab stuff
 set switchbuf=usetab,newtab
 set guitablabel=\[%N\]\ %t\ %M
+nmap <leader>t :tabnew<CR>
+nmap <C-L> :tabn<CR>
+nmap <C-H> :tabp<CR>
+function! Tabline()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    let tab = i + 1
+    let winnr = tabpagewinnr(tab)
+    let buflist = tabpagebuflist(tab)
+    let bufnr = buflist[winnr - 1]
+    let bufname = bufname(bufnr)
+    let bufmodified = getbufvar(bufnr, "&mod")
 
-" toggle line numbers
-nmap <C-L> :set invnumber<CR>
+    let s .= '%' . tab . 'T'
+    let s .= '%#TabLineNum#'
+    let s .= ' ' . tab .':'
+    let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+    let s .= (bufname != '' ? ' ' . fnamemodify(bufname, ':t') : '[No Name]')
 
-"""""
-"Nerdtree stuff
-"""""
-"start nerd tree by default
-"autocmd vimenter * NERDTree
-"" on new buffer or vim enter put the cursor in the main window
-"autocmd BufNew * wincmd w
-"autocmd vimenter * wincmd w
-""exit vim if you close the last buffer 
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-""add nerd tree toggle
-"map <C-n> :NERDTreeToggle<CR>
+    if bufmodified
+      let s .= '*'
+    endif
+    let s .= ' %#TabLineFill# '
+  endfor
+
+  let s .= '%#TabLineFill#'
+  return s
+endfunction
+set tabline=%!Tabline()
+highlight TabLineFill   ctermfg=Black     ctermbg=Black     cterm=None
+highlight TabLine       ctermfg=Gray      ctermbg=Black     cterm=None
+highlight TabLineSel    ctermfg=White     ctermbg=None      cterm=None
+highlight TabLineNum    ctermfg=DarkBlue  ctermbg=Black     cterm=None
+
+" coloring
+highlight LineNr        ctermfg=DarkGray  ctermbg=None
+highlight CursorLine                      ctermbg=Black  cterm=None
+highlight CursorLineNr  ctermfg=Gray      ctermbg=None
+highlight NonText       ctermfg=Black
+highlight SpecialKey    ctermfg=Black
+highlight PreProc       ctermfg=DarkMagenta
+highlight javaCommentTitle ctermfg=DarkCyan
+
+highlight ExtraWhitespace ctermbg=Red
+match ExtraWhitespace /\s\+$/

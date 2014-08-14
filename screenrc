@@ -6,10 +6,11 @@ defscrollback 10000
 defutf8 on
 nonblock on
 
-shelltitle "$ |bash"
+shelltitle "bash"
 hardstatus alwayslastline
 #hardstatus string "%{= ky}%-Lw%{=r}%20>%n %t%{= ky}%+Lw %{= ky}%-=| %1` |  %{= kw}%M%d %c%{-} %{=r} ${USER}@%H "
-hardstatus string "%{= kG}[ %{Y}%H %{g}][%= %{= kw}%?%-Lw%?%{g}%n-%t%?(%u)%?%{w}%?%+Lw%?%?%= %{g}][ %{y}%1`%%%{g} ][ %{y}%2`%{g} ][%{y} %D %d.%m. %c %{g}]"
+#hardstatus string "%{= kG}[ %{Y}%H %{g}][%= %{= kw}%?%-Lw%?%{g}%n-%t%?(%u)%?%{w}%?%+Lw%?%?%= %{g}][ %{y}%1`%%%{g} ][ %{y}%2`%{g} ][%{y} %D %d.%m. %c %{g}]"
+hardstatus string "%{= kW} %-w%{= dW}%n %t%{= kW}%+w"
 #hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%1`][%{B} %Y/%m/%d %{W}%c %{g} ]'
 #term xterm-256color
 

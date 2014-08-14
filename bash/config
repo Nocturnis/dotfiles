@@ -10,8 +10,8 @@ GLUE="\[\033[G\]"
 function __git_branch {
     GIT_BRANCH=$(__git_ps1 "%s")
     if [ -n "$GIT_BRANCH" ]; then
-        COLOR=$BRIGHT_BLUEF
-        if [ -n "$(git ls-files --other --error-unmatch --exclude-standard -md)" ]; then
+        COLOR=$BLUEF
+        if [ -n "$(git status --porcelain)" ]; then
             COLOR=$BRIGHT_REDF
         fi
         printf " $COLOR$GIT_BRANCH"
