@@ -96,6 +96,7 @@ endif
 set foldlevel=100
 
 set t_Co=16
+set cursorline
 set autoindent
 set smartindent
 set hidden
@@ -165,7 +166,7 @@ highlight TabLineNum    ctermfg=DarkBlue  ctermbg=Black     cterm=None
 
 " coloring
 highlight LineNr        ctermfg=DarkGray  ctermbg=None
-highlight CursorLine                      ctermbg=Black  cterm=None
+highlight CursorLine                      ctermbg=Black     cterm=None
 highlight CursorLineNr  ctermfg=Gray      ctermbg=None
 highlight NonText       ctermfg=Black
 highlight SpecialKey    ctermfg=Black
