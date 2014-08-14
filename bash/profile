@@ -3,7 +3,7 @@
 . ~/.dotfiles/bash/aliases
 . ~/.dotfiles/bash/tools
 . ~/.dotfiles/bash/git-prompt.sh
-if [ -a "~/.at_google" ]; then
+if [ -e ~/.at_google ]; then
   . ~/.dotfiles/bash/google
 fi
 
