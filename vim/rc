@@ -2,9 +2,13 @@ if filereadable(expand("~/.at_google"))
   source /usr/share/vim/google/google.vim
   source /usr/share/vim/google/gtags.vim
   set runtimepath^=~/.vim/bundle/ctrlp.vim
+  Glug corpweb
   Glug grok
   Glug relatedfiles
   Glug youcompleteme-google
+
+  noremap <leader>cs :CorpWebCs<Space>
+  noremap <leader>cf :CorpWebCsFile<CR>
 
   " Speed up CtrlP with ag
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
@@ -18,13 +22,15 @@ if filereadable(expand("~/.at_google"))
       \ -g ""'
   set ts=2 sts=2 sw=2 expandtab
 
-  " <C-]> opens Gtselect in a new window
-  nnoremap <C-]> <C-w>v:exe 'let searchtag= "' . expand('<cword>') . '"' \| :exe 'let @/= "' . searchtag . '"'<CR> \| :exe 'Gtselect ' . searchtag <CR>
+  " <C-]> opens Gtselect
+  nnoremap <C-]> :exe 'let searchtag= "' . expand('<cword>') . '"' \| :exe 'let @/= "' . searchtag . '"'<CR> \| :exe 'Gtselect ' . searchtag <CR>
+  nnoremap <leader><C-]> <C-W>v<C-W>T<C-]>
+  nnoremap <leader>f :RelatedFiles<CR>
 else
   set ts=4 sts=4 sw=4 expandtab
 endif
 
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+map <C-F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
     \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
     \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
@@ -53,8 +59,8 @@ if has('autocmd')
 
 endif
 
-" set the leader key to the comma
-let mapleader=','
+" set the leader key to the backslash
+let mapleader='\'
 
 " source custom functions
 so ~/.dotfiles/vim/functions
@@ -111,6 +117,8 @@ set ignorecase
 set smartcase
 set scrolloff=5
 set backspace=indent,eol,start " backspace over everything
+set splitbelow
+set splitright
 
 " mimic TextMate's invisible characters
 set listchars=tab:▸\ ,eol:¬
@@ -119,7 +127,6 @@ set listchars=tab:▸\ ,eol:¬
 " show current file (filetype) on the left and 
 " [cursor position line,colum] [number of lines] on the right
 set statusline=%F%m%r%h%w\ (%{&ft})\ %=[%l,%v]\ [%L\ lines]
-highlight StatusLine ctermfg=DarkGray ctermbg=Gray
 
 " show the status line
 set laststatus=2
@@ -131,8 +138,12 @@ syntax on
 set switchbuf=usetab,newtab
 set guitablabel=\[%N\]\ %t\ %M
 nmap <leader>t :tabnew<CR>
-nmap <C-L> :tabn<CR>
-nmap <C-H> :tabp<CR>
+nmap H :tabp<CR>
+nmap L :tabn<CR>
+nmap <C-H> <C-W>h
+nmap <C-J> <C-W>j
+nmap <C-K> <C-W>k
+nmap <C-L> <C-W>l
 function! Tabline()
   let s = ''
   for i in range(tabpagenr('$'))
@@ -147,7 +158,8 @@ function! Tabline()
     let s .= '%#TabLineNum#'
     let s .= ' ' . tab .':'
     let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
-    let s .= (bufname != '' ? ' ' . fnamemodify(bufname, ':t') : '[No Name]')
+    let s .= ' '
+    let s .= (bufname != '' ? fnamemodify(bufname, ':t') : '[No Name]')
 
     if bufmodified
       let s .= '*'
@@ -160,7 +172,7 @@ function! Tabline()
 endfunction
 set tabline=%!Tabline()
 highlight TabLineFill   ctermfg=Black     ctermbg=Black     cterm=None
-highlight TabLine       ctermfg=Gray      ctermbg=Black     cterm=None
+highlight TabLine       ctermfg=DarkGray      ctermbg=Black     cterm=None
 highlight TabLineSel    ctermfg=White     ctermbg=None      cterm=None
 highlight TabLineNum    ctermfg=DarkBlue  ctermbg=Black     cterm=None
 
@@ -168,10 +180,27 @@ highlight TabLineNum    ctermfg=DarkBlue  ctermbg=Black     cterm=None
 highlight LineNr        ctermfg=DarkGray  ctermbg=None
 highlight CursorLine                      ctermbg=Black     cterm=None
 highlight CursorLineNr  ctermfg=Gray      ctermbg=None
+highlight ColorColumn                     ctermbg=Black
 highlight NonText       ctermfg=Black
 highlight SpecialKey    ctermfg=Black
+
 highlight PreProc       ctermfg=DarkMagenta
 highlight javaCommentTitle ctermfg=DarkCyan
 
+highlight DiffAdd       ctermfg=Gray      ctermbg=DarkGreen   cterm=None
+highlight DiffDelete    ctermfg=Gray      ctermbg=LightRed     cterm=None
+highlight DiffChange    ctermfg=Gray      ctermbg=DarkYellow  cterm=None
+highlight DiffText      ctermfg=Gray      ctermbg=DarkGreen   cterm=None
+
 highlight ExtraWhitespace ctermbg=Red
 match ExtraWhitespace /\s\+$/
+
+highlight StatusLine ctermfg=DarkMagenta ctermbg=Gray
+highlight StatusLineNC ctermfg=Black ctermbg=DarkGray
+augroup BgHighlight
+  autocmd!
+  autocmd WinEnter * set colorcolumn=81
+  autocmd WinEnter * set cursorline
+  autocmd WinLeave * set colorcolumn=0
+  autocmd WinLeave * set nocursorline
+augroup END
