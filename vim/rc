@@ -1,34 +1,19 @@
 if filereadable(expand("~/.at_google"))
-  source /usr/share/vim/google/google.vim
-  source /usr/share/vim/google/gtags.vim
-  set runtimepath^=~/.vim/bundle/ctrlp.vim
-  Glug corpweb
-  Glug grok
-  Glug relatedfiles
-  Glug youcompleteme-google
-
-  noremap <leader>cs :CorpWebCs<Space>
-  noremap <leader>cf :CorpWebCsFile<CR>
-
-  " Speed up CtrlP with ag
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore "**/*.pyc"
-      \ --ignore .git5_specs
-      \ --ignore review
-      \ -g ""'
-  set ts=2 sts=2 sw=2 expandtab
-
-  " <C-]> opens Gtselect
-  nnoremap <C-]> :exe 'let searchtag= "' . expand('<cword>') . '"' \| :exe 'let @/= "' . searchtag . '"'<CR> \| :exe 'Gtselect ' . searchtag <CR>
-  nnoremap <leader><C-]> <C-W>v<C-W>T<C-]>
-  nnoremap <leader>f :RelatedFiles<CR>
+  source ~/.dotfiles/vim/google.vim
 else
   set ts=4 sts=4 sw=4 expandtab
 endif
+
+" Speed up CtrlP with ag
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+    \ --ignore .git
+    \ --ignore .svn
+    \ --ignore .hg
+    \ --ignore .DS_Store
+    \ --ignore "**/*.pyc"
+    \ --ignore .git5_specs
+    \ --ignore review
+    \ -g ""'
 
 map <C-F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
     \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
