@@ -56,7 +56,6 @@ if has('autocmd')
 
   " compile coffeescripts on save
   au BufWritePost,FileWritePost *.coffee :silent !coffee -c %
-
 endif
 
 " set the leader key to the backslash
@@ -183,6 +182,11 @@ highlight CursorLineNr  ctermfg=Gray      ctermbg=None
 highlight ColorColumn                     ctermbg=Black
 highlight NonText       ctermfg=Black
 highlight SpecialKey    ctermfg=Black
+highlight SignColumn                      ctermbg=None      cterm=None
+highlight GitGutterAdd ctermfg=DarkGreen ctermbg=DarkGreen cterm=None
+highlight GitGutterChange ctermfg=DarkYellow ctermbg=DarkYellow cterm=None
+highlight GitGutterDelete ctermfg=Red ctermbg=None cterm=Underline
+highlight GitGutterChangeDelete ctermfg=Red ctermbg=Yellow cterm=Underline
 
 highlight PreProc       ctermfg=DarkMagenta
 highlight javaCommentTitle ctermfg=DarkCyan
@@ -196,7 +200,7 @@ highlight ExtraWhitespace ctermbg=Red
 match ExtraWhitespace /\s\+$/
 
 highlight StatusLine ctermfg=DarkMagenta ctermbg=Gray
-highlight StatusLineNC ctermfg=Black ctermbg=DarkGray
+highlight StatusLineNC ctermfg=DarkGray ctermbg=Black cterm=None
 augroup BgHighlight
   autocmd!
   autocmd WinEnter * set colorcolumn=81
