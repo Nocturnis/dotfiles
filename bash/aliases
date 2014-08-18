@@ -20,6 +20,7 @@ alias words="cat /usr/share/dict/web2 /usr/share/dict/web2a"
 if [ "$(ls --color=auto > /dev/null 2>&1 && echo $?)" == "0" ]; then
     alias ls='ls -aGF --color=auto'
     alias ll='ls -lha --color=auto'
+    alias grep='grep --color=auto'
 else
     alias ls='ls -aGF'
     alias ll='ls -lha'
