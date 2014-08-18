@@ -15,6 +15,9 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
     \ --ignore review
     \ -g ""'
 
+" Shortcut for current buffer in new window
+noremap <leader>n :vs<CR><C-W>T
+
 " Opens CtrlP in a new tab
 noremap <leader><C-P> :tabnew<CR>:CtrlP<CR>
 
@@ -45,6 +48,11 @@ if has('autocmd')
 
   " compile coffeescripts on save
   au BufWritePost,FileWritePost *.coffee :silent !coffee -c %
+
+  " Go to last viewed tab
+  let g:lasttab = 1
+  nmap T :exe "tabn ".g:lasttab<CR>
+  au TabLeave * let g:lasttab = tabpagenr()
 endif
 
 " set the leader key to the backslash
@@ -172,7 +180,7 @@ function! Tabline()
     let bufmodified = getbufvar(bufnr, "&mod")
 
     let s .= '%' . tab . 'T'
-    let s .= '%#TabLineNum#'
+    let s .= (tab == tabpagenr() ? '%#TabLineNumSel#' : '%#TabLineNum#')
     let s .= ' ' . tab .':'
     let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
     let s .= ' '
@@ -189,9 +197,10 @@ function! Tabline()
 endfunction
 set tabline=%!Tabline()
 highlight TabLineFill   ctermfg=Black     ctermbg=Black     cterm=None
-highlight TabLine       ctermfg=DarkGray      ctermbg=Black     cterm=None
+highlight TabLine       ctermfg=DarkGray  ctermbg=Black     cterm=None
+highlight TabLineNum    ctermfg=Yellow    ctermbg=Black     cterm=None
 highlight TabLineSel    ctermfg=White     ctermbg=None      cterm=None
-highlight TabLineNum    ctermfg=DarkBlue  ctermbg=Black     cterm=None
+highlight TabLineNumSel ctermfg=LightBlue ctermbg=None      cterm=None
 
 " coloring
 highlight LineNr        ctermfg=DarkGray  ctermbg=None
