@@ -123,35 +123,42 @@ set listchars=tab:▸\ ,eol:¬
 
 " show current file (filetype) on the left and 
 " [cursor position line,colum] [number of lines] on the right
-"function! StatusLineMode(mode)
-"  let cmode=mode()
-"  if cmode == 'v' || cmode == 'V'
-"    highlight StatusLineMode ctermfg=Gray ctermbg=Blue
-"    return 'Visual'
-"  elseif cmode == 'R'
-"    highlight StatusLineMode ctermfg=Gray ctermbg=Yellow
-"    return 'Replace'
-"  elseif cmode == 'i'
-"    highlight StatusLineMode ctermfg=Gray ctermbg=LightGreen
-"    return 'Insert'
-"  else
-"    highlight StatusLineMode ctermfg=DarkGray ctermbg=Gray
-"    return 'Normal'
-"  end
-"endfunction
-"function! Status(i)
-"  return '%#StatusLineMode# %{StatusLineMode(v:insertmode)} %#StatusLine# %F%m%r%h%w %=[%l,%v] [%L lines]'
-"endfunction
-"function! s:RefreshStatus()
-"  for nr in range(1, winnr('$'))
-"    call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
-"  endfor
-"endfunction
-"augroup status
-"  autocmd!
-"  autocmd VimEnter,WinEnter,BufWinEnter,InsertEnter,InsertLeave * call <SID>RefreshStatus()
-"augroup END
-set statusline=\ %F%m%r%h%w\ %=%l,%v\ \ %L\ lines\ 
+function! StatusLineMode(mode)
+  let cmode=mode()
+  if cmode == 'v' || cmode == 'V'
+    highlight StatusLineMode ctermfg=Gray ctermbg=Blue
+    return 'Visual'
+  elseif cmode == 'R'
+    highlight StatusLineMode ctermfg=Gray ctermbg=Yellow
+    return 'Replace'
+  elseif cmode == 'i'
+    highlight StatusLineMode ctermfg=Gray ctermbg=LightGreen
+    return 'Insert'
+  else
+    highlight StatusLineMode ctermfg=DarkGray ctermbg=Gray
+    return 'Normal'
+  end
+endfunction
+function! Status(i)
+  let s = ''
+  if winnr() == a:i
+    let s .= '%#StatusLineMode# %{StatusLineMode(v:insertmode)} %#StatusLine#'
+  else
+    let s .= '%#StatusLineNC#'
+  end
+  let s .= ' %F%m%r%h%w %=%l, %v  %L lines '
+  return s
+endfunction
+function! s:RefreshStatus()
+  for nr in range(1, winnr('$'))
+    call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
+  endfor
+endfunction
+augroup status
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter,InsertEnter,InsertLeave * call <SID>RefreshStatus()
+augroup END
+"set statusline=\ %F%m%r%h%w\ %=%l,%v\ \ %L\ lines\ 
 
 " show the status line
 set laststatus=2
@@ -214,6 +221,7 @@ highlight GitGutterAdd ctermfg=DarkGreen ctermbg=DarkGreen cterm=None
 highlight GitGutterChange ctermfg=DarkYellow ctermbg=DarkYellow cterm=None
 highlight GitGutterDelete ctermfg=Red ctermbg=None cterm=None
 highlight GitGutterChangeDelete ctermfg=Red ctermbg=Yellow cterm=None
+highlight Search ctermfg=Black ctermbg=Yellow
 
 highlight PreProc       ctermfg=DarkMagenta
 highlight javaCommentTitle ctermfg=DarkCyan
