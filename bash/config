@@ -7,6 +7,32 @@ HOST=`hostname -s`
 # http://jonisalonen.com/2012/your-bash-prompt-needs-this/
 GLUE="\[\033[G\]"
 
+SELF_USER="bradenw"
+G_LAPTOP_NAME="bradenw-macbookpro"
+
+function __user_and_host {
+    USER_PRINTED=""
+    if [ $USER == "root" ]; then
+        USER_PRINTED="$REDF$USER"
+    elif [ $USER != $SELF_USER ]; then
+        USER_PRINTED="$BRIGHT_WHITEF$USER"
+    fi
+    HOST_PRINTED="$BRIGHT_WHITEF$HOST"
+    if [ $HOST == $G_LAPTOP_NAME ]; then
+        HOST_PRINTED="${BRIGHT_BLACKF}g-mbp"
+    fi
+    printf "$USER_PRINTED$BLACKF@$HOST_PRINTED"
+}
+
+function __working_dir {
+    PWD=$(pwd)
+
+    # If path is subdirectory of home, replace home path with ~
+    HOME=$(cd ~ && pwd)
+    PWD=${PWD/#"$HOME"/"~"}
+    printf "${BRIGHT_WHITEF}${PWD}"
+}
+
 function __git_branch {
     GIT_BRANCH=$(__git_ps1 "%s")
     if [ -n "$GIT_BRANCH" ]; then
@@ -19,5 +45,9 @@ function __git_branch {
     echo ""
 }
 
-# Set the prompt to: "[<user>@<host> <pwd> ] "
-export PS1="$GLUE$BRIGHT_BLACK[$COLOR\u$BRIGHT_BLACK@$BRIGHT_WHITE\h $BRIGHT_CYAN\w\$(__git_branch)$BRIGHT_BLACK] $RESET"
+function __prompt_command {
+    printf "\n$GLUEF$BLACKF/ $BLUEF//$BRIGHT_BLACKF $(date +%T) $(__user_and_host) $(__working_dir)$(__git_branch)$BLACKF / \n"
+    PS1=" $BLUE// $BLACK> $RESET"
+}
+
+PROMPT_COMMAND=__prompt_command
