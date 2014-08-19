@@ -15,17 +15,6 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
     \ --ignore review
     \ -g ""'
 
-" Shortcut for current buffer in new window
-noremap <leader>n :vs<CR><C-W>T
-
-" Opens CtrlP in a new tab
-noremap <leader><C-P> :tabnew<CR>:CtrlP<CR>
-
-" Show highlight group information
-map <C-F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 if has('autocmd')
 
   " turn filetype off per the pathogen instructions at
@@ -53,6 +42,12 @@ if has('autocmd')
   let g:lasttab = 1
   nmap T :exe "tabn ".g:lasttab<CR>
   au TabLeave * let g:lasttab = tabpagenr()
+
+  let g:gitgutter_sign_added='++'
+  let g:gitgutter_sign_modified='~~'
+  let g:gitgutter_sign_removed='__'
+  let g:gitgutter_sign_removed_first_line='‾‾'
+  let g:gitgutter_sign_modified_removed='__'
 endif
 
 " set the leader key to the backslash
@@ -86,6 +81,17 @@ nmap <ret> :nohlsearch<cr>
 cnoremap %% <c-r>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
+
+" open current buffer in new tab
+noremap <leader>n :vs<CR><C-W>T
+
+" opens CtrlP in a new tab
+noremap <leader><C-P> :tabnew<CR>:CtrlP<CR>
+
+" show highlight group information
+map <C-F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " a visual reminder of an 80-character line
 if exists('+colorcolumn')
@@ -203,13 +209,14 @@ function! Tabline()
   return s
 endfunction
 set tabline=%!Tabline()
+
+" coloring
 highlight TabLineFill   ctermfg=Black     ctermbg=Black     cterm=None
 highlight TabLine       ctermfg=DarkGray  ctermbg=Black     cterm=None
 highlight TabLineNum    ctermfg=Yellow    ctermbg=Black     cterm=None
 highlight TabLineSel    ctermfg=White     ctermbg=None      cterm=None
 highlight TabLineNumSel ctermfg=LightBlue ctermbg=None      cterm=None
 
-" coloring
 highlight LineNr        ctermfg=DarkGray  ctermbg=None
 highlight CursorLine                      ctermbg=Black     cterm=None
 highlight CursorLineNr  ctermfg=Gray      ctermbg=None
