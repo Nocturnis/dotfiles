@@ -85,6 +85,9 @@ map <leader>v :view %%
 " open current buffer in new tab
 noremap <leader>n :vs<CR><C-W>T
 
+" move current buffer to new tab
+noremap <leader>T <C-W>T
+
 " opens CtrlP in a new tab
 noremap <leader><C-P> :tabnew<CR>:CtrlP<CR>
 
@@ -135,10 +138,10 @@ function! StatusLineMode(mode)
     highlight StatusLineMode ctermfg=Gray ctermbg=Blue
     return 'Visual'
   elseif cmode == 'R'
-    highlight StatusLineMode ctermfg=Gray ctermbg=Yellow
+    highlight StatusLineMode ctermfg=Black ctermbg=Yellow
     return 'Replace'
   elseif cmode == 'i'
-    highlight StatusLineMode ctermfg=Gray ctermbg=LightGreen
+    highlight StatusLineMode ctermfg=Black ctermbg=LightGreen
     return 'Insert'
   else
     highlight StatusLineMode ctermfg=DarkGray ctermbg=Gray
@@ -152,7 +155,10 @@ function! Status(i)
   else
     let s .= '%#StatusLineNC#'
   end
-  let s .= ' %F%m%r%h%w %=%l, %v  %L lines '
+  let s .= ' %F%m%r%h%w '
+  if winnr() == a:i
+    let s .= '%=%#StatusLinePosition# col %v, line %l / %L '
+  end
   return s
 endfunction
 function! s:RefreshStatus()
@@ -164,7 +170,6 @@ augroup status
   autocmd!
   autocmd VimEnter,WinEnter,BufWinEnter,InsertEnter,InsertLeave * call <SID>RefreshStatus()
 augroup END
-"set statusline=\ %F%m%r%h%w\ %=%l,%v\ \ %L\ lines\ 
 
 " show the status line
 set laststatus=2
@@ -188,20 +193,29 @@ function! Tabline()
     let tab = i + 1
     let winnr = tabpagewinnr(tab)
     let buflist = tabpagebuflist(tab)
-    let bufnr = buflist[winnr - 1]
-    let bufname = bufname(bufnr)
-    let bufmodified = getbufvar(bufnr, "&mod")
+    let buftitles = []
+    for j in range(len(buflist))
+      let bufnr = buflist[j]
+      let bufname = fnamemodify(bufname(buflist[j]), ':t')
+      if bufname == ''
+        let bufname = '[No Name]'
+      endif
+      let bufmodified = getbufvar(bufnr, "&mod")
+      let buftitle = bufname
+      if bufmodified
+        let buftitle .= '*'
+      endif
+      call add(buftitles, buftitle)
+    endfor
+    let tabname = join(buftitles, ', ')
 
     let s .= '%' . tab . 'T'
     let s .= (tab == tabpagenr() ? '%#TabLineNumSel#' : '%#TabLineNum#')
-    let s .= ' ' . tab .':'
+    let s .= ' ' . tab
     let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
     let s .= ' '
-    let s .= (bufname != '' ? fnamemodify(bufname, ':t') : '[No Name]')
+    let s .= tabname
 
-    if bufmodified
-      let s .= '*'
-    endif
     let s .= ' %#TabLineFill# '
   endfor
 
@@ -225,24 +239,30 @@ highlight NonText       ctermfg=Black
 highlight SpecialKey    ctermfg=Black
 highlight SignColumn                      ctermbg=None      cterm=None
 highlight GitGutterAdd ctermfg=DarkGreen ctermbg=DarkGreen cterm=None
-highlight GitGutterChange ctermfg=DarkYellow ctermbg=DarkYellow cterm=None
+highlight GitGutterChange ctermfg=Yellow ctermbg=Yellow cterm=None
 highlight GitGutterDelete ctermfg=Red ctermbg=None cterm=None
 highlight GitGutterChangeDelete ctermfg=Red ctermbg=Yellow cterm=None
 highlight Search ctermfg=Black ctermbg=Yellow
 
-highlight PreProc       ctermfg=DarkMagenta
-highlight javaCommentTitle ctermfg=DarkCyan
+highlight PreProc       ctermfg=DarkGray
+highlight Constant       ctermfg=DarkMagenta
+highlight Comment       ctermfg=DarkCyan
+highlight javaCommentTitle ctermfg=Blue
+highlight javaDocParam ctermfg=Blue
+highlight javaString ctermfg=Magenta
 
 highlight DiffAdd       ctermfg=Gray      ctermbg=DarkGreen   cterm=None
 highlight DiffDelete    ctermfg=Gray      ctermbg=LightRed     cterm=None
 highlight DiffChange    ctermfg=Gray      ctermbg=DarkYellow  cterm=None
 highlight DiffText      ctermfg=Gray      ctermbg=DarkGreen   cterm=None
 
-highlight ExtraWhitespace ctermbg=Red
-match ExtraWhitespace /\s\+$/
+highlight trailingWhitespace ctermbg=Red
+"highlight ExtraWhitespace ctermbg=Red
+"match ExtraWhitespace /\s\+$/
 
 highlight StatusLine ctermfg=DarkMagenta ctermbg=Gray
 highlight StatusLineNC ctermfg=DarkGray ctermbg=Black cterm=None
+highlight StatusLinePosition ctermfg=Gray ctermbg=DarkGray cterm=None
 augroup BgHighlight
   autocmd!
   autocmd WinEnter * set colorcolumn=81
