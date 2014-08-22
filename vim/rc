@@ -250,6 +250,7 @@ highlight Comment       ctermfg=DarkCyan
 highlight javaCommentTitle ctermfg=Blue
 highlight javaDocParam ctermfg=Blue
 highlight javaString ctermfg=Magenta
+highlight javaScriptStringS ctermfg=Magenta
 
 highlight DiffAdd       ctermfg=Gray      ctermbg=DarkGreen   cterm=None
 highlight DiffDelete    ctermfg=Gray      ctermbg=LightRed     cterm=None
