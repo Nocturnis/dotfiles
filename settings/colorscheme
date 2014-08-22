@@ -1,0 +1,7 @@
+            black   red     green   yellow  blue    purple  cyan    white
+        +-----------------------------------------------------------------
+normal  |   1b444e  cb4c16  859900  b58900  268bd2  6c70c4  2aa198  c9cece
+bright  |   657b83  e66f3c  a3b814  deac0f  4b9fda  9599dc  4bb8b0  eee8d5
+        +-----------------------------------------------------------------
+fg      |   839496
+bg      |   002b36
