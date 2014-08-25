@@ -38,7 +38,7 @@ function __git_branch {
     if [ -n "$GIT_BRANCH" ]; then
         COLOR=$BLUEF
         if [ -n "$(git status --porcelain)" ]; then
-            COLOR=$BRIGHT_REDF
+            COLOR=$REDF
         fi
         printf " $COLOR$GIT_BRANCH"
     fi
