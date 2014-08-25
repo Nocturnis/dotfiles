@@ -25,7 +25,7 @@ else
     alias ls='ls -aGF'
     alias ll='ls -lha'
 fi
-alias ag="ag --color-match \"1;35\""
+alias ag="ag --color-match \"0;35\""
 alias df='df -h'
 alias du='du -h'
 alias a="alias"
