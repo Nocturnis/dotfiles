@@ -20,7 +20,8 @@ highlight Search ctermfg=Black ctermbg=Yellow
 highlight PreProc       ctermfg=DarkGray
 highlight Constant       ctermfg=DarkMagenta
 highlight Comment       ctermfg=DarkCyan
-highlight javaCommentTitle ctermfg=Blue
+highlight Operator       ctermfg=DarkGray
+highlight javaCommentTitle ctermfg=DarkBlue
 highlight javaDocComment ctermfg=Blue
 highlight javaDocParam ctermfg=Magenta
 highlight javaDocTags ctermfg=DarkCyan
@@ -28,7 +29,7 @@ highlight javaString ctermfg=Magenta
 highlight javaScriptStringS ctermfg=Magenta
 
 highlight DiffAdd       ctermfg=Gray      ctermbg=DarkGreen   cterm=None
-highlight DiffDelete    ctermfg=Gray      ctermbg=LightRed     cterm=None
+highlight DiffDelete    ctermfg=Gray      ctermbg=Red         cterm=None
 highlight DiffChange    ctermfg=Gray      ctermbg=DarkYellow  cterm=None
 highlight DiffText      ctermfg=Gray      ctermbg=DarkGreen   cterm=None
 
