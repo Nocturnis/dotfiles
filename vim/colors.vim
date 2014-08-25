@@ -21,7 +21,9 @@ highlight PreProc       ctermfg=DarkGray
 highlight Constant       ctermfg=DarkMagenta
 highlight Comment       ctermfg=DarkCyan
 highlight javaCommentTitle ctermfg=Blue
-highlight javaDocParam ctermfg=Blue
+highlight javaDocComment ctermfg=Blue
+highlight javaDocParam ctermfg=Magenta
+highlight javaDocTags ctermfg=DarkCyan
 highlight javaString ctermfg=Magenta
 highlight javaScriptStringS ctermfg=Magenta
 
@@ -32,6 +34,6 @@ highlight DiffText      ctermfg=Gray      ctermbg=DarkGreen   cterm=None
 
 highlight trailingWhitespace ctermbg=Red
 
-highlight StatusLine ctermfg=DarkMagenta ctermbg=Gray
+highlight StatusLine ctermfg=DarkMagenta ctermbg=Black
 highlight StatusLineNC ctermfg=DarkGray ctermbg=Black cterm=None
 highlight StatusLinePosition ctermfg=Gray ctermbg=DarkGray cterm=None
