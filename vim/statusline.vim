@@ -22,7 +22,7 @@ function! Status(i)
   else
     let s .= '%#StatusLineNC#'
   end
-  let s .= ' %F%m%r%h%w '
+  let s .= ' %f%m%r%h%w '
   if winnr() == a:i
     let s .= '%=%#StatusLinePosition# col %v, line %l / %L '
   end
