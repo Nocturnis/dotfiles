@@ -33,7 +33,7 @@ highlight DiffDelete              ctermfg=Gray        ctermbg=LightRed    cterm=
 highlight DiffChange              ctermfg=Gray        ctermbg=DarkYellow  cterm=None
 highlight DiffText                ctermfg=Gray        ctermbg=DarkGreen   cterm=None
 
-highlight trailingWhitespace                          ctermbg=Red
+highlight trailingWhitespace                          ctermbg=DarkRed
 
 highlight StatusLine              ctermfg=DarkMagenta ctermbg=Black
 highlight StatusLineNC            ctermfg=DarkGray    ctermbg=Black       cterm=None
