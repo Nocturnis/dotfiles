@@ -13,8 +13,8 @@ highlight SpecialKey    ctermfg=Black
 highlight SignColumn                      ctermbg=None      cterm=None
 highlight GitGutterAdd ctermfg=DarkGreen ctermbg=DarkGreen cterm=None
 highlight GitGutterChange ctermfg=Yellow ctermbg=Yellow cterm=None
-highlight GitGutterDelete ctermfg=Red ctermbg=None cterm=None
-highlight GitGutterChangeDelete ctermfg=Red ctermbg=Yellow cterm=None
+highlight GitGutterDelete ctermfg=DarkRed ctermbg=None cterm=None
+highlight GitGutterChangeDelete ctermfg=DarkRed ctermbg=Yellow cterm=None
 highlight Search ctermfg=Black ctermbg=Yellow
 
 highlight PreProc       ctermfg=DarkGray
@@ -29,7 +29,7 @@ highlight javaString ctermfg=Magenta
 highlight javaScriptStringS ctermfg=Magenta
 
 highlight DiffAdd       ctermfg=Gray      ctermbg=DarkGreen   cterm=None
-highlight DiffDelete    ctermfg=Gray      ctermbg=Red         cterm=None
+highlight DiffDelete    ctermfg=Gray      ctermbg=LightRed    cterm=None
 highlight DiffChange    ctermfg=Gray      ctermbg=DarkYellow  cterm=None
 highlight DiffText      ctermfg=Gray      ctermbg=DarkGreen   cterm=None
 
