@@ -130,49 +130,6 @@ set updatetime=1200
 set listchars=tab:▸\ ,eol:¬
 " hi NonText ctermfg=red
 
-" show current file (filetype) on the left and 
-" [cursor position line,colum] [number of lines] on the right
-function! StatusLineMode(mode)
-  let cmode=mode()
-  if cmode == 'v' || cmode == 'V'
-    highlight StatusLineMode ctermfg=Gray ctermbg=Blue
-    return 'Visual'
-  elseif cmode == 'R'
-    highlight StatusLineMode ctermfg=Black ctermbg=Yellow
-    return 'Replace'
-  elseif cmode == 'i'
-    highlight StatusLineMode ctermfg=Black ctermbg=LightGreen
-    return 'Insert'
-  else
-    highlight StatusLineMode ctermfg=DarkGray ctermbg=Gray
-    return 'Normal'
-  end
-endfunction
-function! Status(i)
-  let s = ''
-  if winnr() == a:i
-    let s .= '%#StatusLineMode# %{StatusLineMode(v:insertmode)} %#StatusLine#'
-  else
-    let s .= '%#StatusLineNC#'
-  end
-  let s .= ' %F%m%r%h%w '
-  if winnr() == a:i
-    let s .= '%=%#StatusLinePosition# col %v, line %l / %L '
-  end
-  return s
-endfunction
-function! s:RefreshStatus()
-  for nr in range(1, winnr('$'))
-    call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
-  endfor
-endfunction
-augroup status
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter,InsertEnter,InsertLeave * call <SID>RefreshStatus()
-augroup END
-
-" show the status line
-set laststatus=2
 
 syntax enable
 syntax on
@@ -187,83 +144,11 @@ nmap <C-H> <C-W>h
 nmap <C-J> <C-W>j
 nmap <C-K> <C-W>k
 nmap <C-L> <C-W>l
-function! Tabline()
-  let s = ''
-  for i in range(tabpagenr('$'))
-    let tab = i + 1
-    let winnr = tabpagewinnr(tab)
-    let buflist = tabpagebuflist(tab)
-    let buftitles = []
-    for j in range(len(buflist))
-      let bufnr = buflist[j]
-      let bufname = fnamemodify(bufname(buflist[j]), ':t')
-      if bufname == ''
-        let bufname = '[No Name]'
-      endif
-      let bufmodified = getbufvar(bufnr, "&mod")
-      let buftitle = bufname
-      if bufmodified
-        let buftitle .= '*'
-      endif
-      call add(buftitles, buftitle)
-    endfor
-    let tabname = join(buftitles, ', ')
 
-    let s .= '%' . tab . 'T'
-    let s .= (tab == tabpagenr() ? '%#TabLineNumSel#' : '%#TabLineNum#')
-    let s .= ' ' . tab
-    let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
-    let s .= ' '
-    let s .= tabname
+source ~/.dotfiles/vim/tabline.vim
+source ~/.dotfiles/vim/statusline.vim
+source ~/.dotfiles/vim/colors.vim
 
-    let s .= ' %#TabLineFill# '
-  endfor
-
-  let s .= '%#TabLineFill#'
-  return s
-endfunction
-set tabline=%!Tabline()
-
-" coloring
-highlight TabLineFill   ctermfg=Black     ctermbg=Black     cterm=None
-highlight TabLine       ctermfg=DarkGray  ctermbg=Black     cterm=None
-highlight TabLineNum    ctermfg=Yellow    ctermbg=Black     cterm=None
-highlight TabLineSel    ctermfg=White     ctermbg=None      cterm=None
-highlight TabLineNumSel ctermfg=LightBlue ctermbg=None      cterm=None
-
-highlight LineNr        ctermfg=DarkGray  ctermbg=None
-highlight CursorLine                      ctermbg=Black     cterm=None
-highlight CursorLineNr  ctermfg=Gray      ctermbg=None
-highlight ColorColumn                     ctermbg=Black
-highlight NonText       ctermfg=Black
-highlight SpecialKey    ctermfg=Black
-highlight SignColumn                      ctermbg=None      cterm=None
-highlight GitGutterAdd ctermfg=DarkGreen ctermbg=DarkGreen cterm=None
-highlight GitGutterChange ctermfg=Yellow ctermbg=Yellow cterm=None
-highlight GitGutterDelete ctermfg=Red ctermbg=None cterm=None
-highlight GitGutterChangeDelete ctermfg=Red ctermbg=Yellow cterm=None
-highlight Search ctermfg=Black ctermbg=Yellow
-
-highlight PreProc       ctermfg=DarkGray
-highlight Constant       ctermfg=DarkMagenta
-highlight Comment       ctermfg=DarkCyan
-highlight javaCommentTitle ctermfg=Blue
-highlight javaDocParam ctermfg=Blue
-highlight javaString ctermfg=Magenta
-highlight javaScriptStringS ctermfg=Magenta
-
-highlight DiffAdd       ctermfg=Gray      ctermbg=DarkGreen   cterm=None
-highlight DiffDelete    ctermfg=Gray      ctermbg=LightRed     cterm=None
-highlight DiffChange    ctermfg=Gray      ctermbg=DarkYellow  cterm=None
-highlight DiffText      ctermfg=Gray      ctermbg=DarkGreen   cterm=None
-
-highlight trailingWhitespace ctermbg=Red
-"highlight ExtraWhitespace ctermbg=Red
-"match ExtraWhitespace /\s\+$/
-
-highlight StatusLine ctermfg=DarkMagenta ctermbg=Gray
-highlight StatusLineNC ctermfg=DarkGray ctermbg=Black cterm=None
-highlight StatusLinePosition ctermfg=Gray ctermbg=DarkGray cterm=None
 augroup BgHighlight
   autocmd!
   autocmd WinEnter * set colorcolumn=81
