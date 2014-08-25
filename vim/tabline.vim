@@ -25,7 +25,7 @@ function! ShortenFilepaths(filepaths)
         endif
         let title_set[info.title] = 1
       endfor
-      
+
       if !disambiguated
         for info in info_list
           let info.title = fnamemodify(info.remaining_path, ':t') . '/' . info.title
@@ -44,7 +44,7 @@ function! ShortenFilepaths(filepaths)
   return results
 endfunction
 
-" Returns a list with all the duplicates in list removed.  The ordering of the 
+" Returns a list with all the duplicates in list removed.  The ordering of the
 " result is arbitrary.
 function! RemoveDuplicates(list)
   let d = {}
@@ -60,7 +60,7 @@ endfunction
 
 function! Tabline()
   let buffer_filepaths = []
-  for i in range(bufnr('$'))
+  for i in range(bufnr('$') + 1)
     if bufexists(i) && buflisted(i)
       let bufname = bufname(i)
       if bufname != ''
