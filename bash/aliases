@@ -13,7 +13,7 @@ alias tls="racket -f $HOME/Projects/scheme/TLS/base.scm -i"
 # handy for grepping words from the dictionary
 alias words="cat /usr/share/dict/web2 /usr/share/dict/web2a"
 
-
+alias eclimd="~/.eclipse/org.eclipse.platform_4.4.0_1906475983_linux_gtk_x86_64/eclimd"
 
 # laziness
 # Ubuntu needs --color=auto, OSX prints an error message every time
