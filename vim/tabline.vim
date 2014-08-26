@@ -61,7 +61,7 @@ endfunction
 function! Tabline()
   let buffer_filepaths = []
   for i in range(bufnr('$') + 1)
-    if bufexists(i) && buflisted(i)
+    if bufexists(i) && buflisted(i) && bufloaded(i)
       let bufname = bufname(i)
       if bufname != ''
         call add(buffer_filepaths, fnamemodify(bufname, ':p'))
