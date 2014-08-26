@@ -31,6 +31,7 @@ ENDF="m"
 # The {}s aren't necessary. They aid in reading.
 
 RESET="$BEG${NULL}$END"
+RESETF="$BEGF${NULL}$ENDF"
 
 BLACK="$BEG${NORMAL};${FG_BLACK}$END"
 BLACKF="$BEGF${NORMAL};${FG_BLACK}$ENDF"
