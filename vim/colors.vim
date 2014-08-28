@@ -21,12 +21,17 @@ highlight PreProc                 ctermfg=DarkGray
 highlight Constant                ctermfg=DarkMagenta
 highlight Comment                 ctermfg=DarkCyan
 highlight Operator                ctermfg=DarkGray
+highlight Statement               ctermfg=Brown
+highlight Type                    ctermfg=DarkGreen
 highlight javaCommentTitle        ctermfg=DarkBlue
 highlight javaDocComment          ctermfg=Blue
 highlight javaDocParam            ctermfg=Magenta
 highlight javaDocTags             ctermfg=DarkCyan
 highlight javaString              ctermfg=Magenta
 highlight javaScriptStringS       ctermfg=Magenta
+highlight javaParen               ctermfg=LightCyan
+highlight javaParen1              ctermfg=LightRed
+highlight javaParen2              ctermfg=LightBlue
 
 highlight DiffAdd                 ctermfg=Gray        ctermbg=DarkGreen   cterm=None
 highlight DiffDelete              ctermfg=Gray        ctermbg=LightRed    cterm=None
