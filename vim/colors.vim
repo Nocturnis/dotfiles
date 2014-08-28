@@ -35,6 +35,6 @@ highlight DiffText                ctermfg=Gray        ctermbg=DarkGreen   cterm=
 
 highlight trailingWhitespace                          ctermbg=DarkRed
 
-highlight StatusLine              ctermfg=DarkMagenta ctermbg=Black
+highlight StatusLine              ctermfg=DarkMagenta ctermbg=Magenta     cterm=None
 highlight StatusLineNC            ctermfg=DarkGray    ctermbg=Black       cterm=None
 highlight StatusLinePosition      ctermfg=Gray        ctermbg=DarkGray    cterm=None

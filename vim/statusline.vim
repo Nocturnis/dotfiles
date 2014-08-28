@@ -1,13 +1,13 @@
 function! StatusLineMode(mode)
   let cmode=mode()
   if cmode == 'v' || cmode == 'V'
-    highlight StatusLineMode ctermfg=Gray ctermbg=DarkBlue
+    highlight StatusLineMode ctermfg=LightBlue ctermbg=DarkBlue
     return 'Visual'
   elseif cmode == 'R'
-    highlight StatusLineMode ctermfg=Black ctermbg=Yellow
+    highlight StatusLineMode ctermfg=Yellow ctermbg=Brown
     return 'Replace'
   elseif cmode == 'i'
-    highlight StatusLineMode ctermfg=Black ctermbg=Green
+    highlight StatusLineMode ctermfg=LightGreen ctermbg=DarkGreen
     return 'Insert'
   else
     highlight StatusLineMode ctermfg=Gray ctermbg=DarkGray cterm=None
@@ -24,7 +24,7 @@ function! Status(i)
   end
   let s .= ' %f%m%r%h%w '
   if winnr() == a:i
-    let s .= '%=%#StatusLinePosition# col %v, line %l / %L '
+    let s .= '%=%#StatusLinePosition# col %v  line %l / %L '
   end
   return s
 endfunction
