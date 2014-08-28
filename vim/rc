@@ -92,7 +92,7 @@ noremap <leader>T <C-W>T
 noremap <leader><C-P> :tabnew<CR>:CtrlP<CR>
 
 " show highlight group information
-map <C-F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+map <leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
     \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
     \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
