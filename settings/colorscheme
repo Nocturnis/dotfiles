@@ -1,7 +1,9 @@
+Based on Solarized (http://ethanschoonover.com/solarized)
+
             black   red     green   yellow  blue    purple  cyan    white
         +-----------------------------------------------------------------
-normal  |   1b444e  cb4c16  859900  b58900  268bd2  6c70c4  2aa198  c9cece
-bright  |   657b83  e66f3c  a3b814  deac0f  4b9fda  9599dc  4bb8b0  eee8d5
+normal  |   1b444e  cb4c16  859900  b58900  268bd2  6c70c4  2aa198  becbd2
+bright  |   657b83  f18354  bcd31d  ecbc2a  60aadf  b1b4e8  62c7c0  eee8d5
         +-----------------------------------------------------------------
-fg      |   839496
+fg      |   8aa1ac
 bg      |   002b36
