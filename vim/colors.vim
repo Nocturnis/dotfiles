@@ -23,23 +23,32 @@ highlight Comment                 ctermfg=DarkCyan
 highlight Operator                ctermfg=DarkGray
 highlight Statement               ctermfg=Brown
 highlight Type                    ctermfg=DarkGreen
+
+" Java
 highlight javaCommentTitle        ctermfg=DarkBlue
 highlight javaDocComment          ctermfg=Blue
 highlight javaDocParam            ctermfg=Magenta
 highlight javaDocTags             ctermfg=DarkCyan
 highlight javaString              ctermfg=Magenta
-highlight javaScriptStringS       ctermfg=Magenta
 highlight javaParen               ctermfg=LightCyan
 highlight javaParen1              ctermfg=LightRed
 highlight javaParen2              ctermfg=LightBlue
 
+" JavaScript
+highlight javaScriptStringS       ctermfg=Magenta
+
+" Proto
+highlight pbString                ctermfg=Magenta
+
 highlight DiffAdd                 ctermfg=Gray        ctermbg=DarkGreen   cterm=None
-highlight DiffDelete              ctermfg=Gray        ctermbg=LightRed    cterm=None
-highlight DiffChange              ctermfg=Gray        ctermbg=DarkYellow  cterm=None
+highlight DiffDelete              ctermfg=Gray        ctermbg=DarkRed     cterm=None
+highlight DiffChange              ctermfg=DarkGray    ctermbg=Yellow      cterm=None
 highlight DiffText                ctermfg=Gray        ctermbg=DarkGreen   cterm=None
 
 highlight trailingWhitespace                          ctermbg=DarkRed
 
-highlight StatusLine              ctermfg=DarkMagenta ctermbg=Magenta     cterm=None
+highlight StatusLine              ctermfg=Black       ctermbg=Magenta     cterm=None
 highlight StatusLineNC            ctermfg=DarkGray    ctermbg=Black       cterm=None
 highlight StatusLinePosition      ctermfg=Gray        ctermbg=DarkGray    cterm=None
+
+highlight MatchParen                                  ctermbg=White    cterm=Reverse
