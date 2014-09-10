@@ -42,6 +42,13 @@ function create_symlinks {
   ln -s $DIR/vim/rc $VRC
 }
 
+function get_google_dotfiles {
+  if [ -f "~/.at_google" ]; then
+    git clone sso://user/bradenw/dotfiles ~/.dotfiles-google/
+    ~/.dotfiles-google/setup
+  fi
+}
+
 # make sure the directory exists
 if [ -d $DIR ]; then
 
@@ -51,11 +58,13 @@ if [ -d $DIR ]; then
       Replace )
         erase_dotfiles
         create_symlinks
+        get_google_dotfiles
         exit 0
         ;;
       
       No )
         create_symlinks
+        get_google_dotfiles
         exit 0
         ;;
     esac
