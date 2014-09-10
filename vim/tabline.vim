@@ -102,8 +102,10 @@ function! Tabline()
     let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
     let s .= ' '
     let s .= tabname
+    let s .= ' '
+    let s .= '%X'
 
-    let s .= ' %#TabLineFill# '
+    let s .= '%#TabLineFill# '
   endfor
 
   let s .= '%#TabLineFill#'
