@@ -3,6 +3,7 @@ alias chibi="rlwrap chibi-scheme"
 alias clj="rlwrap clj"
 alias racket="rlwrap racket"
 alias s48="rlwrap scheme48"
+alias jdb="rlwrap jdb"
 
 # load gsi with The Little Schemer's base functions
 # alias tls="gsi $HOME/Projects/scheme/TLS/base.scm -"
@@ -14,6 +15,7 @@ alias tls="racket -f $HOME/Projects/scheme/TLS/base.scm -i"
 alias words="cat /usr/share/dict/web2 /usr/share/dict/web2a"
 
 alias eclimd="~/.eclipse/org.eclipse.platform_4.4.0_1906475983_linux_gtk_x86_64/eclimd"
+alias yavdb="~/.dotfiles/vim/bundle/yavdb/yavdb"
 
 # laziness
 # Ubuntu needs --color=auto, OSX prints an error message every time
