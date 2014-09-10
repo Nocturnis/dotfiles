@@ -7,7 +7,7 @@ highlight TabLineNumSel           ctermfg=LightBlue   ctermbg=None        cterm=
 highlight LineNr                  ctermfg=DarkGray    ctermbg=None
 highlight CursorLine                                  ctermbg=Black       cterm=None
 highlight CursorLineNr            ctermfg=Gray        ctermbg=None
-highlight ColorColumn                                 ctermbg=Black
+highlight ColorColumn                                 ctermbg=DarkRed
 highlight NonText                 ctermfg=Black
 highlight SpecialKey              ctermfg=Black
 highlight SignColumn                                  ctermbg=None        cterm=None
@@ -39,6 +39,9 @@ highlight javaScriptStringS       ctermfg=Magenta
 
 " Proto
 highlight pbString                ctermfg=Magenta
+
+" sh
+highlight shDoubleQuote           ctermfg=Magenta
 
 highlight DiffAdd                 ctermfg=Gray        ctermbg=DarkGreen   cterm=None
 highlight DiffDelete              ctermfg=Gray        ctermbg=DarkRed     cterm=None
