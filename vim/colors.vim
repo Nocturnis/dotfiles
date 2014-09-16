@@ -49,6 +49,8 @@ highlight DiffChange              ctermfg=DarkGray    ctermbg=Yellow      cterm=
 highlight DiffText                ctermfg=Gray        ctermbg=DarkGreen   cterm=None
 
 highlight trailingWhitespace                          ctermbg=DarkRed
+highlight ExtraWhitespace                             ctermbg=DarkRed
+match ExtraWhitespace /\s\+$/
 
 highlight StatusLine              ctermfg=Black       ctermbg=Magenta     cterm=None
 highlight StatusLineNC            ctermfg=DarkGray    ctermbg=Black       cterm=None
