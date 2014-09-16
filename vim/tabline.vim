@@ -58,6 +58,14 @@ function! RemoveDuplicates(list)
   return result
 endfunction
 
+" Strips the non-printed characters (highlighting etc.) from the given string.
+function! StripNonPrinted(str)
+  let result = substitute(a:str, '%#[a-zA-Z0-9]\+#', '', 'g')
+  let result = substitute(result, '%[0-9]\+T', '', 'g')
+  let result = substitute(result, '%X', '', 'g')
+  return result
+endfunction
+
 function! Tabline()
   let buffer_filepaths = []
   for i in range(bufnr('$') + 1)
@@ -71,10 +79,13 @@ function! Tabline()
   let shortened_filepaths = ShortenFilepaths(buffer_filepaths)
 
   let s = ''
-  for i in range(tabpagenr('$'))
-    let tab = i + 1
-    let winnr = tabpagewinnr(tab)
-    let buflist = tabpagebuflist(tab)
+  let tabs = []
+  let totaltablinelength = 0
+  let numtabs = tabpagenr('$')
+  for i in range(numtabs)
+    let tabnr = i + 1
+    let winnr = tabpagewinnr(tabnr)
+    let buflist = tabpagebuflist(tabnr)
     let buftitles = []
     for j in range(len(buflist))
       let bufnr = buflist[j]
@@ -96,20 +107,106 @@ function! Tabline()
     endfor
     let tabname = join(buftitles, ', ')
 
-    let s .= '%' . tab . 'T'
-    let s .= (tab == tabpagenr() ? '%#TabLineNumSel#' : '%#TabLineNum#')
-    let s .= ' ' . tab
-    let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
-    let s .= ' '
-    let s .= tabname
-    let s .= ' '
-    let s .= '%X'
-
-    let s .= '%#TabLineFill# '
+    let tab = ''
+    let tab .= '%' . tabnr . 'T'
+    let tab .= (tabnr == tabpagenr() ? '%#TabLineNumSel#' : '%#TabLineNum#')
+    let tab .= ' ' . tabnr
+    let tab .= (tabnr == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+    let tab .= ' '
+    let tab .= tabname
+    let tab .= ' '
+    let tab .= '%X'
+    let totaltablinelength += len(StripNonPrinted(tab)) + 1
+    call add(tabs, tab)
   endfor
+  if totaltablinelength > &columns
+    let direction = 1
+    let leftindex = tabpagenr() - 1
+    let rightindex = tabpagenr() - 1
+    let spaceremaining = &columns - len(StripNonPrinted(tabs[leftindex]))
+    let spilledonce = 0
+    let lefttabsremaining = 0
+    let righttabsremaining = 0
+    while spaceremaining > 0 && (leftindex > 0 || rightindex < numtabs - 1)
+      let tabtoadd = ''
+      if direction == -1
+        if leftindex == 0
+          let direction = -direction
+          continue
+        endif
+        let tabtoadd = tabs[leftindex - 1]
+      else
+        if rightindex == numtabs - 1
+          let direction = -direction
+          continue
+        endif
+        let tabtoadd = tabs[rightindex + 1]
+      endif
+      let tabsize = len(StripNonPrinted(tabtoadd))
+      let moretabssize = 0
+      if leftindex > 0
+        let moretabssize = 9
+      endif
+      if rightindex < numtabs - 1
+        let moretabssize += len(numtabs . "") + 8
+      endif
+      if spaceremaining > (tabsize + 1 + moretabssize)
+        if direction == -1
+          let leftindex -= 1
+        else
+          let rightindex += 1
+        endif
+        let spaceremaining -= tabsize + 1
+      elseif !spilledonce
+        let spilledonce = 1
+      else
+        break
+      endif
+      let direction = -direction
+      " echom leftindex . " : " . rightindex . ", " . spaceremaining . " remaining"
+    endwhile
+    let s = ''
+    let leftemptyspace = 0
+    let rightemptyspace = 0
+    let moretabssize = 0
+    if leftindex > 0
+      let moretabssize = 9
+    endif
+    if rightindex < numtabs - 1
+      let moretabssize += len(numtabs . "") + 8
+    endif
+    if leftindex > 0 && rightindex < numtabs - 1
+      let leftemptyspace = (spaceremaining - moretabssize) / 2
+      let rightemptyspace = spaceremaining - moretabssize - leftemptyspace
+    elseif leftindex > 0
+      let leftemptyspace = spaceremaining - moretabssize
+    elseif rightindex < numtabs - 1
+      let rightemptyspace = spaceremaining - moretabssize
+    endif
+    let lefttabsremaining = leftindex
+    let righttabsremaining = numtabs - 1 - rightindex
+    if lefttabsremaining > 0
+      let s .= '%#TabLineMore# <- 0... '
+    endif
+    let s .= '%#TabLineFill#'
+    for i in range(leftemptyspace)
+      let s .= ' '
+    endfor
+    let s .= join(tabs[leftindex : rightindex], '%#TabLineFill# ')
+    let s .= "%#TabLineFill#"
+    for i in range(rightemptyspace)
+      let s .= ' '
+    endfor
+    if righttabsremaining > 0
+      let s .= '%#TabLineMore# ...' . numtabs . ' -> '
+    endif
+    return s
+  else
+    let s = join(tabs, '%#TabLineFill# ')
+    let s .= '%#TabLineFill#'
+    return s
+  endif
 
-  let s .= '%#TabLineFill#'
-  return s
 endfunction
 
 set tabline=%!Tabline()
