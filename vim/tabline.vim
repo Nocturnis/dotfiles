@@ -186,7 +186,7 @@ function! Tabline()
     let lefttabsremaining = leftindex
     let righttabsremaining = numtabs - 1 - rightindex
     if lefttabsremaining > 0
-      let s .= '%#TabLineMore# <- 0... '
+      let s .= '%#TabLineMore# <- 1... '
     endif
     let s .= '%#TabLineFill#'
     for i in range(leftemptyspace)
