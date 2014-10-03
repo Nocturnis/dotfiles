@@ -3,7 +3,7 @@ highlight TabLine                 ctermfg=DarkGray    ctermbg=Black       cterm=
 highlight TabLineNum              ctermfg=Yellow      ctermbg=Black       cterm=None
 highlight TabLineSel              ctermfg=White       ctermbg=None        cterm=None
 highlight TabLineNumSel           ctermfg=LightBlue   ctermbg=None        cterm=None
-highlight TabLineMore             ctermfg=Gray        ctermbg=DarkGray    cterm=None
+highlight TabLineMore             ctermfg=Black       ctermbg=Yellow      cterm=None
 
 highlight LineNr                  ctermfg=DarkGray    ctermbg=None
 highlight CursorLine                                  ctermbg=Black       cterm=None
