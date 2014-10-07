@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # wrap REPLs with rlwrap for nice cli editing
 alias chibi="rlwrap chibi-scheme"
 alias clj="rlwrap clj"
@@ -14,7 +15,7 @@ alias tls="racket -f $HOME/Projects/scheme/TLS/base.scm -i"
 # handy for grepping words from the dictionary
 alias words="cat /usr/share/dict/web2 /usr/share/dict/web2a"
 
-alias eclimd="~/.eclipse/org.eclipse.platform_4.4.0_1906475983_linux_gtk_x86_64/eclimd"
+alias eclimd="/usr/local/google/users/bradenw/eclipse44/stable/eclimd"
 alias yavdb="~/.dotfiles/vim/bundle/yavdb/yavdb"
 
 # laziness
@@ -88,6 +89,11 @@ alias jas="jasmine-node --color"
 alias mtr="sudo mtr"
 
 alias chrome="google-chrome"
+alias chrome-isolated="google-chrome --user-data-dir=~/.config/google-chrome/Profile\ 1/"
+function chrome-isolated-proxy() {
+  local proxy_server="$1"
+  chrome-isolated --proxy-server="http=${proxy_server}"
+}
 
 # postgres
 alias pg_start="pg_ctl -l /usr/local/var/postgres/server.log start"
