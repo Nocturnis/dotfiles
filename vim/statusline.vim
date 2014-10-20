@@ -17,14 +17,25 @@ endfunction
 
 function! Status(i)
   let s = ''
+  let bufnr = tabpagebuflist()[a:i - 1]
+  let fullpath = bufname(bufnr)
+  let path = fnamemodify(fullpath, ':~:.:h')
+  let filename = fnamemodify(fullpath, ':t')
   if winnr() == a:i
     let s .= '%#StatusLineMode# %{StatusLineMode(v:insertmode)} %#StatusLine#'
+    let s .= ' '
+    let s .= '%#StatusLineFaded#' . path . '/'
+    let s .= '%#StatusLine#' . filename
+    let s .= '%#StatusLineFaded#'
   else
-    let s .= '%#StatusLineNC#'
+    let s .= '%#StatusLineNC# '
+    let s .= '%#StatusLineNCFaded#' . path . '/'
+    let s .= '%#StatusLineNC#' . filename
+    let s .= '%#StatusLineNCFaded#'
   end
-  let s .= ' %f%m%r%h%w '
+  let s .= ' %m%r%h%w '
   if winnr() == a:i
-    let s .= '%=%#StatusLinePosition# col %v  line %l / %L '
+    let s .= '%=%#StatusLinePosition# #%n  col %v  line %l / %L '
   end
   return s
 endfunction

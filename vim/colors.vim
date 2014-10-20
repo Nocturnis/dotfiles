@@ -54,7 +54,9 @@ highlight ExtraWhitespace                             ctermbg=DarkRed
 match ExtraWhitespace /\s\+$/
 
 highlight StatusLine              ctermfg=Black       ctermbg=Magenta     cterm=None
-highlight StatusLineNC            ctermfg=DarkGray    ctermbg=Black       cterm=None
+highlight StatusLineFaded         ctermfg=DarkMagenta ctermbg=Magenta     cterm=None
+highlight StatusLineNC            ctermfg=Gray        ctermbg=Black       cterm=None
+highlight StatusLineNCFaded       ctermfg=DarkGray    ctermbg=Black       cterm=None
 highlight StatusLinePosition      ctermfg=Gray        ctermbg=DarkGray    cterm=None
 
 highlight MatchParen                                  ctermbg=White    cterm=Reverse
