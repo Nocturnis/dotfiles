@@ -2,6 +2,7 @@ highlight TabLineFill             ctermfg=Black       ctermbg=Black       cterm=
 highlight TabLine                 ctermfg=DarkGray    ctermbg=Black       cterm=None
 highlight TabLineNum              ctermfg=Yellow      ctermbg=Black       cterm=None
 highlight TabLineSel              ctermfg=White       ctermbg=None        cterm=None
+highlight TabLineSelFaded         ctermfg=DarkGray    ctermbg=None        cterm=None
 highlight TabLineNumSel           ctermfg=LightBlue   ctermbg=None        cterm=None
 highlight TabLineMore             ctermfg=Black       ctermbg=Yellow      cterm=None
 

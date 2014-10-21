@@ -92,17 +92,28 @@ function! Tabline()
       let bufname = bufname(buflist[j])
       let longbufname = fnamemodify(bufname, ':p')
       let buftitle = ''
+      if tabnr == tabpagenr()
+        if j == winnr() - 1
+          let buftitle .= "%#TabLineSel#"
+        else
+          let buftitle .= "%#TabLineSelFaded#"
+        endif
+      endif
       if bufname == ''
-        let buftitle = '[No Name]'
+        let buftitle .= '[No Name]'
       elseif has_key(shortened_filepaths, longbufname)
-        let buftitle = shortened_filepaths[longbufname]
+        let buftitle .= shortened_filepaths[longbufname]
       else
-        let buftitle = fnamemodify(bufname, ':t')
+        let buftitle .= fnamemodify(bufname, ':t')
       endif
       let bufmodified = getbufvar(bufnr, "&mod")
+      if tabnr == tabpagenr()
+        let buftitle .= "%#TabLineSelFaded#"
+      endif
       if bufmodified
         let buftitle .= '*'
       endif
+      " let buftitle .= (tabnr == tabpagenr() ? (j + 1) . '/' . winnr() : '')
       call add(buftitles, buftitle)
     endfor
     let tabname = join(buftitles, ', ')
