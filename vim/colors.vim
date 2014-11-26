@@ -39,6 +39,11 @@ highlight javaParen2              ctermfg=LightBlue
 " JavaScript
 highlight javaScriptStringS       ctermfg=Magenta
 
+" HTML
+highlight htmlTag                 ctermfg=DarkGray
+highlight htmlEndTag              ctermfg=DarkGray
+highlight htmlEvent               ctermfg=LightBlue
+
 " Proto
 highlight pbString                ctermfg=Magenta
 
