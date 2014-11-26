@@ -45,6 +45,8 @@ highlight javaScriptIdentifier    ctermfg=DarkGreen
 highlight javaScriptFunction      ctermfg=DarkGreen
 highlight javaScriptBraces        ctermfg=DarkGray
 highlight javaScriptParens        ctermfg=DarkGray
+" For JavaScript embedded in HTML script tags.
+highlight javaScript              ctermfg=None
 
 " Python
 highlight pythonString            ctermfg=Magenta
