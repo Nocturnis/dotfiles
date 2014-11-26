@@ -38,6 +38,18 @@ highlight javaParen2              ctermfg=LightBlue
 
 " JavaScript
 highlight javaScriptStringS       ctermfg=Magenta
+highlight javaScriptStringD       ctermfg=Magenta
+highlight javaScriptRegexpString  ctermfg=Blue
+highlight javaScriptNumber        ctermfg=DarkMagenta
+highlight javaScriptIdentifier    ctermfg=DarkGreen
+highlight javaScriptFunction      ctermfg=DarkGreen
+highlight javaScriptBraces        ctermfg=DarkGray
+highlight javaScriptParens        ctermfg=DarkGray
+
+" Python
+highlight pythonString            ctermfg=Magenta
+highlight pythonBuiltin           ctermfg=DarkMagenta
+highlight pythonFunction          ctermfg=DarkGreen
 
 " Proto
 highlight pbString                ctermfg=Magenta
