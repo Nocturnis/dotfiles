@@ -10,7 +10,7 @@ function! StatusLineMode(mode)
     highlight StatusLineMode ctermfg=LightGreen ctermbg=DarkGreen
     return 'Insert'
   else
-    highlight StatusLineMode ctermfg=Gray ctermbg=DarkGray cterm=None
+    highlight StatusLineMode ctermfg=None ctermbg=DarkGray cterm=None
     return 'Normal'
   end
 endfunction
