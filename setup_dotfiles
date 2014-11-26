@@ -44,7 +44,7 @@ function create_symlinks {
 
 function get_google_dotfiles {
   if [ -f "~/.at_google" ]; then
-    git clone sso://user/bradenw/dotfiles ~/.dotfiles-google/
+    git clone sso://user/bradenw/dotfiles-google ~/.dotfiles-google/
     ~/.dotfiles-google/setup
   fi
 }

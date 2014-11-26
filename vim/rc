@@ -48,6 +48,9 @@ if has('autocmd')
   let g:gitgutter_sign_removed='__'
   let g:gitgutter_sign_removed_first_line='‾‾'
   let g:gitgutter_sign_modified_removed='__'
+
+  let g:EclimJavaSearchSingleResult='edit'
+  let g:EclimCompletionMethod = 'omnifunc'
 endif
 
 " set the leader key to the backslash
@@ -144,6 +147,13 @@ nmap <C-H> <C-W>h
 nmap <C-J> <C-W>j
 nmap <C-K> <C-W>k
 nmap <C-L> <C-W>l
+
+" j and k navigate by visual lines, not actual lines.  If a line overflows to 
+" the next line, j and k can navigate to the overflowed portion
+nmap j gj
+nmap k gk
+
+vnoremap // y/<c-r>"<cr>
 
 source ~/.dotfiles/vim/tabline.vim
 source ~/.dotfiles/vim/statusline.vim
