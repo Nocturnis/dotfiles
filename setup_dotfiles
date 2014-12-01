@@ -13,6 +13,8 @@ IRC="$HOME/.irbrc"
 SCREEN="$HOME/.screenrc"
 VIM="$HOME/.vim"
 VRC="$HOME/.vimrc"
+ZSHRC="$HOME/.zshrc"
+OHMYZSHCUSTOM="$HOME/.oh-my-zsh/custom"
 
 function erase_dotfiles {
   # echo "Erasing dotfiles..."
@@ -26,6 +28,8 @@ function erase_dotfiles {
   rm -f $SCREEN
   rm -f $VIM
   rm -f $VRC
+  rm -f $ZSHRC
+  rm -f $OHMYZSHCUSTOM
 }
 
 function create_symlinks {
@@ -40,6 +44,8 @@ function create_symlinks {
   ln -s $DIR/screenrc $SCREEN
   ln -s $DIR/vim $VIM
   ln -s $DIR/vim/rc $VRC
+  ln -s $DIR/zsh/rc $ZSHRC
+  ln -s $DIR/zsh/custom/ $OHMYZSHCUSTOM
 }
 
 function get_google_dotfiles {
