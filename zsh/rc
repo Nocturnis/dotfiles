@@ -81,5 +81,10 @@ source $ZSH/oh-my-zsh.sh
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-export KEYTIMEOUT=1
+# vi keybinds
 bindkey -v
+# Make mode swapping less slow
+export KEYTIMEOUT=1
+
+# Keep paged output (git log, etc.) on the screen after exiting
+export TERM=xterm
