@@ -63,6 +63,13 @@ highlight pbString                ctermfg=Magenta
 
 " sh
 highlight shDoubleQuote           ctermfg=Magenta
+highlight shQuote                 ctermfg=Magenta
+highlight shTestDoubleQuote       ctermfg=Magenta
+highlight shFunctionKey           ctermfg=DarkGreen
+highlight shFunction              ctermfg=None
+highlight shVariable              ctermfg=DarkBlue
+highlight shDerefSimple           ctermfg=LightBlue
+highlight shDerefVar              ctermfg=LightBlue
 
 highlight DiffAdd                 ctermfg=Gray        ctermbg=DarkGreen   cterm=None
 highlight DiffDelete              ctermfg=Gray        ctermbg=DarkRed     cterm=None
