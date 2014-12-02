@@ -29,7 +29,7 @@ function erase_dotfiles {
   rm -f $VIM
   rm -f $VRC
   rm -f $ZSHRC
-  rm -f $OHMYZSHCUSTOM
+  rm -rf $OHMYZSHCUSTOM
 }
 
 function create_symlinks {
