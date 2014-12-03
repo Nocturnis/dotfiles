@@ -35,7 +35,9 @@ function! Status(i)
   end
   let s .= ' %m%r%h%w '
   if winnr() == a:i
-    let s .= '%=%#StatusLinePosition# #%n  col %v  line %l / %L '
+    let s .= '%=%#StatusLinePositionFaded# #%#StatusLinePosition#%n  '
+    let s .= '%#StatusLinePositionFaded#col %#StatusLinePosition#%v  '
+    let s .= '%#StatusLinePositionFaded#line %#StatusLinePosition#%l %#StatusLinePositionFaded#/ %#StatusLinePosition#%L '
   end
   return s
 endfunction

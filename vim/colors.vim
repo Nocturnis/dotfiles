@@ -85,5 +85,6 @@ highlight StatusLineFaded         ctermfg=Magenta     ctermbg=DarkMagenta cterm=
 highlight StatusLineNC            ctermfg=White       ctermbg=DarkGray    cterm=None
 highlight StatusLineNCFaded       ctermfg=Gray        ctermbg=DarkGray    cterm=None
 highlight StatusLinePosition      ctermfg=Gray        ctermbg=DarkGray    cterm=None
+highlight StatusLinePositionFaded ctermfg=None        ctermbg=DarkGray    cterm=None
 
 highlight MatchParen                                  ctermbg=White    cterm=Reverse
