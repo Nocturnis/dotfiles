@@ -29,7 +29,14 @@ function erase_dotfiles {
   rm -f $VIM
   rm -f $VRC
   rm -f $ZSHRC
-  rm -rf $OHMYZSHCUSTOM
+
+  rm -f $OHMYZSHCUSTOM/aliases.zsh
+  rm -f $OHMYZSHCUSTOM/env.zsh
+  rm -f $OHMYZSHCUSTOM/highlighting.zsh
+  rm -f $OHMYZSHCUSTOM/themes/my.zsh-theme
+  for PLUGIN in "$(ls -A $DIR/zsh/custom/plugins/)"; do
+    rm -f $OHMYZSHCUSTOM/plugins/$PLUGIN
+  done
 }
 
 function create_symlinks {
@@ -45,7 +52,17 @@ function create_symlinks {
   ln -s $DIR/vim $VIM
   ln -s $DIR/vim/rc $VRC
   ln -s $DIR/zsh/rc $ZSHRC
-  ln -s $DIR/zsh/custom/ $OHMYZSHCUSTOM
+
+  mkdir -p $OHMYZSHCUSTOM
+  ln -s $DIR/zsh/custom/aliases.zsh $OHMYZSHCUSTOM/aliases.zsh
+  ln -s $DIR/zsh/custom/env.zsh $OHMYZSHCUSTOM/env.zsh
+  ln -s $DIR/zsh/custom/highlighting.zsh $OHMYZSHCUSTOM/highlighting.zsh
+  mkdir -p $OHMYZSHCUSTOM/themes
+  ln -s $DIR/zsh/custom/themes/my.zsh-theme $OHMYZSHCUSTOM/themes/my.zsh-theme
+  mkdir -p $OHMYZSHCUSTOM/plugins
+  for PLUGIN in "$(ls -A $DIR/zsh/custom/plugins/)"; do
+    ln -s $DIR/zsh/custom/plugins/$PLUGIN $OHMYZSHCUSTOM/plugins/$PLUGIN
+  done
 }
 
 function get_google_dotfiles {
