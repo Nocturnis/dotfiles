@@ -55,10 +55,13 @@ function get_google_dotfiles {
   fi
 }
 
-function get_oh_my_zsh {
+function setup_zsh {
   if [[ !(-d ~/.oh-my-zsh) ]]; then
     git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
   fi
+  cd $DIR
+  git submodule init zsh/custom/plugins/zsh-syntax-highlighting
+  git submodule update zsh/custom/plugins/zsh-syntax-highlighting
 }
 
 # make sure the directory exists
@@ -68,7 +71,7 @@ if [ -d $DIR ]; then
   select RN in "Replace" "No"; do
     case $RN in
       Replace )
-        get_oh_my_zsh
+        setup_zsh
         erase_dotfiles
         create_symlinks
         get_google_dotfiles
