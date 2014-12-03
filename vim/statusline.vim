@@ -1,7 +1,7 @@
 function! StatusLineMode(mode)
   let cmode=mode()
   if cmode == 'v' || cmode == 'V'
-    highlight StatusLineMode ctermfg=LightBlue ctermbg=DarkBlue
+    highlight StatusLineMode ctermfg=Gray ctermbg=DarkBlue
     return 'Visual'
   elseif cmode == 'R'
     highlight StatusLineMode ctermfg=Yellow ctermbg=Brown
