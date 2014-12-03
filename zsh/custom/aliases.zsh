@@ -1,5 +1,12 @@
-# Include .files, show trailing slash on directory and other symbols for special files
-alias ls='ls -aF'
+# Ubuntu needs --color=auto, OSX prints an error message every time
+if [[ "$(ls --color=auto > /dev/null 2>&1 && echo $?)" == "0" ]]; then
+    alias ls='ls -aGF --color=auto'
+    alias ll='ls -lha --color=auto'
+    alias grep='grep --color=auto'
+else
+    alias ls='ls -aGF'
+    alias ll='ls -lha'
+fi
 
 alias chrome="google-chrome"
 # Open chrome with a separate profile
