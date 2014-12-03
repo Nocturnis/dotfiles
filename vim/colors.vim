@@ -83,7 +83,7 @@ match ExtraWhitespace /\s\+$/
 highlight StatusLine              ctermfg=White       ctermbg=DarkMagenta cterm=None
 highlight StatusLineFaded         ctermfg=Magenta     ctermbg=DarkMagenta cterm=None
 highlight StatusLineNC            ctermfg=White       ctermbg=DarkGray    cterm=None
-highlight StatusLineNCFaded       ctermfg=Gray        ctermbg=DarkGray    cterm=None
+highlight StatusLineNCFaded       ctermfg=None        ctermbg=DarkGray    cterm=None
 highlight StatusLinePosition      ctermfg=Gray        ctermbg=DarkGray    cterm=None
 highlight StatusLinePositionFaded ctermfg=None        ctermbg=DarkGray    cterm=None
 
