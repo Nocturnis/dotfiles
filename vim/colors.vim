@@ -80,10 +80,10 @@ highlight trailingWhitespace                          ctermbg=DarkRed
 highlight ExtraWhitespace                             ctermbg=DarkRed
 match ExtraWhitespace /\s\+$/
 
-highlight StatusLine              ctermfg=Black       ctermbg=Magenta     cterm=None
-highlight StatusLineFaded         ctermfg=DarkMagenta ctermbg=Magenta     cterm=None
-highlight StatusLineNC            ctermfg=Gray        ctermbg=Black       cterm=None
-highlight StatusLineNCFaded       ctermfg=DarkGray    ctermbg=Black       cterm=None
+highlight StatusLine              ctermfg=White       ctermbg=DarkMagenta     cterm=None
+highlight StatusLineFaded         ctermfg=Magenta     ctermbg=DarkMagenta     cterm=None
+highlight StatusLineNC            ctermfg=White        ctermbg=DarkGray       cterm=None
+highlight StatusLineNCFaded       ctermfg=Gray    ctermbg=DarkGray       cterm=None
 highlight StatusLinePosition      ctermfg=Gray        ctermbg=DarkGray    cterm=None
 
 highlight MatchParen                                  ctermbg=White    cterm=Reverse
