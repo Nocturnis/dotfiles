@@ -36,6 +36,12 @@
   interactive = auto
   status = auto
 
+[color "status"]
+  added = green
+  changed = yellow
+  deleted = red
+  untracked = red
+
 [core]
   editor = vim
 	excludesfile = ~/.gitignore
