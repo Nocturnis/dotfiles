@@ -4,11 +4,6 @@
 
 autoload -U colors && colors
 
-local at_google=""
-if [[ -e "~/.at_google" ]]; then
-    at_google="1"
-fi
-
 function __user_and_host {
     local host="$(hostname -s)"
     local user="$(id -un)"
@@ -60,20 +55,11 @@ function __prompt_command {
     echo
     echo -n "%{$fg_no_bold[black]%}/ $vi_mode_color//"
     echo -n " %{$fg_bold[black]%}$(date +%T)"
-    if [[ -n $at_google ]]; then
-        echo -n " "
-        echo -n "%{$fg_no_bold[blue]%}G"
-        echo -n "%{$fg_no_bold[red]%}o"
-        echo -n "%{$fg_no_bold[yellow]%}o"
-        echo -n "%{$fg_no_bold[blue]%}g"
-        echo -n "%{$fg_no_bold[green]%}l"
-        echo -n "%{$fg_no_bold[red]%}e"
-    fi
     echo -n " $(__user_and_host) $(__working_dir)$(__git_branch)"
     echo -n "%{$fg_no_bold[black]%} /"
     echo
 
-    echo " $vi_mode_color// %{$fg_no_bold[black]%}> %{$reset_color%}"
+    echo " $vi_mode_color// %{$fg_no_bold[black]%}~> %{$reset_color%}"
 }
 
 PROMPT="$(__prompt_command)"
