@@ -99,6 +99,14 @@ map <leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
     \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
     \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+let g:grabbedbufnr=1
+" 'yank' current buffer (save number)
+nmap <leader>by :let g:grabbedbufnr = bufnr('')<cr>
+" 'delete' current buffer (save number and closes)
+nmap <leader>bd <leader>by:q<cr>
+" 'paste' buffer (open in current window)
+nmap <leader>bp :exe "buffer ".g:grabbedbufnr<cr>
+
 " a visual reminder of an 80-character line
 if exists('+colorcolumn')
   set colorcolumn=81
