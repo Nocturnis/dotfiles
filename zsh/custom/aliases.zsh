@@ -12,7 +12,7 @@ alias ag="ag --color-match \"0;35\" --color-path \"0;32\""
 
 alias chrome="google-chrome"
 # Open chrome with a separate profile
-alias chrome-isolated="google-chrome --user-data-dir=~/.config/google-chrome/Profile\ 1/"
+alias chrome-isolated="google-chrome --user-data-dir=$HOME/.config/google-chrome/Profile\ 1/"
 # Open chrome with a seperate profile, takes a proxy host/port as an argument
 function chrome-isolated-proxy() {
   local proxy_server="$1"
