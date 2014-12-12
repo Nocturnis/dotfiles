@@ -16,6 +16,10 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
     \ -g ""'
 
 if has('autocmd')
+  let g:EclimHighlightInfo='EclimHighlightInfo'
+  let g:EclimHighlightWarning='EclimHighlightWarning'
+  let g:EclimHighlightError='EclimHighlightError'
+  let g:EclimQuickfixSignText='>>'
 
   " turn filetype off per the pathogen instructions at
   " http://www.vim.org/scripts/script.php?script_id=2332
