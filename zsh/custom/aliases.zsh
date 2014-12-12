@@ -8,6 +8,8 @@ else
     alias ll='ls -lha'
 fi
 
+alias ag="ag --color-match \"0;35\" --color-path \"0;32\""
+
 alias chrome="google-chrome"
 # Open chrome with a separate profile
 alias chrome-isolated="google-chrome --user-data-dir=~/.config/google-chrome/Profile\ 1/"
