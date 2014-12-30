@@ -15,7 +15,7 @@ highlight SpecialKey              ctermfg=Black
 highlight SignColumn                                  ctermbg=Black       cterm=None
 highlight GitGutterAdd            ctermfg=DarkGreen   ctermbg=DarkGreen   cterm=None
 highlight GitGutterChange         ctermfg=Yellow      ctermbg=Yellow      cterm=None
-highlight GitGutterDelete         ctermfg=DarkRed     ctermbg=None        cterm=None
+highlight GitGutterDelete         ctermfg=DarkRed     ctermbg=Black       cterm=None
 highlight GitGutterChangeDelete   ctermfg=DarkRed     ctermbg=Yellow      cterm=None
 highlight EclimHighlightInfo      ctermfg=DarkBlue    ctermbg=Gray
 highlight EclimHighlightWarning   ctermfg=DarkYellow  ctermbg=Gray
