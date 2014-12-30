@@ -6,19 +6,19 @@ highlight TabLineSelFaded         ctermfg=DarkGray    ctermbg=None        cterm=
 highlight TabLineNumSel           ctermfg=LightBlue   ctermbg=None        cterm=None
 highlight TabLineMore             ctermfg=Black       ctermbg=Yellow      cterm=None
 
-highlight LineNr                  ctermfg=DarkGray    ctermbg=None
+highlight LineNr                  ctermfg=DarkGray    ctermbg=Black
 highlight CursorLine                                  ctermbg=Black       cterm=None
-highlight CursorLineNr            ctermfg=Gray        ctermbg=None
+highlight CursorLineNr            ctermfg=Gray        ctermbg=Black
 highlight ColorColumn                                 ctermbg=DarkRed
 highlight NonText                 ctermfg=Black
 highlight SpecialKey              ctermfg=Black
-highlight SignColumn                                  ctermbg=None        cterm=None
+highlight SignColumn                                  ctermbg=Black       cterm=None
 highlight GitGutterAdd            ctermfg=DarkGreen   ctermbg=DarkGreen   cterm=None
 highlight GitGutterChange         ctermfg=Yellow      ctermbg=Yellow      cterm=None
 highlight GitGutterDelete         ctermfg=DarkRed     ctermbg=None        cterm=None
 highlight GitGutterChangeDelete   ctermfg=DarkRed     ctermbg=Yellow      cterm=None
 highlight EclimHighlightInfo      ctermfg=DarkBlue    ctermbg=Gray
-highlight EclimHighlightWarning   ctermfg=DarkYellow  ctermbg=DarkGray
+highlight EclimHighlightWarning   ctermfg=DarkYellow  ctermbg=Gray
 highlight EclimHighlightError     ctermfg=White       ctermbg=LightRed
 highlight Search                  ctermfg=Black       ctermbg=Yellow
 
@@ -30,10 +30,10 @@ highlight Statement               ctermfg=Brown
 highlight Type                    ctermfg=DarkGreen
 
 " Java
-highlight javaCommentTitle        ctermfg=DarkBlue
-highlight javaDocComment          ctermfg=Blue
-highlight javaDocParam            ctermfg=Magenta
-highlight javaDocTags             ctermfg=DarkCyan
+highlight javaCommentTitle        ctermfg=DarkBlue    ctermbg=None        cterm=Reverse
+highlight javaDocComment          ctermfg=Blue        ctermbg=None        cterm=None
+highlight javaDocParam            ctermfg=Magenta     ctermbg=None        cterm=None
+highlight javaDocTags             ctermfg=DarkCyan    ctermbg=None        cterm=None
 highlight javaString              ctermfg=Magenta
 highlight javaParen               ctermfg=LightCyan
 highlight javaParen1              ctermfg=LightRed
@@ -89,6 +89,6 @@ highlight StatusLineNC            ctermfg=White       ctermbg=DarkGray    cterm=
 highlight StatusLineNCFaded       ctermfg=None        ctermbg=DarkGray    cterm=None
 highlight StatusLinePosition      ctermfg=Gray        ctermbg=DarkGray    cterm=None
 highlight StatusLinePositionFaded ctermfg=None        ctermbg=DarkGray    cterm=None
-highlight VertSplit               ctermfg=Black       ctermbg=DarkGray    cterm=None
+highlight VertSplit               ctermfg=DarkGray    ctermbg=DarkGray    cterm=None
 
 highlight MatchParen                                  ctermbg=White    cterm=Reverse
