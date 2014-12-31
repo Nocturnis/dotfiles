@@ -140,10 +140,9 @@ set backspace=indent,eol,start " backspace over everything
 set splitbelow
 set splitright
 set updatetime=1200
+set nowrap
 
-" mimic TextMate's invisible characters
-set listchars=tab:▸\ ,eol:¬
-" hi NonText ctermfg=red
+set listchars=tab:▸\ ,eol:¬,nbsp:?,conceal:?,precedes:←,extends:→
 
 
 syntax enable
