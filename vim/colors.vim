@@ -10,8 +10,8 @@ highlight LineNr                  ctermfg=DarkGray    ctermbg=Black
 highlight CursorLine                                  ctermbg=Black       cterm=None
 highlight CursorLineNr            ctermfg=Gray        ctermbg=Black
 highlight ColorColumn                                 ctermbg=DarkRed
-highlight NonText                 ctermfg=DarkGray    ctermbg=Black
-highlight SpecialKey              ctermfg=DarkGray    ctermbg=Black
+highlight NonText                 ctermfg=Black       ctermbg=White
+highlight SpecialKey              ctermfg=Yellow      ctermbg=Black
 highlight SignColumn                                  ctermbg=Black       cterm=None
 highlight GitGutterAdd            ctermfg=DarkGreen   ctermbg=DarkGreen   cterm=None
 highlight GitGutterChange         ctermfg=Yellow      ctermbg=Yellow      cterm=None
