@@ -32,12 +32,19 @@ function __working_dir {
     echo -n "%{$fg_bold[white]%}${PWD}"
 }
 
+function __git_branch_exported {
+    local git_branch=$1
+    git log -n 1 --format=%d | grep "origin/$git_branch" &> /dev/null && echo -n "1"
+}
+
 function __git_branch {
     local git_branch=$(__git_ps1 "%s")
     if [ -n "$git_branch" ]; then
         local color="%{$fg_no_bold[blue]%}"
         if [ -n "$(git status --porcelain)" ]; then
             color="%{$fg_no_bold[red]%}"
+        elif [ -z "$(__git_branch_exported $git_branch)" ]; then
+            color="%{$fg_no_bold[yellow]%}"
         fi
         echo -n " $color$git_branch"
     fi
