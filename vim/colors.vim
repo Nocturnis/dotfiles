@@ -10,7 +10,7 @@ highlight LineNr                  ctermfg=DarkGray    ctermbg=Black
 highlight CursorLine                                  ctermbg=Black       cterm=None
 highlight CursorLineNr            ctermfg=Gray        ctermbg=Black
 highlight ColorColumn                                 ctermbg=DarkRed
-highlight NonText                 ctermfg=Black       ctermbg=White
+highlight NonText                 ctermfg=White       ctermbg=Black
 highlight SpecialKey              ctermfg=Yellow      ctermbg=Black
 highlight SignColumn                                  ctermbg=Black       cterm=None
 highlight GitGutterAdd            ctermfg=DarkGreen   ctermbg=DarkGreen   cterm=None
@@ -21,6 +21,9 @@ highlight EclimHighlightInfo      ctermfg=DarkBlue    ctermbg=Gray
 highlight EclimHighlightWarning   ctermfg=DarkYellow  ctermbg=Gray
 highlight EclimHighlightError     ctermfg=White       ctermbg=LightRed
 highlight Search                  ctermfg=Black       ctermbg=Yellow
+
+highlight IndentGuidesOdd                             ctermbg=None
+highlight IndentGuidesEven                            ctermbg=Black
 
 highlight PreProc                 ctermfg=DarkGray
 highlight Constant                ctermfg=DarkMagenta
