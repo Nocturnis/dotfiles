@@ -30,6 +30,8 @@ function erase_dotfiles {
   rm -f $VRC
   rm -f $ZSHRC
 
+  rm -f $HOME/.i3/config
+
   rm -f $OHMYZSHCUSTOM/aliases.zsh
   rm -f $OHMYZSHCUSTOM/env.zsh
   rm -f $OHMYZSHCUSTOM/highlighting.zsh
@@ -52,6 +54,9 @@ function create_symlinks {
   ln -s $DIR/vim $VIM
   ln -s $DIR/vim/rc $VRC
   ln -s $DIR/zsh/rc $ZSHRC
+
+  mkdir -p $HOME/.i3/
+  ln -s $DIR/i3/config $HOME/.i3/config
 
   mkdir -p $OHMYZSHCUSTOM
   ln -s $DIR/zsh/custom/aliases.zsh $OHMYZSHCUSTOM/aliases.zsh
