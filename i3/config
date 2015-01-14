@@ -156,4 +156,5 @@ bindsym $mod+r mode "resize"
 bar {
         #status_command i3status
         status_command python ~/.dotfiles/i3/bar.py
+        font pango:Fira Mono 10
 }

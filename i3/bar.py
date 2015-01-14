@@ -24,8 +24,8 @@ def volume_string():
                 #result = result + u'█'
                 result = result + '\\u2588'
             else:
-                result = result + '\\u2591'
-        result = result + ' ' + str(int(volume_percent * 100)) + '%'
+                result = result + ' '
+        result = result + ' ' + str(int(volume_percent * 100)).rjust(3) + '%'
     return result
 
 def battery_level_string():
@@ -51,11 +51,13 @@ def battery_level_string():
             result = result + '\\u2588'
         else:
             #result = result + u'░'
-            result = result + '\\u2591'
+            result = result + ' '
     if charging:
         #result = result + u'⚡'
         result = result + ' \\u26a1'
-    result = result + ' ' + str(charge_current * 100 / charge_full) + '%'
+    else:
+        result = result + '  '
+    result = result + ' ' + str(charge_current * 100 / charge_full).rjust(3) + '%'
 
     return result
 
