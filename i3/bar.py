@@ -34,7 +34,7 @@ def battery_level_string():
     with open('/sys/class/power_supply/BAT0/charge_full', 'r') as charge_full_file:
         charge_full = int(charge_full_file.read())
     with open('/sys/class/power_supply/BAT0/status', 'r') as status_file:
-        charging = status_file.read() != 'Discharging'
+        charging = status_file.read().rstrip('\n') != 'Discharging'
     charge_percent = charge_current * 1.0 / charge_full
 
     color = 'green'
