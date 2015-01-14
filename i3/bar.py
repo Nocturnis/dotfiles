@@ -4,6 +4,7 @@
 from datetime import datetime
 from time import sleep
 
+import os.path
 import re
 import subprocess
 import sys
@@ -26,6 +27,9 @@ def volume_string():
                 result = result + ' '
         result = result + ' ' + str(int(volume_percent * 100)).rjust(3) + '%'
     return result
+
+def has_battery():
+    return os.path.exists('/sys/class/power_supply/BAT0')
 
 def battery_level_string():
     with open('/sys/class/power_supply/BAT0/charge_now', 'r') as charge_current_file:
@@ -69,7 +73,8 @@ while True:
     sys.stdout.write("[")
     # TODO: better JSON encoding than just string concat
     sys.stdout.write("{\"full_text\": \"" + volume_string() + "\"},")
-    sys.stdout.write("{\"full_text\": \"" + battery_level_string() + "\"},")
+    if has_battery():
+        sys.stdout.write("{\"full_text\": \"" + battery_level_string() + "\"},")
     sys.stdout.write("{\"full_text\": \"" + date_string() + "\"}")
     sys.stdout.write("],")
     sys.stdout.flush()
