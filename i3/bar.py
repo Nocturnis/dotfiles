@@ -2,11 +2,10 @@
 # coding=utf-8
 
 from datetime import datetime
-from termcolor import colored
 from time import sleep
 
 import re
-import subprocess 
+import subprocess
 import sys
 
 def volume_string():
@@ -46,7 +45,6 @@ def battery_level_string():
     result = ''
     for i in range(0, 10):
         if i < charge_percent * 10:
-            #result = result + colored(u'█', color)
             #result = result + u'█'
             result = result + '\\u2588'
         else:
