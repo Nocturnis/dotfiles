@@ -4,12 +4,13 @@
 from datetime import datetime
 from time import sleep
 
+import json
 import os.path
 import re
 import subprocess
 import sys
 
-def volume_string():
+def volume_part():
     sound_status = subprocess.check_output(['amixer', 'sget', 'Master'])
     match = re.search('Playback [0-9]+ \\[([0-9]+)%\\] \\[(?:.+?)\\] \\[(.+?)\\]', sound_status)
     volume_percent = float(match.group(1)) / 100
@@ -19,19 +20,19 @@ def volume_string():
     if muted:
         result = result + 'Muted'
     else:
-        for i in range(0, 10):
-            if i < volume_percent * 10:
-                #result = result + u'█'
-                result = result + '\\u2588'
-            else:
-                result = result + ' '
+        result = result + horizontal_bar(10, volume_percent)
         result = result + ' ' + str(int(volume_percent * 100)).rjust(3) + '%'
-    return result
+    return [{
+        'full_text': result
+    }]
 
 def has_battery():
     return os.path.exists('/sys/class/power_supply/BAT0')
 
-def battery_level_string():
+def battery_part():
+    if not has_battery():
+        return []
+
     with open('/sys/class/power_supply/BAT0/charge_now', 'r') as charge_current_file:
         charge_current = int(charge_current_file.read())
     with open('/sys/class/power_supply/BAT0/charge_full', 'r') as charge_full_file:
@@ -40,43 +41,50 @@ def battery_level_string():
         charging = status_file.read().rstrip('\n') != 'Discharging'
     charge_percent = charge_current * 1.0 / charge_full
 
-    color = 'green'
+    bar_color = '#859900' # green
     if charge_percent < 0.2:
-        color = 'red'
+        bar_color = '#cb4c16' # red
     elif charge_percent < 0.6:
-        color = 'yellow'
+        bar_color = '#b58900' # yellow
 
-    result = ''
-    for i in range(0, 10):
-        if i < charge_percent * 10:
-            #result = result + u'█'
-            result = result + '\\u2588'
-        else:
-            #result = result + u'░'
-            result = result + ' '
+    bar = horizontal_bar(10, charge_percent)
+
+    charge_text = ''
     if charging:
-        #result = result + u'⚡'
-        result = result + ' \\u26a1'
+        charge_text = charge_text + u' ⚡'
     else:
-        result = result + '  '
-    result = result + ' ' + str(charge_current * 100 / charge_full).rjust(3) + '%'
+        charge_text = charge_text + '  '
+    charge_text = charge_text + ' ' + str(int(charge_percent * 100)).rjust(3) + '%'
 
+    return [{
+        'full_text': bar,
+        'color': bar_color,
+        'separator': False,
+        'separator_block_width': 0
+    }, {
+        'full_text': charge_text
+    }]
+
+def datetime_part():
+    return [{
+        'full_text': datetime.now().strftime('%-m/%-d/%y %I:%M%p').lower()
+    }]
+
+def horizontal_bar(width, value):
+    result = ''
+    for i in range(0, width):
+        if i < value * width:
+            result = result + u'█'
+        else:
+            result = result + ' '
     return result
-
-def date_string():
-    return datetime.now().strftime('%-m/%-d/%y %I:%M%p').lower()
 
 sys.stdout.write("{\"version\":1}")
 sys.stdout.write("[")
-i = 0
 while True:
-    sys.stdout.write("[")
-    # TODO: better JSON encoding than just string concat
-    sys.stdout.write("{\"full_text\": \"" + volume_string() + "\"},")
-    if has_battery():
-        sys.stdout.write("{\"full_text\": \"" + battery_level_string() + "\"},")
-    sys.stdout.write("{\"full_text\": \"" + date_string() + "\"}")
-    sys.stdout.write("],")
+    sys.stdout.write(json.dumps(
+        volume_part() + battery_part() + datetime_part()
+    ))
+    sys.stdout.write(",")
     sys.stdout.flush()
-    i = i + 1
     sleep(0.2)
