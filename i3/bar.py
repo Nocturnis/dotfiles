@@ -91,9 +91,11 @@ def horizontal_bar(width, value):
 sys.stdout.write("{\"version\":1}")
 sys.stdout.write("[")
 while True:
-    sys.stdout.write(json.dumps(
-        volume_part() + battery_part() + datetime_part()
-    ))
+    parts = volume_part() + battery_part() + datetime_part()
+    for part in parts:
+        if not 'separator_block_width' in part:
+            part['separator_block_width'] = 19
+    sys.stdout.write(json.dumps(parts))
     sys.stdout.write(",\n")
     sys.stdout.flush()
     sleep(0.2)
