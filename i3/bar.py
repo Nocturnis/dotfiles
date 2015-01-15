@@ -10,16 +10,18 @@ import re
 import subprocess
 import sys
 
-class Colors:
-    red = '#cb4c16'
-    yellow = '#b58900'
-    green = '#859900'
-
-def volume_part():
+################################################################################
+# Volume
+def volume_status():
     sound_status = subprocess.check_output(['amixer', 'sget', 'Master'])
     match = re.search('Playback [0-9]+ \\[([0-9]+)%\\] \\[(?:.+?)\\] \\[(.+?)\\]', sound_status)
     volume_percent = float(match.group(1)) / 100
     muted = match.group(2).find('off') >= 0
+
+    return (volume_percent, muted)
+
+def volume_part():
+    volume_percent, muted = volume_status()
 
     result = ''
     if muted:
@@ -31,13 +33,12 @@ def volume_part():
         'full_text': result
     }]
 
+################################################################################
+# Battery
 def has_battery():
     return os.path.exists('/sys/class/power_supply/BAT0')
 
-def battery_part():
-    if not has_battery():
-        return []
-
+def battery_status():
     with open('/sys/class/power_supply/BAT0/charge_now', 'r') as charge_current_file:
         charge_current = int(charge_current_file.read())
     with open('/sys/class/power_supply/BAT0/charge_full', 'r') as charge_full_file:
@@ -45,6 +46,14 @@ def battery_part():
     with open('/sys/class/power_supply/BAT0/status', 'r') as status_file:
         charging = status_file.read().rstrip('\n') != 'Discharging'
     charge_percent = charge_current * 1.0 / charge_full
+
+    return (charge_percent, charging)
+
+def battery_part():
+    if not has_battery():
+        return []
+
+    charge_percent, charging = battery_status()
 
     bar_color = Colors.green # green
     if charge_percent < 0.2:
@@ -70,11 +79,21 @@ def battery_part():
         'full_text': charge_text
     }]
 
+################################################################################
+# Date/Time
 def datetime_part():
     now = datetime.now()
     return [{
         'full_text': now.strftime('%A ') + now.strftime('%-m/%-d/%y %I:%M%p').lower()
     }]
+
+
+################################################################################
+# Util
+class Colors:
+    red = '#cb4c16'
+    yellow = '#b58900'
+    green = '#859900'
 
 def horizontal_bar(width, value):
     result = ''
@@ -94,6 +113,8 @@ def horizontal_bar(width, value):
             result = result + ' '
     return result
 
+################################################################################
+# Output
 sys.stdout.write("{\"version\":1}")
 sys.stdout.write("[")
 while True:
