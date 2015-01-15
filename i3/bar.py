@@ -73,7 +73,16 @@ def datetime_part():
 def horizontal_bar(width, value):
     result = ''
     for i in range(0, width):
-        if i < value * width:
+        if i == int(value * width):
+            partial = (value * width - i) * 10 / 8
+            partials = [u'▏', u'▎', u'▍', u'▌', u'▋', u'▊', u'▉']
+            for j in range(7):
+                if partial <= (j + 1) * 1.0 / 8:
+                    result = result + partials[j]
+                    break
+            else:
+                result = result + u'█'
+        elif i < int(value * width):
             result = result + u'█'
         else:
             result = result + ' '
@@ -85,6 +94,6 @@ while True:
     sys.stdout.write(json.dumps(
         volume_part() + battery_part() + datetime_part()
     ))
-    sys.stdout.write(",")
+    sys.stdout.write(",\n")
     sys.stdout.flush()
     sleep(0.2)
