@@ -10,6 +10,11 @@ import re
 import subprocess
 import sys
 
+class Colors:
+    red = '#cb4c16'
+    yellow = '#b58900'
+    green = '#859900'
+
 def volume_part():
     sound_status = subprocess.check_output(['amixer', 'sget', 'Master'])
     match = re.search('Playback [0-9]+ \\[([0-9]+)%\\] \\[(?:.+?)\\] \\[(.+?)\\]', sound_status)
@@ -41,11 +46,11 @@ def battery_part():
         charging = status_file.read().rstrip('\n') != 'Discharging'
     charge_percent = charge_current * 1.0 / charge_full
 
-    bar_color = '#859900' # green
+    bar_color = Colors.green # green
     if charge_percent < 0.2:
-        bar_color = '#cb4c16' # red
+        bar_color = Colors.red # red
     elif charge_percent < 0.6:
-        bar_color = '#b58900' # yellow
+        bar_color = Colors.yellow # yellow
 
     bar = horizontal_bar(10, charge_percent)
 
