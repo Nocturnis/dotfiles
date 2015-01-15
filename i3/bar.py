@@ -66,8 +66,9 @@ def battery_part():
     }]
 
 def datetime_part():
+    now = datetime.now()
     return [{
-        'full_text': datetime.now().strftime('%-m/%-d/%y %I:%M%p').lower()
+        'full_text': now.strftime('%A ') + now.strftime('%-m/%-d/%y %I:%M%p').lower()
     }]
 
 def horizontal_bar(width, value):
