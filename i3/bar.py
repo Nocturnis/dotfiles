@@ -30,6 +30,11 @@ def volume_part():
         result = result + horizontal_bar(10, volume_percent) + u'▏'
         result = result + str(int(volume_percent * 100)).rjust(3) + '%'
     return [{
+        'full_text': 'Vol ',
+        'color': Colors.gray,
+        'separator': False,
+        'separator_block_width': 0
+    }, {
         'full_text': result
     }]
 
@@ -71,6 +76,11 @@ def battery_part():
     charge_text = charge_text + ' ' + str(int(charge_percent * 100)).rjust(3) + '%'
 
     return [{
+        'full_text': 'Bat ',
+        'color': Colors.gray,
+        'separator': False,
+        'separator_block_width': 0
+    }, {
         'full_text': bar,
         'color': bar_color,
         'separator': False,
@@ -94,6 +104,7 @@ class Colors:
     red = '#cb4c16'
     yellow = '#b58900'
     green = '#859900'
+    gray = '#586e75'
 
 def horizontal_bar(width, value):
     result = ''
