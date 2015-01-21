@@ -28,7 +28,7 @@ def volume_part():
     if muted:
         result = result + 'Muted'
     else:
-        result = result + horizontal_bar(10, volume_percent) + u'▏'
+        result = result + horizontal_bar(10, volume_percent) + ' '
         result = result + str(int(volume_percent * 100)).rjust(3) + '%'
     return [{
         'full_text': 'Vol ',
@@ -67,7 +67,7 @@ def battery_part():
     elif charge_percent < 0.6:
         bar_color = Colors.yellow # yellow
 
-    bar = horizontal_bar(10, charge_percent) + u'▏'
+    bar = horizontal_bar(10, charge_percent) + ' '
 
     charge_text = ''
     if charging:
