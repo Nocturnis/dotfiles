@@ -71,8 +71,6 @@ def battery_part():
     charge_text = ''
     if charging:
         charge_text = charge_text + u' ⚡'
-    else:
-        charge_text = charge_text + '  '
     charge_text = charge_text + ' ' + str(int(charge_percent * 100)).rjust(3) + '%'
 
     return [{
