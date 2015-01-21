@@ -2,6 +2,7 @@
 # coding=utf-8
 
 from datetime import datetime
+from math import floor
 from time import sleep
 
 import json
@@ -109,17 +110,12 @@ class Colors:
 def horizontal_bar(width, value):
     result = ''
     for i in range(0, width):
-        if i == int(value * width):
-            partial = (value * width - i) * 10 / 8
-            partials = [u'▏', u'▎', u'▍', u'▌', u'▋', u'▊', u'▉']
-            for j in range(7):
-                if partial <= (j + 1) * 1.0 / 8:
-                    result = result + partials[j]
-                    break
-            else:
-                result = result + u'█'
-        elif i < int(value * width):
+        if i < int(value * width):
             result = result + u'█'
+        elif i == int(value * width):
+            partials = [u'▏', u'▎', u'▍', u'▌', u'▋', u'▊', u'▉', u'█']
+            index = int(floor((value * width - i) * 8))
+            result = result + partials[index]
         else:
             result = result + ' '
     return result
