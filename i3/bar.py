@@ -109,16 +109,12 @@ class Colors:
     dark_gray = '#586e75'
 
 def horizontal_bar(width, value):
-    result = ''
-    for i in range(0, width):
-        if i < int(value * width):
-            result = result + u'█'
-        elif i == int(value * width):
-            partials = [u'▏', u'▎', u'▍', u'▌', u'▋', u'▊', u'▉', u'█']
-            index = int(floor((value * width - i) * 8))
-            result = result + partials[index]
-        else:
-            result = result + u'•'
+    partials = [u'▏', u'▎', u'▍', u'▌', u'▋', u'▊', u'▉', u'█']
+
+    result = u'█' * int(value * width) \
+            + partials[int(floor((value * width % 1) * 8))] \
+            + u'•' * (width - int(value * width))
+
     return result
 
 ################################################################################
