@@ -117,7 +117,7 @@ def horizontal_bar(width, value):
             index = int(floor((value * width - i) * 8))
             result = result + partials[index]
         else:
-            result = result + ' '
+            result = result + u'•'
     return result
 
 ################################################################################
