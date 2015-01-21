@@ -24,19 +24,30 @@ def volume_status():
 def volume_part():
     volume_percent, muted = volume_status()
 
-    result = ''
-    if muted:
-        result = result + 'Muted'
-    else:
-        result = result + horizontal_bar(10, volume_percent) + ' '
-        result = result + str(int(volume_percent * 100)).rjust(3) + '%'
-    return [{
+    title_part = {
         'full_text': 'Vol ',
         'color': Colors.gray,
         'separator': False,
         'separator_block_width': 0
+    }
+
+    if muted:
+        return [title_part, {
+            'full_text': 'Muted'
+        }]
+
+    bar, bar_filler = horizontal_bar(10, volume_percent)
+    return [title_part, {
+        'full_text': bar,
+        'separator': False,
+        'separator_block_width': 0
     }, {
-        'full_text': result
+        'full_text': bar_filler,
+        'color': Colors.dark_gray,
+        'separator': False,
+        'separator_block_width': 0
+    }, {
+        'full_text': str(int(volume_percent * 100)).rjust(3) + '%'
     }]
 
 ################################################################################
@@ -67,13 +78,13 @@ def battery_part():
     elif charge_percent < 0.6:
         bar_color = Colors.yellow # yellow
 
-    bar = horizontal_bar(10, charge_percent) + ' '
+    bar, bar_filler = horizontal_bar(10, charge_percent)
 
     charge_text = ''
     if charging:
-        charge_text = charge_text + u'⚡'
+        charge_text = charge_text + u' ⚡'
     else:
-        charge_text = charge_text + ' '
+        charge_text = charge_text + '  '
     charge_text = charge_text + ' ' + str(int(charge_percent * 100)).rjust(3) + '%'
 
     return [{
@@ -84,6 +95,11 @@ def battery_part():
     }, {
         'full_text': bar,
         'color': bar_color,
+        'separator': False,
+        'separator_block_width': 0
+    }, {
+        'full_text': bar_filler,
+        'color': Colors.dark_gray,
         'separator': False,
         'separator_block_width': 0
     }, {
@@ -111,11 +127,11 @@ class Colors:
 def horizontal_bar(width, value):
     partials = [u'▏', u'▎', u'▍', u'▌', u'▋', u'▊', u'▉', u'█']
 
-    result = u'█' * int(value * width) \
-            + partials[int(floor((value * width % 1) * 8))] \
-            + u'•' * (width - int(value * width))
+    bar = u'█' * int(value * width) \
+            + partials[int(floor((value * width % 1) * 8))]
+    filler = u'•' * (width - int(value * width))
 
-    return result
+    return (bar, filler)
 
 ################################################################################
 # Output
