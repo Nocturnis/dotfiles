@@ -132,7 +132,9 @@ while True:
     parts = volume_part() + battery_part() + datetime_part()
     for part in parts:
         if not 'separator_block_width' in part:
-            part['separator_block_width'] = 19
+            part['separator_block_width'] = 35
+        if not 'separator' in part:
+            part['separator'] = False
     sys.stdout.write(json.dumps(parts))
     sys.stdout.write(",\n")
     sys.stdout.flush()
