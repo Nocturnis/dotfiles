@@ -36,17 +36,7 @@ def volume_part():
             'full_text': 'Muted'
         }]
 
-    bar, bar_filler = horizontal_bar(10, volume_percent)
-    return [title_part, {
-        'full_text': bar,
-        'separator': False,
-        'separator_block_width': 0
-    }, {
-        'full_text': bar_filler,
-        'color': Colors.dark_gray,
-        'separator': False,
-        'separator_block_width': 0
-    }, {
+    return [title_part] + horizontal_bar(volume_percent, 10) + [{
         'full_text': str(int(volume_percent * 100)).rjust(3) + '%'
     }]
 
@@ -78,8 +68,6 @@ def battery_part():
     elif charge_percent < 0.6:
         bar_color = Colors.yellow # yellow
 
-    bar, bar_filler = horizontal_bar(10, charge_percent)
-
     charge_text = ''
     if charging:
         charge_text = charge_text + u' ⚡'
@@ -92,17 +80,7 @@ def battery_part():
         'color': Colors.gray,
         'separator': False,
         'separator_block_width': 0
-    }, {
-        'full_text': bar,
-        'color': bar_color,
-        'separator': False,
-        'separator_block_width': 0
-    }, {
-        'full_text': bar_filler,
-        'color': Colors.dark_gray,
-        'separator': False,
-        'separator_block_width': 0
-    }, {
+    }] + horizontal_bar(charge_percent, 10, bar_color = bar_color, filler_char = '>' if charging else u'•') + [{
         'full_text': charge_text
     }]
 
@@ -124,14 +102,24 @@ class Colors:
     gray = '#8aa1ac'
     dark_gray = '#586e75'
 
-def horizontal_bar(width, value):
+def horizontal_bar(value, width, bar_color = None, filler_color = Colors.dark_gray, filler_char = u'•'):
     partials = [u'▏', u'▎', u'▍', u'▌', u'▋', u'▊', u'▉', u'█']
 
     bar = u'█' * int(value * width) \
             + partials[int(floor((value * width % 1) * 8))]
-    filler = u'•' * (width - int(value * width))
+    filler = filler_char * (width - int(value * width))
 
-    return (bar, filler)
+    return [{
+        'full_text': bar,
+        'color': bar_color,
+        'separator': False,
+        'separator_block_width': 0
+    }, {
+        'full_text': filler,
+        'color': filler_color,
+        'separator': False,
+        'separator_block_width': 0
+    }]
 
 ################################################################################
 # Output
