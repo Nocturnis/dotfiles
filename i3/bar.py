@@ -105,7 +105,8 @@ class Colors:
     red = '#cb4c16'
     yellow = '#b58900'
     green = '#859900'
-    gray = '#586e75'
+    gray = '#8aa1ac'
+    dark_gray = '#586e75'
 
 def horizontal_bar(width, value):
     result = ''
