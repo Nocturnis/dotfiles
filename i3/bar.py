@@ -37,7 +37,7 @@ def volume_part():
         }]
 
     return [title_part] + horizontal_bar(volume_percent, 10) + [{
-        'full_text': str(int(volume_percent * 100)).rjust(3) + '%'
+        'full_text': ' ' + str(int(volume_percent * 100)).rjust(3) + '%'
     }]
 
 ################################################################################
@@ -103,9 +103,10 @@ class Colors:
 def horizontal_bar(value, width, bar_color = None, filler_color = Colors.dark_gray, filler_char = u'•'):
     partials = [u'▏', u'▎', u'▍', u'▌', u'▋', u'▊', u'▉', u'█']
 
-    bar = u'█' * int(value * width) \
-            + partials[int(floor((value * width % 1) * 8))]
-    filler = filler_char * (width - int(value * width))
+    bar = u'█' * int(value * width)
+    if value < 1.0:
+        bar = bar + partials[int(floor((value * width % 1) * 8))]
+    filler = filler_char * (width - int(value * width) - 1)
 
     return [{
         'full_text': bar,
