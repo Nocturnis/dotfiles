@@ -104,7 +104,9 @@ def horizontal_bar(value, width, bar_color = None, filler_color = Colors.dark_gr
     partials = [u'◐', u'●']
 
     bar = u'●' * int(value * width)
-    if value < 1.0:
+    if value == 0:
+        bar = filler_char
+    elif value < 1.0:
         bar = bar + partials[int(floor((value * width % 1) * len(partials)))]
     filler = filler_char * (width - int(value * width) - 1)
 
