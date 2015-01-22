@@ -73,12 +73,13 @@ def battery_part():
         charge_text = charge_text + u' ⚡'
     charge_text = charge_text + ' ' + str(int(charge_percent * 100)).rjust(3) + '%'
 
+    filler_text = (u'◯' * (frame % 4)) + u'◉' + (u'◯' * (3 - (frame % 4)))
     return [{
         'full_text': 'Bat ',
         'color': Colors.gray,
         'separator': False,
         'separator_block_width': 0
-    }] + horizontal_bar(charge_percent, 10, bar_color = bar_color, filler_char = u'◉' if charging else u'◯') + [{
+    }] + horizontal_bar(charge_percent, 10, bar_color = bar_color, filler_char = filler_text if charging else u'◯') + [{
         'full_text': charge_text
     }]
 
@@ -108,7 +109,8 @@ def horizontal_bar(value, width, bar_color = None, filler_color = Colors.dark_gr
         bar = filler_char
     elif value < 1.0:
         bar = bar + partials[int(floor((value * width % 1) * len(partials)))]
-    filler = filler_char * (width - int(value * width) - 1)
+    filler_chars_needed = (width - int(value * width) - 1)
+    filler = (filler_char * filler_chars_needed)[0:filler_chars_needed]
 
     return [{
         'full_text': bar,
@@ -126,6 +128,7 @@ def horizontal_bar(value, width, bar_color = None, filler_color = Colors.dark_gr
 # Output
 sys.stdout.write("{\"version\":1}")
 sys.stdout.write("[")
+frame = 0
 while True:
     parts = volume_part() + battery_part() + datetime_part()
     for part in parts:
@@ -137,3 +140,4 @@ while True:
     sys.stdout.write(",\n")
     sys.stdout.flush()
     sleep(0.2)
+    frame = frame + 1
