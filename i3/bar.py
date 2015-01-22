@@ -64,7 +64,10 @@ def battery_part():
 
     bar_color = Colors.green # green
     if charge_percent < 0.2:
-        bar_color = Colors.red # red
+        if not charging and frame % 6 < 1:
+            bar_color = Colors.bright_red
+        else:
+            bar_color = Colors.red # red
     elif charge_percent < 0.6:
         bar_color = Colors.yellow # yellow
 
@@ -96,6 +99,7 @@ def datetime_part():
 # Util
 class Colors:
     red = '#cb4c16'
+    bright_red = "#f18354"
     yellow = '#b58900'
     green = '#859900'
     gray = '#8aa1ac'
