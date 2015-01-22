@@ -62,14 +62,14 @@ def battery_part():
 
     charge_percent, charging = battery_status()
 
-    bar_color = Colors.green # green
+    bar_color = Colors.green
     if charge_percent < 0.2:
         if not charging and frame % 6 < 1:
             bar_color = Colors.bright_red
         else:
-            bar_color = Colors.red # red
+            bar_color = Colors.red
     elif charge_percent < 0.6:
-        bar_color = Colors.yellow # yellow
+        bar_color = Colors.yellow
 
     charge_text = ''
     if charging:
