@@ -14,6 +14,25 @@ import subprocess
 import sys
 
 ################################################################################
+# CPU
+def cpu_status():
+    mpstat = subprocess.check_output(['mpstat'])
+    idle = float(re.search('all +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +([\.0-9]+)', mpstat).group(1)) / 100
+    return 1 - idle
+
+def cpu_part():
+    cpu_usage = cpu_status()
+
+    return [{
+        'full_text': 'CPU ',
+        'color': Colors.gray,
+        'separator': False,
+        'separator_block_width': 0
+    }] + horizontal_bar(cpu_usage, 10) + [{
+        'full_text': ' ' + str(int(cpu_usage * 100)).rjust(3) + '%'
+    }]
+
+################################################################################
 # Memory
 def memory_status():
     with open('/proc/meminfo', 'r') as meminfo_file:
@@ -173,7 +192,7 @@ sys.stdout.write("{\"version\":1}")
 sys.stdout.write("[")
 frame = 0
 while True:
-    parts = memory_part() + volume_part() + battery_part() + datetime_part()
+    parts = cpu_part() + memory_part() + volume_part() + battery_part() + datetime_part()
     for part in parts:
         if not 'separator_block_width' in part:
             part['separator_block_width'] = 25
