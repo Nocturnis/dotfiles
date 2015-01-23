@@ -106,7 +106,10 @@ def battery_part():
         charge_text = charge_text + u' ⚡'
     charge_text = charge_text + ' ' + str(int(charge_percent * 100)).rjust(3) + '%'
 
-    filler_text = (u'◯' * (frame % 4)) + u'◉' + (u'◯' * (3 - (frame % 4)))
+    filler_text = (u'◯' * (frame % 8)) \
+            + u'◉' \
+            + (u'◯' * (7 - (frame % 8)))
+
     return [{
         'full_text': 'Bat ',
         'color': Colors.gray,
