@@ -33,7 +33,12 @@ def memory_part():
         'separator': False,
         'separator_block_width': 0
     }] + horizontal_bar(mem_used * 1.0 / mem_total, 10) + [{
-        'full_text': ' ' + bytes_string(mem_used, 1) + '/' + bytes_string(mem_total, 1)
+        'full_text': ' ' + bytes_string(mem_used, 1),
+        'separator': False,
+        'separator_block_width': 0
+    }, {
+        'full_text': '/' + bytes_string(mem_total, 1),
+        'color': Colors.dark_gray
     }]
 
 ################################################################################
