@@ -28,7 +28,7 @@ def cpu_part():
         'color': Colors.gray,
         'separator': False,
         'separator_block_width': 0
-    }] + horizontal_bar(cpu_usage, 10) + [{
+    }] + horizontal_bar(cpu_usage) + [{
         'full_text': ' ' + str(int(cpu_usage * 100)).rjust(3) + '%'
     }]
 
@@ -51,7 +51,7 @@ def memory_part():
         'color': Colors.gray,
         'separator': False,
         'separator_block_width': 0
-    }] + horizontal_bar(mem_used * 1.0 / mem_total, 10) + [{
+    }] + horizontal_bar(mem_used * 1.0 / mem_total) + [{
         'full_text': ' ' + bytes_string(mem_used, 1),
         'separator': False,
         'separator_block_width': 0
@@ -85,7 +85,7 @@ def volume_part():
             'full_text': 'Muted'
         }]
 
-    return [title_part] + horizontal_bar(volume_percent, 10) + [{
+    return [title_part] + horizontal_bar(volume_percent) + [{
         'full_text': ' ' + str(int(volume_percent * 100)).rjust(3) + '%'
     }]
 
@@ -134,7 +134,7 @@ def battery_part():
         'color': Colors.gray,
         'separator': False,
         'separator_block_width': 0
-    }] + horizontal_bar(charge_percent, 10, bar_color = bar_color, filler_char = filler_text if charging else u'◯') + [{
+    }] + horizontal_bar(charge_percent, bar_color = bar_color, filler_char = filler_text if charging else u'◯') + [{
         'full_text': charge_text
     }]
 
@@ -157,7 +157,7 @@ class Colors:
     gray = '#8aa1ac'
     dark_gray = '#586e75'
 
-def horizontal_bar(value, width, bar_color = None, filler_color = Colors.dark_gray, filler_char = u'◯'):
+def horizontal_bar(value, width = 6, bar_color = None, filler_color = Colors.dark_gray, filler_char = u'◯'):
     partials = [u'◐', u'●']
 
     bar = u'●' * int(value * width)
