@@ -3,6 +3,8 @@
 
 from datetime import datetime
 from math import floor
+from math import log
+from math import pow
 from time import sleep
 
 import json
@@ -10,6 +12,29 @@ import os.path
 import re
 import subprocess
 import sys
+
+################################################################################
+# Memory
+def memory_status():
+    with open('/proc/meminfo', 'r') as meminfo_file:
+        meminfo = meminfo_file.read()
+
+    used = int(re.search('Active: +([0-9]+)', meminfo).group(1)) * 1000
+    total = int(re.search('MemTotal: +([0-9]+)', meminfo).group(1)) * 1000
+
+    return (used, total)
+
+def memory_part():
+    mem_used, mem_total = memory_status()
+
+    return [{
+        'full_text': 'Mem ',
+        'color': Colors.gray,
+        'separator': False,
+        'separator_block_width': 0
+    }] + horizontal_bar(mem_used * 1.0 / mem_total, 10) + [{
+        'full_text': ' ' + bytes_string(mem_used, 1) + '/' + bytes_string(mem_total, 1)
+    }]
 
 ################################################################################
 # Volume
@@ -128,13 +153,19 @@ def horizontal_bar(value, width, bar_color = None, filler_color = Colors.dark_gr
         'separator_block_width': 0
     }]
 
+def bytes_string(num_bytes, decimal_places = 0):
+    units = ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb']
+    order = int(floor(log(num_bytes, 1000)))
+    return (('%.' + str(decimal_places) + 'f') % (num_bytes / pow(1000, order))) \
+            + units[order]
+
 ################################################################################
 # Output
 sys.stdout.write("{\"version\":1}")
 sys.stdout.write("[")
 frame = 0
 while True:
-    parts = volume_part() + battery_part() + datetime_part()
+    parts = memory_part() + volume_part() + battery_part() + datetime_part()
     for part in parts:
         if not 'separator_block_width' in part:
             part['separator_block_width'] = 35
