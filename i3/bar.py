@@ -176,7 +176,7 @@ while True:
     parts = memory_part() + volume_part() + battery_part() + datetime_part()
     for part in parts:
         if not 'separator_block_width' in part:
-            part['separator_block_width'] = 35
+            part['separator_block_width'] = 25
         if not 'separator' in part:
             part['separator'] = False
     sys.stdout.write(json.dumps(parts))
