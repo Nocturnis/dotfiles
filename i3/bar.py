@@ -162,7 +162,7 @@ def datetime_part():
 # Util
 class Colors:
     red = '#cb4c16'
-    bright_red = "#f18354"
+    bright_red = '#f18354'
     yellow = '#b58900'
     green = '#859900'
     gray = '#8aa1ac'
@@ -199,8 +199,8 @@ def bytes_string(num_bytes, decimal_places = 0):
 
 ################################################################################
 # Output
-sys.stdout.write("{\"version\":1}")
-sys.stdout.write("[")
+sys.stdout.write('{\'version\':1}')
+sys.stdout.write('[')
 frame = 0
 while True:
     parts = cpu_part() + memory_part() + volume_part() + battery_part() + datetime_part()
@@ -210,7 +210,7 @@ while True:
         if not 'separator' in part:
             part['separator'] = False
     sys.stdout.write(json.dumps(parts))
-    sys.stdout.write(",\n")
+    sys.stdout.write(',\n')
     sys.stdout.flush()
     sleep(0.2)
     frame = frame + 1
