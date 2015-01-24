@@ -2,9 +2,7 @@
 # coding=utf-8
 
 from datetime import datetime
-from math import floor
-from math import log
-from math import pow
+from math import floor, log, pow
 from time import sleep
 
 import json
