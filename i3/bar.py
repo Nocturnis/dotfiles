@@ -199,7 +199,7 @@ def bytes_string(num_bytes, decimal_places = 0):
 
 ################################################################################
 # Output
-sys.stdout.write('{\'version\':1}')
+sys.stdout.write('{\"version\":1}\n')
 sys.stdout.write('[')
 frame = 0
 while True:
