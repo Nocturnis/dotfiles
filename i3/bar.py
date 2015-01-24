@@ -23,12 +23,18 @@ def cpu_status():
 def cpu_part():
     cpu_usage = cpu_status()
 
+    bar_color = Colors.green
+    if cpu_usage > 0.8:
+        bar_color = Colors.red
+    elif cpu_usage > 0.5:
+        bar_color = Colors.yellow
+
     return [{
         'full_text': 'CPU ',
         'color': Colors.gray,
         'separator': False,
         'separator_block_width': 0
-    }] + horizontal_bar(cpu_usage) + [{
+    }] + horizontal_bar(cpu_usage, bar_color = bar_color) + [{
         'full_text': ' ' + str(int(cpu_usage * 100)).rjust(3) + '%'
     }]
 
@@ -45,13 +51,20 @@ def memory_status():
 
 def memory_part():
     mem_used, mem_total = memory_status()
+    mem_usage = mem_used * 1.0 / mem_total
+
+    bar_color = Colors.green
+    if mem_usage > 0.8:
+        bar_color = Colors.red
+    elif mem_usage > 0.5:
+        bar_color = Colors.yellow
 
     return [{
         'full_text': 'Mem ',
         'color': Colors.gray,
         'separator': False,
         'separator_block_width': 0
-    }] + horizontal_bar(mem_used * 1.0 / mem_total) + [{
+    }] + horizontal_bar(mem_usage, bar_color = bar_color) + [{
         'full_text': ' ' + bytes_string(mem_used, 1),
         'separator': False,
         'separator_block_width': 0
@@ -157,7 +170,7 @@ class Colors:
     gray = '#8aa1ac'
     dark_gray = '#586e75'
 
-def horizontal_bar(value, width = 6, bar_color = None, filler_color = Colors.dark_gray, filler_char = u'◯'):
+def horizontal_bar(value, width = 10, bar_color = None, filler_color = Colors.dark_gray, filler_char = u'◯'):
     partials = [u'◐', u'●']
 
     bar = u'●' * int(value * width)
