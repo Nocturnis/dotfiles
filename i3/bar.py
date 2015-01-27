@@ -28,11 +28,13 @@ def cpu_part():
         bar_color = Colors.yellow
 
     return [{
+        'name': 'cpu:title',
         'full_text': 'CPU ',
         'color': Colors.gray,
         'separator': False,
         'separator_block_width': 0
     }] + horizontal_bar(cpu_usage, bar_color = bar_color) + [{
+        'name': 'cpu:value',
         'full_text': ' ' + str(int(cpu_usage * 100)).rjust(3) + '%'
     }]
 
@@ -58,6 +60,7 @@ def memory_part():
         bar_color = Colors.yellow
 
     return [{
+        'name': 'mem:title',
         'full_text': 'Mem ',
         'color': Colors.gray,
         'separator': False,
@@ -67,6 +70,7 @@ def memory_part():
         'separator': False,
         'separator_block_width': 0
     }, {
+        'name': 'mem:value',
         'full_text': '/' + bytes_string(mem_total, 1),
         'color': Colors.dark_gray
     }]
@@ -85,6 +89,7 @@ def volume_part():
     volume_percent, muted = volume_status()
 
     title_part = {
+        'name': 'vol:title',
         'full_text': 'Vol ',
         'color': Colors.gray,
         'separator': False,
@@ -93,10 +98,12 @@ def volume_part():
 
     if muted:
         return [title_part, {
+            'name': 'vol:muted',
             'full_text': 'Muted'
         }]
 
     return [title_part] + horizontal_bar(volume_percent) + [{
+        'name': 'vol:value',
         'full_text': ' ' + str(int(volume_percent * 100)).rjust(3) + '%'
     }]
 
@@ -141,11 +148,13 @@ def battery_part():
             + (u'◯' * (7 - (frame % 8)))
 
     return [{
+        'name': 'bat:title',
         'full_text': 'Bat ',
         'color': Colors.gray,
         'separator': False,
         'separator_block_width': 0
     }] + horizontal_bar(charge_percent, bar_color = bar_color, filler_char = filler_text if charging else u'◯') + [{
+        'name': 'bat:value',
         'full_text': charge_text
     }]
 
@@ -154,6 +163,7 @@ def battery_part():
 def datetime_part():
     now = datetime.now()
     return [{
+        'name': 'datetime',
         'full_text': now.strftime('%A ') + now.strftime('%-m/%-d/%y %I:%M%p').lower()
     }]
 
