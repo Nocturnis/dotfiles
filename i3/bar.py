@@ -11,161 +11,170 @@ import re
 import subprocess
 import sys
 
+class BarPart:
+    def render(self, frame):
+        return []
+
 ################################################################################
 # CPU
-def cpu_status():
-    mpstat = subprocess.check_output(['mpstat'])
-    idle = float(re.search('all +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +([\.0-9]+)', mpstat).group(1)) / 100
-    return 1 - idle
+class CpuPart(BarPart):
+    def __status(self):
+        mpstat = subprocess.check_output(['mpstat'])
+        idle = float(re.search('all +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +([\.0-9]+)', mpstat).group(1)) / 100
+        return 1 - idle
 
-def cpu_part():
-    cpu_usage = cpu_status()
+    def render(self, frame):
+        cpu_usage = self.__status()
 
-    bar_color = Colors.green
-    if cpu_usage > 0.8:
-        bar_color = Colors.red
-    elif cpu_usage > 0.5:
-        bar_color = Colors.yellow
+        bar_color = Colors.green
+        if cpu_usage > 0.8:
+            bar_color = Colors.red
+        elif cpu_usage > 0.5:
+            bar_color = Colors.yellow
 
-    return [{
-        'name': 'cpu:title',
-        'full_text': 'CPU ',
-        'color': Colors.gray,
-        'separator': False,
-        'separator_block_width': 0
-    }] + horizontal_bar(cpu_usage, bar_color = bar_color) + [{
-        'name': 'cpu:value',
-        'full_text': ' ' + str(int(cpu_usage * 100)).rjust(3) + '%'
-    }]
+        return [{
+            'name': 'cpu:title',
+            'full_text': 'CPU ',
+            'color': Colors.gray,
+            'separator': False,
+            'separator_block_width': 0
+        }] + horizontal_bar(cpu_usage, bar_color = bar_color) + [{
+            'name': 'cpu:value',
+            'full_text': ' ' + str(int(cpu_usage * 100)).rjust(3) + '%'
+        }]
 
 ################################################################################
 # Memory
-def memory_status():
-    with open('/proc/meminfo', 'r') as meminfo_file:
-        meminfo = meminfo_file.read()
+class MemoryPart(BarPart):
+    def __status(self):
+        with open('/proc/meminfo', 'r') as meminfo_file:
+            meminfo = meminfo_file.read()
 
-    used = int(re.search('Active: +([0-9]+)', meminfo).group(1)) * 1000
-    total = int(re.search('MemTotal: +([0-9]+)', meminfo).group(1)) * 1000
+        used = int(re.search('Active: +([0-9]+)', meminfo).group(1)) * 1000
+        total = int(re.search('MemTotal: +([0-9]+)', meminfo).group(1)) * 1000
 
-    return (used, total)
+        return (used, total)
 
-def memory_part():
-    mem_used, mem_total = memory_status()
-    mem_usage = mem_used * 1.0 / mem_total
+    def render(self, frame):
+        mem_used, mem_total = self.__status()
+        mem_usage = mem_used * 1.0 / mem_total
 
-    bar_color = Colors.green
-    if mem_usage > 0.8:
-        bar_color = Colors.red
-    elif mem_usage > 0.5:
-        bar_color = Colors.yellow
+        bar_color = Colors.green
+        if mem_usage > 0.8:
+            bar_color = Colors.red
+        elif mem_usage > 0.5:
+            bar_color = Colors.yellow
 
-    return [{
-        'name': 'mem:title',
-        'full_text': 'Mem ',
-        'color': Colors.gray,
-        'separator': False,
-        'separator_block_width': 0
-    }] + horizontal_bar(mem_usage, bar_color = bar_color) + [{
-        'full_text': ' ' + bytes_string(mem_used, 1),
-        'separator': False,
-        'separator_block_width': 0
-    }, {
-        'name': 'mem:value',
-        'full_text': '/' + bytes_string(mem_total, 1),
-        'color': Colors.dark_gray
-    }]
+        return [{
+            'name': 'mem:title',
+            'full_text': 'Mem ',
+            'color': Colors.gray,
+            'separator': False,
+            'separator_block_width': 0
+        }] + horizontal_bar(mem_usage, bar_color = bar_color) + [{
+            'full_text': ' ' + bytes_string(mem_used, 1),
+            'separator': False,
+            'separator_block_width': 0
+        }, {
+            'name': 'mem:value',
+            'full_text': '/' + bytes_string(mem_total, 1),
+            'color': Colors.dark_gray
+        }]
 
 ################################################################################
 # Volume
-def volume_status():
-    sound_status = subprocess.check_output(['amixer', 'sget', 'Master'])
-    match = re.search('Playback [0-9]+ \\[([0-9]+)%\\] \\[(?:.+?)\\] \\[(.+?)\\]', sound_status)
-    volume_percent = float(match.group(1)) / 100
-    muted = match.group(2).find('off') >= 0
+class VolumePart(BarPart):
+    def __status(self):
+        sound_status = subprocess.check_output(['amixer', 'sget', 'Master'])
+        match = re.search('Playback [0-9]+ \\[([0-9]+)%\\] \\[(?:.+?)\\] \\[(.+?)\\]', sound_status)
+        volume_percent = float(match.group(1)) / 100
+        muted = match.group(2).find('off') >= 0
 
-    return (volume_percent, muted)
+        return (volume_percent, muted)
 
-def volume_part():
-    volume_percent, muted = volume_status()
+    def render(self, frame):
+        volume_percent, muted = self.__status()
 
-    title_part = {
-        'name': 'vol:title',
-        'full_text': 'Vol ',
-        'color': Colors.gray,
-        'separator': False,
-        'separator_block_width': 0
-    }
+        title_part = {
+            'name': 'vol:title',
+            'full_text': 'Vol ',
+            'color': Colors.gray,
+            'separator': False,
+            'separator_block_width': 0
+        }
 
-    if muted:
-        return [title_part, {
-            'name': 'vol:muted',
-            'full_text': 'Muted'
+        if muted:
+            return [title_part, {
+                'name': 'vol:muted',
+                'full_text': 'Muted'
+            }]
+
+        return [title_part] + horizontal_bar(volume_percent) + [{
+            'name': 'vol:value',
+            'full_text': ' ' + str(int(volume_percent * 100)).rjust(3) + '%'
         }]
-
-    return [title_part] + horizontal_bar(volume_percent) + [{
-        'name': 'vol:value',
-        'full_text': ' ' + str(int(volume_percent * 100)).rjust(3) + '%'
-    }]
 
 ################################################################################
 # Battery
-def has_battery():
-    return os.path.exists('/sys/class/power_supply/BAT0')
+class BatteryPart(BarPart):
+    def __has_battery(self):
+        return os.path.exists('/sys/class/power_supply/BAT0')
 
-def battery_status():
-    with open('/sys/class/power_supply/BAT0/charge_now', 'r') as charge_current_file:
-        charge_current = int(charge_current_file.read())
-    with open('/sys/class/power_supply/BAT0/charge_full', 'r') as charge_full_file:
-        charge_full = int(charge_full_file.read())
-    with open('/sys/class/power_supply/BAT0/status', 'r') as status_file:
-        charging = status_file.read().rstrip('\n') != 'Discharging'
-    charge_percent = charge_current * 1.0 / charge_full
+    def __status(self):
+        with open('/sys/class/power_supply/BAT0/charge_now', 'r') as charge_current_file:
+            charge_current = int(charge_current_file.read())
+        with open('/sys/class/power_supply/BAT0/charge_full', 'r') as charge_full_file:
+            charge_full = int(charge_full_file.read())
+        with open('/sys/class/power_supply/BAT0/status', 'r') as status_file:
+            charging = status_file.read().rstrip('\n') != 'Discharging'
+        charge_percent = charge_current * 1.0 / charge_full
 
-    return (charge_percent, charging)
+        return (charge_percent, charging)
 
-def battery_part():
-    if not has_battery():
-        return []
+    def render(self, frame):
+        if not self.__has_battery():
+            return []
 
-    charge_percent, charging = battery_status()
+        charge_percent, charging = self.__status()
 
-    bar_color = Colors.green
-    if charge_percent < 0.2:
-        if not charging and frame % 6 < 1:
-            bar_color = Colors.bright_red
-        else:
-            bar_color = Colors.red
-    elif charge_percent < 0.6:
-        bar_color = Colors.yellow
+        bar_color = Colors.green
+        if charge_percent < 0.2:
+            if not charging and frame % 6 < 1:
+                bar_color = Colors.bright_red
+            else:
+                bar_color = Colors.red
+        elif charge_percent < 0.6:
+            bar_color = Colors.yellow
 
-    charge_text = ''
-    if charging:
-        charge_text = charge_text + u' ⚡'
-    charge_text = charge_text + ' ' + str(int(charge_percent * 100)).rjust(3) + '%'
+        charge_text = ''
+        if charging:
+            charge_text = charge_text + u' ⚡'
+        charge_text = charge_text + ' ' + str(int(charge_percent * 100)).rjust(3) + '%'
 
-    filler_text = (u'◯' * (frame % 8)) \
-            + u'◉' \
-            + (u'◯' * (7 - (frame % 8)))
+        filler_text = (u'◯' * (frame % 8)) \
+                + u'◉' \
+                + (u'◯' * (7 - (frame % 8)))
 
-    return [{
-        'name': 'bat:title',
-        'full_text': 'Bat ',
-        'color': Colors.gray,
-        'separator': False,
-        'separator_block_width': 0
-    }] + horizontal_bar(charge_percent, bar_color = bar_color, filler_char = filler_text if charging else u'◯') + [{
-        'name': 'bat:value',
-        'full_text': charge_text
-    }]
+        return [{
+            'name': 'bat:title',
+            'full_text': 'Bat ',
+            'color': Colors.gray,
+            'separator': False,
+            'separator_block_width': 0
+        }] + horizontal_bar(charge_percent, bar_color = bar_color, filler_char = filler_text if charging else u'◯') + [{
+            'name': 'bat:value',
+            'full_text': charge_text
+        }]
 
 ################################################################################
 # Date/Time
-def datetime_part():
-    now = datetime.now()
-    return [{
-        'name': 'datetime',
-        'full_text': now.strftime('%A ') + now.strftime('%-m/%-d/%y %I:%M%p').lower()
-    }]
+class DateTimePart(BarPart):
+    def render(self):
+        now = datetime.now()
+        return [{
+            'name': 'datetime',
+            'full_text': now.strftime('%A ') + now.strftime('%-m/%-d/%y %I:%M%p').lower()
+        }]
 
 
 ################################################################################
@@ -212,8 +221,9 @@ def bytes_string(num_bytes, decimal_places = 0):
 sys.stdout.write('{\"version\":1}\n')
 sys.stdout.write('[')
 frame = 0
+parts = [CpuPart(), MemoryPart(), VolumePart(), BatteryPart(), DateTimePart()]
 while True:
-    parts = cpu_part() + memory_part() + volume_part() + battery_part() + datetime_part()
+    parts_rendered = [part.render(frame) for part in parts]
     for part in parts:
         if not 'separator_block_width' in part:
             part['separator_block_width'] = 25
