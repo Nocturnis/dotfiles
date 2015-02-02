@@ -158,3 +158,4 @@ bar {
         status_command python ~/.dotfiles/i3/bar.py
         font pango:Fira Mono 10
 }
+exec --no-startup-id nm-applet

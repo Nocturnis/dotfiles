@@ -8,18 +8,35 @@ from time import sleep
 import json
 import os.path
 import re
+import select
 import subprocess
 import sys
 
 ################################################################################
 # CPU
-def cpu_status():
-    mpstat = subprocess.check_output(['mpstat'])
-    idle = float(re.search('all +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +([\.0-9]+)', mpstat).group(1)) / 100
-    return 1 - idle
+class CpuStatus:
+    # Start up mpstat, getting stats for each second.  Always read to the last
+    # line, and parse that one.
+    def __init__(self):
+        self.mpstat__ = subprocess.Popen(['mpstat', '1'], stdout=subprocess.PIPE)
+        self.mpstat__.stdout.readline()
+        self.last_value__ = 0
+    def has_available__(self):
+        return len(select.select([self.mpstat__.stdout], [], [], 0)[0]) > 0
+    def get_status(self):
+        last_line = None
+        while self.has_available__():
+            last_line = self.mpstat__.stdout.readline()
+        if not last_line is None:
+            idle = float(re.search('all +' + ('[\.0-9]+ +' * 9) + '([\.0-9]+)', last_line).group(1)) / 100
+            value = 1 - idle
+            self.last_value__ = value
+            return value
+        return self.last_value__
 
+cpu_status = CpuStatus()
 def cpu_part():
-    cpu_usage = cpu_status()
+    cpu_usage = cpu_status.get_status()
 
     bar_color = Colors.green
     if cpu_usage > 0.8:
@@ -162,7 +179,7 @@ def datetime_part():
 # Util
 class Colors:
     red = '#cb4c16'
-    bright_red = "#f18354"
+    bright_red = '#f18354'
     yellow = '#b58900'
     green = '#859900'
     gray = '#8aa1ac'
@@ -199,8 +216,8 @@ def bytes_string(num_bytes, decimal_places = 0):
 
 ################################################################################
 # Output
-sys.stdout.write("{\"version\":1}")
-sys.stdout.write("[")
+sys.stdout.write('{\"version\":1}\n')
+sys.stdout.write('[')
 frame = 0
 while True:
     parts = cpu_part() + memory_part() + volume_part() + battery_part() + datetime_part()
@@ -210,7 +227,7 @@ while True:
         if not 'separator' in part:
             part['separator'] = False
     sys.stdout.write(json.dumps(parts))
-    sys.stdout.write(",\n")
+    sys.stdout.write(',\n')
     sys.stdout.flush()
     sleep(0.2)
     frame = frame + 1
