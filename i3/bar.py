@@ -8,6 +8,7 @@ from time import sleep
 import json
 import os.path
 import re
+import select
 import subprocess
 import sys
 
@@ -18,10 +19,24 @@ class BarPart:
 ################################################################################
 # CPU
 class CpuPart(BarPart):
+    def __init__(self):
+        self.mpstat__ = subprocess.Popen(['mpstat', '5'], stdout=subprocess.PIPE)
+        self.mpstat__.stdout.readline()
+        self.last_value__ = 0
+
+    def __mpstat_has_available(self):
+        return len(select.select([self.mpstat__.stdout], [], [], 0)[0]) > 0
+
     def __status(self):
-        mpstat = subprocess.check_output(['mpstat'])
-        idle = float(re.search('all +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +[\.0-9]+ +([\.0-9]+)', mpstat).group(1)) / 100
-        return 1 - idle
+        last_line = None
+        while self.__mpstat_has_available():
+            last_line = self.mpstat__.stdout.readline()
+        if not last_line is None:
+            idle = float(re.search('all +' + ('[\.0-9]+ +' * 9) + '([\.0-9]+)', last_line).group(1)) / 100
+            value = 1 - idle
+            self.last_value__ = value
+            return value
+        return self.last_value__
 
     def render(self, frame):
         cpu_usage = self.__status()

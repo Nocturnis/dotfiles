@@ -118,7 +118,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 # lock screen
-bindsym $mod+Shift+Escape exec "i3lock -c 000000"
+bindsym $mod+Shift+Escape exec "i3lock -d -c 000000"
 
 # volume controls
 bindsym XF86AudioLowerVolume exec "/usr/bin/amixer -q sset Master '5%-'"
@@ -158,3 +158,4 @@ bar {
         status_command python ~/.dotfiles/i3/bar.py
         font pango:Fira Mono 10
 }
+exec --no-startup-id nm-applet
