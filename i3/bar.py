@@ -18,7 +18,7 @@ class CpuStatus:
     # Start up mpstat, getting stats for each second.  Always read to the last
     # line, and parse that one.
     def __init__(self):
-        self.mpstat__ = subprocess.Popen(['mpstat', '1'], stdout=subprocess.PIPE)
+        self.mpstat__ = subprocess.Popen(['mpstat', '5'], stdout=subprocess.PIPE)
         self.mpstat__.stdout.readline()
         self.last_value__ = 0
     def has_available__(self):
