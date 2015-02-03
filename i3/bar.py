@@ -184,7 +184,7 @@ class BatteryPart(BarPart):
 ################################################################################
 # Date/Time
 class DateTimePart(BarPart):
-    def render(self):
+    def render(self, frame):
         now = datetime.now()
         return [{
             'name': 'datetime',
@@ -238,13 +238,16 @@ sys.stdout.write('[')
 frame = 0
 parts = [CpuPart(), MemoryPart(), VolumePart(), BatteryPart(), DateTimePart()]
 while True:
-    parts_rendered = [part.render(frame) for part in parts]
+    parts_rendered = []
     for part in parts:
+        for subpart in part.render(frame):
+            parts_rendered.append(subpart)
+    for part in parts_rendered:
         if not 'separator_block_width' in part:
             part['separator_block_width'] = 25
         if not 'separator' in part:
             part['separator'] = False
-    sys.stdout.write(json.dumps(parts))
+    sys.stdout.write(json.dumps(parts_rendered))
     sys.stdout.write(',\n')
     sys.stdout.flush()
     sleep(0.2)
