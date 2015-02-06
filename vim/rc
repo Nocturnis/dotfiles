@@ -180,9 +180,12 @@ function! SetLineLength(length)
   call SetColorColumn()
 endfunction
 function! SetColorColumn()
+  if !exists('b:linelength')
+    let b:linelength = 80
+  endif
   exec "set colorcolumn=" . (b:linelength + 1)
 endfunction
-command -nargs=1 LineLength call SetLineLength(<args>)
+command! -nargs=1 LineLength call SetLineLength(<args>)
 
 augroup BgHighlight
   autocmd!
