@@ -181,7 +181,11 @@ function! SetLineLength(length)
 endfunction
 function! SetColorColumn()
   if !exists('b:linelength')
-    let b:linelength = 100
+    if &filetype == 'java'
+      let b:linelength = 100
+    else
+      let b:linelength = 80
+    endif
   endif
   exec "set colorcolumn=" . (b:linelength + 1)
 endfunction
@@ -191,7 +195,6 @@ nmap <leader>ls :LineLength 80<cr>
 
 augroup BgHighlight
   autocmd!
-  autocmd BufEnter * if !exists('b:linelength') | let b:linelength = 100 | endif
   autocmd BufEnter * call SetColorColumn()
   autocmd WinEnter * call SetColorColumn()
   autocmd WinEnter * set cursorline
