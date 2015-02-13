@@ -76,7 +76,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+t floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+t focus mode_toggle
@@ -124,6 +124,10 @@ bindsym $mod+Shift+Escape exec "i3lock -d -c 000000"
 bindsym XF86AudioLowerVolume exec "/usr/bin/amixer -q sset Master '5%-'"
 bindsym XF86AudioRaiseVolume exec "/usr/bin/amixer -D pulse -q sset Master '5%+' unmute"
 bindsym XF86AudioMute exec "/usr/bin/amixer -D pulse -q sset Master '0+' toggle"
+
+# screenshots
+bindsym $mod+Print exec "/usr/bin/gnome-screenshot --clipboard"
+bindsym $mod+Shift+Print exec "/usr/bin/gnome-screenshot --area --clipboard"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
