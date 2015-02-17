@@ -31,6 +31,15 @@ function! ShortenFilepaths(filepaths)
           let info.title = fnamemodify(info.remaining_path, ':t') . '/' . info.title
           let info.remaining_path = fnamemodify(info.remaining_path, ':h')
         endfor
+      else
+        paths = []
+        for i in range(len(info_list))
+          call add(paths, info_list[i].title)
+        endfor
+        let collapsed_paths = CollapsePaths(paths)
+        for i in range(len(info_list))
+          info_list[i].title = collapsed_paths[i]
+        endfor
       endif
     endwhile
   endfor
@@ -42,6 +51,59 @@ function! ShortenFilepaths(filepaths)
     endfor
   endfor
   return results
+endfunction
+
+" Given a list of paths, collapses common elements into ..., always keeping
+" the filename intact.  Assumes all paths are the same length.
+" ex:
+" ['src/org/foo/bar/Baz.java', 'test/org/foo/bar/Baz.java']
+" => ['src/.../Baz.java', 'test/.../Baz.java']
+function! CollapsePaths(paths)
+  let paths_split = []
+  for path in a:paths
+    call add(paths_split, split(fnamemodify(path, ':h'), '/'))
+  endfor
+  let common_elements = paths_split[0]
+  let common = []
+  for i in range(len(common_elements))
+    call add(common, 1)
+  endfor
+  for apath in paths_split
+    for i in range(len(common_elements))
+      let common_element = common_elements[i]
+      let element = apath[i]
+      if element != common_element
+        let common[i] = 0
+      endif
+    endfor
+  endfor
+  let result = []
+  for j in range(len(paths_split))
+    let bpath = paths_split[j]
+    let result_path = ''
+    for i in range(len(bpath))
+      let element = bpath[i]
+      if !common[i]
+        if len(result_path) > 0
+          let result_path = result_path . '/'
+        endif
+        let result_path = result_path . element
+      else
+        if i == 0 || !common[i - 1]
+          if len(result_path) > 0
+            let result_path = result_path . '/'
+          endif
+          let result_path = result_path . '...'
+        endif
+      endif
+    endfor
+    if len(result_path) > 0
+      let result_path = result_path . '/'
+    endif
+    let result_path = result_path . fnamemodify(a:paths[j], ':t')
+    call add(result, result_path)
+  endfor
+  return result
 endfunction
 
 " Returns a list with all the duplicates in list removed.  The ordering of the
