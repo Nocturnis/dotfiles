@@ -32,13 +32,13 @@ function! ShortenFilepaths(filepaths)
           let info.remaining_path = fnamemodify(info.remaining_path, ':h')
         endfor
       else
-        paths = []
+        let paths = []
         for i in range(len(info_list))
           call add(paths, info_list[i].title)
         endfor
         let collapsed_paths = CollapsePaths(paths)
         for i in range(len(info_list))
-          info_list[i].title = collapsed_paths[i]
+          let info_list[i].title = collapsed_paths[i]
         endfor
       endif
     endwhile
