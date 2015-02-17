@@ -20,23 +20,23 @@ class BarPart:
 # CPU
 class CpuPart(BarPart):
     def __init__(self):
-        self.mpstat__ = subprocess.Popen(['mpstat', '5'], stdout=subprocess.PIPE)
-        self.mpstat__.stdout.readline()
-        self.last_value__ = 0
+        self._mpstat = subprocess.Popen(['mpstat', '5'], stdout=subprocess.PIPE)
+        self._mpstat.stdout.readline()
+        self._last_value = 0
 
     def __mpstat_has_available(self):
-        return len(select.select([self.mpstat__.stdout], [], [], 0)[0]) > 0
+        return len(select.select([self._mpstat.stdout], [], [], 0)[0]) > 0
 
     def __status(self):
         last_line = None
         while self.__mpstat_has_available():
-            last_line = self.mpstat__.stdout.readline()
+            last_line = self._mpstat.stdout.readline()
         if not last_line is None:
             idle = float(re.search('all +' + ('[\.0-9]+ +' * 9) + '([\.0-9]+)', last_line).group(1)) / 100
             value = 1 - idle
-            self.last_value__ = value
+            self._last_value = value
             return value
-        return self.last_value__
+        return self._last_value
 
     def render(self, frame):
         cpu_usage = self.__status()
@@ -184,7 +184,7 @@ class BatteryPart(BarPart):
 ################################################################################
 # Date/Time
 class DateTimePart(BarPart):
-    def render(self):
+    def render(self, frame):
         now = datetime.now()
         return [{
             'name': 'datetime',
@@ -238,13 +238,16 @@ sys.stdout.write('[')
 frame = 0
 parts = [CpuPart(), MemoryPart(), VolumePart(), BatteryPart(), DateTimePart()]
 while True:
-    parts_rendered = [part.render(frame) for part in parts]
+    parts_rendered = []
     for part in parts:
+        for subpart in part.render(frame):
+            parts_rendered.append(subpart)
+    for part in parts_rendered:
         if not 'separator_block_width' in part:
             part['separator_block_width'] = 25
         if not 'separator' in part:
             part['separator'] = False
-    sys.stdout.write(json.dumps(parts))
+    sys.stdout.write(json.dumps(parts_rendered))
     sys.stdout.write(',\n')
     sys.stdout.flush()
     sleep(0.2)
