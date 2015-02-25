@@ -145,6 +145,7 @@ set splitbelow
 set splitright
 set updatetime=1200
 set nowrap
+set wildignore+=*.class
 
 " set listchars=tab:▸\ ,eol:¬,nbsp:?,conceal:?,precedes:←,extends:→
 set listchars=tab:▸\ ,nbsp:?,conceal:?,precedes:←,extends:→
