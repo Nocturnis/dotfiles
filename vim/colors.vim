@@ -64,6 +64,12 @@ highlight htmlTag                 ctermfg=DarkGray
 highlight htmlEndTag              ctermfg=DarkGray
 highlight htmlEvent               ctermfg=LightBlue
 
+" Soy
+highlight soyBraces               ctermfg=Red
+highlight soyEndCommand           ctermfg=Red
+highlight soyTemplateName         ctermfg=None
+highlight soyEqualInArg           ctermfg=DarkGray
+
 " Proto
 highlight pbString                ctermfg=Magenta
 
