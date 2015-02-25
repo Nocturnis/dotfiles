@@ -126,8 +126,8 @@ bindsym XF86AudioRaiseVolume exec "/usr/bin/amixer -D pulse -q sset Master '5%+'
 bindsym XF86AudioMute exec "/usr/bin/amixer -D pulse -q sset Master '0+' toggle"
 
 # screenshots
-bindsym $mod+Print exec "/usr/bin/gnome-screenshot --clipboard"
-bindsym $mod+Shift+Print exec "/usr/bin/gnome-screenshot --area --clipboard"
+bindsym $mod+Print exec "/usr/bin/gnome-screenshot"
+bindsym $mod+Shift+Print exec "/usr/bin/gnome-screenshot --area --interactive"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
