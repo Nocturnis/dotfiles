@@ -25,6 +25,22 @@ mkcd() {
   cd "$*"
 }
 
+function slice() {
+  if [[ $# != '3' ]]; then
+    echo "Show a slice of a file by line number."
+    echo "Usage:"
+    echo "  slice [file] [start] [end]"
+    echo
+    echo "  e.g. slice file.txt 5 12"
+    return
+  fi
+  local file=$1
+  local start=$2
+  local end=$3
+
+  head -n $end $file | tail -n $(expr $end - $start)
+}
+
 function colortest() {
   bgcolors=( 40 100 41 101 42 102 43 103 44 104 45 105 46 106 47 107 49 )
   fgcolors=( 30 90 31 91 32 92 33 93 34 94 35 95 36 96 37 97 39 )
