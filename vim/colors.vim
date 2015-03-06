@@ -43,6 +43,15 @@ highlight javaParen1              ctermfg=LightRed
 highlight javaParen2              ctermfg=LightBlue
 highlight javaObject              ctermfg=DarkBlue
 
+" Apollo
+highlight apolloDocComment        ctermfg=Blue        ctermbg=None        cterm=None
+highlight apolloDocParam          ctermfg=Magenta     ctermbg=None        cterm=None
+highlight apolloDocTags           ctermfg=DarkCyan    ctermbg=None        cterm=None
+highlight apolloObject            ctermfg=DarkBlue    ctermbg=None        cterm=None
+highlight apolloString            ctermfg=Magenta     ctermbg=None        cterm=None
+highlight apolloBracket           ctermfg=DarkGray    ctermbg=None        cterm=None
+highlight apolloParen             ctermfg=DarkGray    ctermbg=None        cterm=None
+
 " JavaScript
 highlight javaScriptStringS       ctermfg=Magenta
 highlight javaScriptStringD       ctermfg=Magenta
@@ -91,7 +100,7 @@ highlight DiffText                ctermfg=Gray        ctermbg=DarkGreen   cterm=
 
 highlight trailingWhitespace                          ctermbg=DarkRed
 highlight ExtraWhitespace                             ctermbg=DarkRed
-match ExtraWhitespace /\s\+$/
+syn match ExtraWhitespace /\s\+$/
 
 highlight StatusLine              ctermfg=White       ctermbg=DarkYellow  cterm=None
 highlight StatusLineFaded         ctermfg=Yellow      ctermbg=DarkYellow  cterm=None
