@@ -41,6 +41,7 @@ highlight javaString              ctermfg=Magenta
 highlight javaParen               ctermfg=LightCyan
 highlight javaParen1              ctermfg=LightRed
 highlight javaParen2              ctermfg=LightBlue
+highlight javaObject              ctermfg=DarkBlue
 
 " JavaScript
 highlight javaScriptStringS       ctermfg=Magenta
