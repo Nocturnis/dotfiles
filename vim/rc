@@ -1,5 +1,5 @@
 if filereadable(expand("~/.at_google"))
-  source ~/.dotfiles/vim/google.vim
+  source ~/.dotfiles-google/vim/google.vim
 else
   set ts=4 sts=4 sw=4 expandtab
 endif
