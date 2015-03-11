@@ -115,13 +115,6 @@ nmap <leader>bd <leader>by:q<cr>
 " 'paste' buffer (open in current window)
 nmap <leader>bp :exe "buffer ".g:grabbedbufnr<cr>
 
-" " a visual reminder of an 80-character line
-" if exists('+colorcolumn')
-"   set colorcolumn=81
-" else
-"   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-" endif
-
 " don't autofold, but still allow manual folding
 set foldlevel=100
 
