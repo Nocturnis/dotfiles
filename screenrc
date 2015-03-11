@@ -6,7 +6,7 @@ defscrollback 10000
 defutf8 on
 nonblock on
 
-shelltitle "bash"
+shelltitle "zsh"
 hardstatus alwayslastline
 #hardstatus string "%{= ky}%-Lw%{=r}%20>%n %t%{= ky}%+Lw %{= ky}%-=| %1` |  %{= kw}%M%d %c%{-} %{=r} ${USER}@%H "
 #hardstatus string "%{= kG}[ %{Y}%H %{g}][%= %{= kw}%?%-Lw%?%{g}%n-%t%?(%u)%?%{w}%?%+Lw%?%?%= %{g}][ %{y}%1`%%%{g} ][ %{y}%2`%{g} ][%{y} %D %d.%m. %c %{g}]"
