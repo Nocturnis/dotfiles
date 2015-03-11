@@ -147,30 +147,33 @@ set updatetime=1200
 set nowrap
 set wildignore+=*.class
 
-" set listchars=tab:▸\ ,eol:¬,nbsp:?,conceal:?,precedes:←,extends:→
 set listchars=tab:▸\ ,nbsp:?,conceal:?,precedes:←,extends:→
-
 
 syntax enable
 syntax on
 
-"tab stuff
+" Ctrl+P goes to an already opened tab if there is one.
 set switchbuf=usetab,newtab
-set guitablabel=\[%N\]\ %t\ %M
+
+" \t opens new tab.
 nmap <leader>t :tabnew<CR>
+
+" H and L navigate between tabs.
 nmap H :tabp<CR>
 nmap L :tabn<CR>
+
+" Ctrl+direction move between windows in a split.
 nmap <C-H> <C-W>h
 nmap <C-J> <C-W>j
 nmap <C-K> <C-W>k
 nmap <C-L> <C-W>l
 
-" j and k navigate by visual lines, not actual lines.  If a line overflows to
-" the next line, j and k can navigate to the overflowed portion
+" Make j and k navigate by visual lines, not actual lines.  If a line overflows
+" to the next line, j and k can navigate to the overflowed portion.
 nmap j gj
 nmap k gk
 
-" press * to search for highlighted text in visual mode.
+" Press * to search for highlighted text in visual mode.
 vnoremap * y/<c-r>"<cr>
 
 source ~/.dotfiles/vim/tabline.vim
