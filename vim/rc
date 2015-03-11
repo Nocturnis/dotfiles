@@ -86,7 +86,7 @@ nmap <leader>s :set spell!<cr>
 nmap <leader><leader> <c-^>
 
 " clear search highlighting
-nmap <ret> :nohlsearch<cr>
+nmap <return> :nohlsearch<cr>
 
 " open files in the same directory as the current file
 cnoremap %% <c-r>=expand('%:h').'/'<cr>
