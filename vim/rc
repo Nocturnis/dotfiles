@@ -170,7 +170,8 @@ nmap <C-L> <C-W>l
 nmap j gj
 nmap k gk
 
-vnoremap // y/<c-r>"<cr>
+" press * to search for highlighted text in visual mode.
+vnoremap * y/<c-r>"<cr>
 
 source ~/.dotfiles/vim/tabline.vim
 source ~/.dotfiles/vim/statusline.vim
