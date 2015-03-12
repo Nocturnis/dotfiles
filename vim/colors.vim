@@ -17,6 +17,8 @@ highlight GitGutterAdd            ctermfg=DarkGreen   ctermbg=DarkGreen   cterm=
 highlight GitGutterChange         ctermfg=Yellow      ctermbg=Yellow      cterm=None
 highlight GitGutterDelete         ctermfg=DarkRed     ctermbg=Black       cterm=None
 highlight GitGutterChangeDelete   ctermfg=DarkRed     ctermbg=Yellow      cterm=None
+highlight SignatureMarkText       ctermfg=White       ctermbg=DarkBlue
+highlight SignatureMarkerText     ctermfg=White       ctermbg=DarkBlue
 highlight EclimHighlightInfo      ctermfg=DarkBlue    ctermbg=Gray
 highlight EclimHighlightWarning   ctermfg=DarkYellow  ctermbg=Gray
 highlight EclimHighlightError     ctermfg=White       ctermbg=LightRed
