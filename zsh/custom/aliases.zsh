@@ -53,3 +53,29 @@ function colortest() {
     printf "\e[0m\n"
   done
 }
+
+function screen-outer() {
+  if [[ $# < 1 ]]; then
+    echo "Usage:"
+    echo "  screen-outer [name] [args...]"
+    return
+  fi
+  local name=$1
+  local args=${@:2}
+  screen -S $name -e ^Xx $args
+}
+
+function screen-inner() {
+  if [[ $# < 1 ]]; then
+    echo "Usage:"
+    echo "  screen-inner [name] [args...]"
+    return
+  fi
+  local name=$1
+
+  local outerName=`echo $STY | grep -Eo "\\.(.+?)" | grep -Eo "[^\\.]+"`
+  local args=${@:2}
+  # Set the title of the current screen window to the same as the inner screen
+  echo -ne "\ek$name\e\\"
+  screen -S "${outerName}-${1}" -e ^Aa $args
+}
