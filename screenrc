@@ -10,7 +10,7 @@ shelltitle "zsh"
 hardstatus alwayslastline
 #hardstatus string "%{= ky}%-Lw%{=r}%20>%n %t%{= ky}%+Lw %{= ky}%-=| %1` |  %{= kw}%M%d %c%{-} %{=r} ${USER}@%H "
 #hardstatus string "%{= kG}[ %{Y}%H %{g}][%= %{= kw}%?%-Lw%?%{g}%n-%t%?(%u)%?%{w}%?%+Lw%?%?%= %{g}][ %{y}%1`%%%{g} ][ %{y}%2`%{g} ][%{y} %D %d.%m. %c %{g}]"
-hardstatus string "%{= kK} %-w%{= dW}%n %t%{= kK}%+w"
+hardstatus string "%{= kK} %-w%{= dB} %n %{= dW}%t %{= kK}%+w"
 #hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%1`][%{B} %Y/%m/%d %{W}%c %{g} ]'
 #term xterm-256color
 
