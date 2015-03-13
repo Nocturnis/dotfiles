@@ -1,3 +1,6 @@
+" set the leader key to the comma
+let mapleader=','
+
 if filereadable(expand("~/.at_google"))
   source ~/.dotfiles-google/vim/google.vim
 else
@@ -72,9 +75,6 @@ if has('autocmd')
     autocmd WinLeave * set nocursorline
   augroup END
 endif
-
-" set the leader key to the backslash
-let mapleader='\'
 
 " source custom functions
 so ~/.dotfiles/vim/functions
