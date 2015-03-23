@@ -120,6 +120,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # lock screen
 bindsym $mod+Shift+Escape exec "i3lock -d -c 000000"
 
+bindsym $mod+y border toggle
+
+bindsym $mod+i exec "i3-input"
+
 # volume controls
 bindsym XF86AudioLowerVolume exec "/usr/bin/amixer -q sset Master '5%-'"
 bindsym XF86AudioRaiseVolume exec "/usr/bin/amixer -D pulse -q sset Master '5%+' unmute"
