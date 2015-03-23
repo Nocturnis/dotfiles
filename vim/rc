@@ -149,7 +149,8 @@ nmap j gj
 nmap k gk
 
 " Press * to search for highlighted text in visual mode.
-vnoremap * y/<c-r>"<cr>
+vnoremap * y/<c-r>"<cr>N
+nnoremap * *N
 
 nmap <leader>ll :LineLength 100<cr>
 nmap <leader>ls :LineLength 80<cr>
