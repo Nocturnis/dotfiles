@@ -187,8 +187,54 @@ class DateTimePart(BarPart):
     def render(self, frame):
         now = datetime.now()
         return [{
-            'name': 'datetime',
-            'full_text': now.strftime('%A ') + now.strftime('%-m/%-d/%y %I:%M%p').lower()
+            'name': 'datetime:day_of_week',
+            'full_text': now.strftime('%A '),
+            'separator': False,
+            'separator_block_width': 0
+        }, {
+            'name': 'datetime:month',
+            'full_text': now.strftime('%-m'),
+            'separator': False,
+            'separator_block_width': 0
+        }, {
+            'full_text': '/',
+            'color': Colors.dark_gray,
+            'separator': False,
+            'separator_block_width': 0
+        }, {
+            'name': 'datetime:day',
+            'full_text': now.strftime('%-d '),
+            'separator': False,
+            'separator_block_width': 0
+        #}, {
+        #    'full_text': '/',
+        #    'color': Colors.dark_gray,
+        #    'separator': False,
+        #    'separator_block_width': 0
+        #}, {
+        #    'name': 'datetime:year',
+        #    'full_text': now.strftime('%y '),
+        #    'separator': False,
+        #    'separator_block_width': 0
+        }, {
+            'name': 'datetime:hour',
+            'full_text': now.strftime('%I').lstrip('0'),
+            'separator': False,
+            'separator_block_width': 0
+        }, {
+            'full_text': ':',
+            'color': Colors.dark_gray,
+            'separator': False,
+            'separator_block_width': 0
+        }, {
+            'name': 'datetime:minute',
+            'full_text': now.strftime('%M'),
+            'separator': False,
+            'separator_block_width': 0
+        }, {
+            'name': 'datetime:half',
+            'full_text': now.strftime('%p').lower(),
+            'color': Colors.gray
         }]
 
 
