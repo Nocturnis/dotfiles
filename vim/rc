@@ -179,7 +179,8 @@ set splitright
 set updatetime=1200
 set nowrap
 set wildignore+=*.class
-
+" Put swapfiles in a separate directory.
+set dir=~/tmp/swp/
 set listchars=tab:▸\ ,nbsp:?,conceal:?,precedes:←,extends:→
 
 syntax enable
