@@ -40,7 +40,7 @@ if has('autocmd')
 
   " local settings for specific filetypes
   au FileType make,snippet setlocal ts=8 sts=8 sw=8 noexpandtab
-  au FileType python setlocal ts=4 sts=4 sw=4
+  au FileType go setlocal ts=4 sts=4 sw=4 noexpandtab
 
   " compile coffeescripts on save
   au BufWritePost,FileWritePost *.coffee :silent !coffee -c %
