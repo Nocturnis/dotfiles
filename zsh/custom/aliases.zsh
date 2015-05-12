@@ -77,5 +77,5 @@ function screen-inner() {
   local args=${@:2}
   # Set the title of the current screen window to the same as the inner screen
   echo -ne "\ek$name\e\\"
-  screen -S "${outerName}-${1}" -e ^Aa $args
+  screen -S "-${outerName}--${1}" -e ^Aa $args
 }
