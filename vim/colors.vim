@@ -11,7 +11,7 @@ highlight CursorLine                                  ctermbg=Black       cterm=
 highlight CursorLineNr            ctermfg=Gray        ctermbg=Black
 highlight ColorColumn                                 ctermbg=DarkRed
 highlight NonText                 ctermfg=White       ctermbg=Black
-highlight SpecialKey              ctermfg=Yellow      ctermbg=Black
+highlight SpecialKey              ctermfg=Black       ctermbg=None
 highlight SignColumn                                  ctermbg=Black       cterm=None
 highlight GitGutterAdd            ctermfg=DarkGreen   ctermbg=DarkGreen   cterm=None
 highlight GitGutterChange         ctermfg=Yellow      ctermbg=Yellow      cterm=None
@@ -41,8 +41,11 @@ highlight javaDocParam            ctermfg=Magenta     ctermbg=None        cterm=
 highlight javaDocTags             ctermfg=DarkCyan    ctermbg=None        cterm=None
 highlight javaString              ctermfg=Magenta
 highlight javaParen               ctermfg=LightCyan
+highlight javaParenT              ctermfg=LightCyan
 highlight javaParen1              ctermfg=LightRed
+highlight javaParenT1             ctermfg=LightRed
 highlight javaParen2              ctermfg=LightBlue
+highlight javaParenT2             ctermfg=LightBlue
 highlight javaObject              ctermfg=DarkBlue
 
 " Apollo
@@ -84,6 +87,9 @@ highlight soyEqualInArg           ctermfg=DarkGray
 
 " Proto
 highlight pbString                ctermfg=Magenta
+
+" Go
+highlight goString                ctermfg=Magenta
 
 " sh
 highlight shDoubleQuote           ctermfg=Magenta
