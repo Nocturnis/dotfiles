@@ -186,6 +186,10 @@ set listchars=tab:▸\ ,nbsp:?,conceal:?,precedes:←,extends:→
 syntax enable
 syntax on
 
+function! MakeGetSet()
+  call feedkeys("^wyt;opublic pbigetl~$a() {}koreturn kk$byt;jjpa;jopublic void setpblll~$a(kkk^wyt jjj$pa value) {}kkk^wyt;jjothis.pa = kjavalue;kkkkk")
+endfunction
+
 source ~/.dotfiles/vim/tabline.vim
 source ~/.dotfiles/vim/statusline.vim
 source ~/.dotfiles/vim/colors.vim
