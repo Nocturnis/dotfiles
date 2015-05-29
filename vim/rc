@@ -42,9 +42,6 @@ if has('autocmd')
   au FileType make,snippet setlocal ts=8 sts=8 sw=8 noexpandtab
   au FileType python setlocal ts=4 sts=4 sw=4
 
-  " compile coffeescripts on save
-  au BufWritePost,FileWritePost *.coffee :silent !coffee -c %
-
   " Go to last viewed tab
   let g:lasttab = 1
   nmap T :exe "tabn ".g:lasttab<CR>
