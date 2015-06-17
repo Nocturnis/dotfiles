@@ -47,6 +47,7 @@ highlight javaParenT1             ctermfg=LightRed
 highlight javaParen2              ctermfg=LightBlue
 highlight javaParenT2             ctermfg=LightBlue
 highlight javaObject              ctermfg=DarkBlue
+highlight javaConstantName        ctermfg=LightRed
 
 " Apollo
 highlight apolloDocComment        ctermfg=Blue        ctermbg=None        cterm=None
