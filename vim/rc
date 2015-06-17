@@ -42,9 +42,6 @@ if has('autocmd')
   au FileType make,snippet setlocal ts=8 sts=8 sw=8 noexpandtab
   au FileType go setlocal ts=4 sts=4 sw=4 noexpandtab
 
-  " compile coffeescripts on save
-  au BufWritePost,FileWritePost *.coffee :silent !coffee -c %
-
   " Go to last viewed tab
   let g:lasttab = 1
   nmap T :exe "tabn ".g:lasttab<CR>
@@ -185,6 +182,10 @@ set listchars=tab:▸\ ,nbsp:?,conceal:?,precedes:←,extends:→
 
 syntax enable
 syntax on
+
+function! MakeGetSet()
+  call feedkeys("^wyt;opublic pbigetl~$a() {}koreturn kk$byt;jjpa;jopublic void setpblll~$a(kkk^wyt jjj$pa value) {}kkk^wyt;jjothis.pa = kjavalue;kkkkk")
+endfunction
 
 source ~/.dotfiles/vim/tabline.vim
 source ~/.dotfiles/vim/statusline.vim

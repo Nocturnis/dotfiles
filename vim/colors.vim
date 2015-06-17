@@ -70,6 +70,13 @@ highlight javaScriptParens        ctermfg=DarkGray
 " For JavaScript embedded in HTML script tags.
 highlight javaScript              ctermfg=None
 
+" Coffeescript
+highlight coffeeCurly             ctermfg=DarkGray
+highlight coffeeBracket           ctermfg=DarkGray
+highlight coffeeSpecialOp         ctermfg=DarkGray
+highlight coffeeParen             ctermfg=DarkGray
+highlight coffeeString            ctermfg=LightMagenta
+
 " Python
 highlight pythonString            ctermfg=Magenta
 highlight pythonBuiltin           ctermfg=DarkMagenta
