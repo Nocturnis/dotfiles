@@ -49,9 +49,6 @@
 [submodule "vim/bundle/vim-buffer-explorer"]
 	path = vim/bundle/vim-buffer-explorer
 	url = https://github.com/widox/vim-buffer-explorer-plugin.git
-[submodule "vim/bundle/vim-fireplace"]
-	path = vim/bundle/vim-fireplace
-	url = git@github.com:tpope/vim-fireplace.git
 [submodule "vim/bundle/vim-gitgutter"]
 	path = vim/bundle/vim-gitgutter
 	url = git://github.com/airblade/vim-gitgutter.git
