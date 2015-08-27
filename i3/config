@@ -32,7 +32,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+space exec dmenu_run
+bindsym $mod+space exec "~/.dotfiles/i3/custom-dmenu"
 bindsym $mod+m exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that

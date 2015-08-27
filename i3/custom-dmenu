@@ -1,0 +1,1 @@
+i3-dmenu-desktop --dmenu="dmenu.xft -i -b -p \">\" -fn \"Fira Mono-10\" -nb \"#333333\""
