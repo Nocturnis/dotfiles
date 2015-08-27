@@ -100,15 +100,18 @@ class MemoryPart(BarPart):
 # Volume
 class VolumePart(BarPart):
     def __status(self):
-        sound_status = subprocess.check_output(['amixer', 'sget', 'Master'])
-        match = re.search('Playback [0-9]+ \\[([0-9]+)%\\] \\[(?:.+?)\\] \\[(.+?)\\]', sound_status)
-        volume_percent = float(match.group(1)) / 100
-        muted = match.group(2).find('off') >= 0
+        try:
+            sound_status = subprocess.check_output(['amixer', 'sget', 'Master'])
+            match = re.search('Playback [0-9]+ \\[([0-9]+)%\\] \\[(?:.+?)\\] \\[(.+?)\\]', sound_status)
+            volume_percent = float(match.group(1)) / 100
+            muted = match.group(2).find('off') >= 0
 
-        return (volume_percent, muted)
+            return (volume_percent, muted, False)
+        except subprocess.CalledProcessError:
+            return (0, False, True)
 
     def render(self, frame):
-        volume_percent, muted = self.__status()
+        volume_percent, muted, err = self.__status()
 
         title_part = {
             'name': 'vol:title',
@@ -117,6 +120,12 @@ class VolumePart(BarPart):
             'separator': False,
             'separator_block_width': 0
         }
+
+        if err:
+            return [title_part, {
+                'name': 'vol:err',
+                'full_text': '?'
+            }]
 
         if muted:
             return [title_part, {
@@ -143,6 +152,7 @@ class BatteryPart(BarPart):
         with open('/sys/class/power_supply/BAT0/status', 'r') as status_file:
             charging = status_file.read().rstrip('\n') != 'Discharging'
         charge_percent = charge_current * 1.0 / charge_full
+        charge_percent = min(1, charge_percent)
 
         return (charge_percent, charging)
 
