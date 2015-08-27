@@ -139,6 +139,40 @@ class VolumePart(BarPart):
         }]
 
 ################################################################################
+# Brightness
+class BrightnessPart(BarPart):
+    def __status(self):
+        try:
+            backlight_status = subprocess.check_output(['xbacklight'])
+            brightness_percent = float(backlight_status) / 100
+
+            return (brightness_percent, False)
+        except subprocess.CalledProcessError:
+            return (0, True)
+
+    def render(self, frame):
+        brightness_percent, err = self.__status()
+
+        title_part = {
+            'name': 'brt:title',
+            'full_text': 'Brt ',
+            'color': Colors.gray,
+            'separator': False,
+            'separator_block_width': 0
+        }
+
+        if err:
+            return [title_part, {
+                'name': 'brt:err',
+                'full_text': '?'
+            }]
+
+        return [title_part] + horizontal_bar(brightness_percent) + [{
+            'name': 'brt:value',
+            'full_text': ' ' + str(int(brightness_percent * 100)).rjust(3) + '%'
+        }]
+
+################################################################################
 # Battery
 class BatteryPart(BarPart):
     def __has_battery(self):
@@ -292,7 +326,7 @@ def bytes_string(num_bytes, decimal_places = 0):
 sys.stdout.write('{\"version\":1}\n')
 sys.stdout.write('[')
 frame = 0
-parts = [CpuPart(), MemoryPart(), VolumePart(), BatteryPart(), DateTimePart()]
+parts = [CpuPart(), MemoryPart(), VolumePart(), BatteryPart(), BrightnessPart(), DateTimePart()]
 while True:
     parts_rendered = []
     for part in parts:
