@@ -20,7 +20,7 @@ function __user_and_host {
     if [[ "$host" == "$g_laptop_name" ]]; then
         host_printed="%{$fg_bold[black]%}g-mbp"
     fi
-    echo -n "$user_printed%{$fg_no_bold[black]%}@$host_printed"
+    echo -n "$user_printed%{$fg_bold[black]%}@$host_printed"
 }
 
 function __working_dir {
@@ -60,13 +60,12 @@ function __prompt_command {
     fi
 
     echo
-    echo -n "%{$fg_no_bold[black]%}/ $vi_mode_color//"
-    echo -n " %{$fg_bold[black]%}$(date +%T)"
-    echo -n " $(__user_and_host) $(__working_dir)$(__git_branch)"
-    echo -n "%{$fg_no_bold[black]%} /"
+    echo -n "%{$bg_bold[magenta]%} "
+    echo -n "%{$bg_no_bold[black]$fg_bold[black]%} $(date +%T)"
+    echo -n " $(__user_and_host) $(__working_dir)$(__git_branch) "
     echo
 
-    echo " $vi_mode_color// %{$fg_no_bold[black]%}~> %{$reset_color%}"
+    echo "%{$bg_bold[magenta]%} %{$reset_color$vi_mode_color%} ~> %{$reset_color%}"
 }
 
 PROMPT="$(__prompt_command)"
