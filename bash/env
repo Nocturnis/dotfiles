@@ -16,7 +16,7 @@ export RUBY_HOME="$HOME/.rbenv/bin"
 # Ensure brew is happy by adding /usr/local/(s)bin
 # before /usr/bin
 export PATH="$RUBY_HOME:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 
 # Additional brew paths
 export PATH="$PATH:/usr/local/Cellar/python/2.7.1/bin:/usr/local/share/python"
