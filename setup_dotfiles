@@ -84,6 +84,11 @@ function setup_zsh {
   cd $DIR
   git submodule init zsh/custom/plugins/zsh-syntax-highlighting
   git submodule update zsh/custom/plugins/zsh-syntax-highlighting
+
+  which zsh
+  if [[ $? -eq 0 && "$SHELL" != "$(which zsh)" ]]; then
+    sudo chsh -s $(which zsh)
+  fi
 }
 
 # make sure the directory exists
