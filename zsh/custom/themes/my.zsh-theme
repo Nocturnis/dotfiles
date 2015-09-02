@@ -52,11 +52,11 @@ function __git_branch {
 }
 
 function __prompt_command {
-    local vi_mode_color="%{$fg_bold[black]%}"
+    local vi_mode_color="${fg_bold[black]}"
     if [[ "$KEYMAP" == "main" ]]; then
-        vi_mode_color="%{$fg_no_bold[green]%}"
+        vi_mode_color="${fg_no_bold[green]}"
     elif [[ "$KEYMAP" == "vicmd" ]]; then
-        vi_mode_color="%{$fg_bold[black]%}"
+        vi_mode_color="${fg_bold[black]}"
     fi
 
     local sidebar_color="${bg_bold[magenta]}"
