@@ -59,13 +59,19 @@ function __prompt_command {
         vi_mode_color="%{$fg_bold[black]%}"
     fi
 
+    local sidebar_color="${bg_bold[magenta]}"
+    if [[ -n "${SSH_TTY}" ]]; then
+      sidebar_color="${bg_bold[yellow]}"
+    fi
+
+
     echo
-    echo -n "%{$bg_bold[magenta]%} "
+    echo -n "%{$sidebar_color%} "
     echo -n "%{$bg_no_bold[black]$fg_bold[black]%} $(date +%T)"
     echo -n " $(__user_and_host) $(__working_dir)$(__git_branch) "
     echo
 
-    echo "%{$bg_bold[magenta]%} %{$reset_color$vi_mode_color%} ~> %{$reset_color%}"
+    echo "%{$sidebar_color%} %{$reset_color$vi_mode_color%} ~> %{$reset_color%}"
 }
 
 PROMPT="$(__prompt_command)"
