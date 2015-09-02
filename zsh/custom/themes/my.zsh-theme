@@ -16,7 +16,12 @@ function __user_and_host {
     elif [[ "$user" != "$self_user" ]]; then
         user_printed="%{$fg_bold[white]%}$user"
     fi
-    local host_printed="%{$fg_bold[white]%}$host"
+    local host_color="${fg_bold[white]}"
+    if [[ -n "${SSH_TTY}" ]]; then
+      host_color="${fg_no_bold[yellow]}"
+    fi
+
+    local host_printed="%{$host_color%}$host"
     if [[ "$host" == "$g_laptop_name" ]]; then
         host_printed="%{$fg_bold[black]%}g-mbp"
     fi
@@ -59,19 +64,13 @@ function __prompt_command {
         vi_mode_color="${fg_bold[black]}"
     fi
 
-    local sidebar_color="${bg_bold[magenta]}"
-    if [[ -n "${SSH_TTY}" ]]; then
-      sidebar_color="${bg_bold[yellow]}"
-    fi
-
-
     echo
-    echo -n "%{$sidebar_color%} "
+    echo -n "%{$bg_bold[magenta]%} "
     echo -n "%{$bg_no_bold[black]$fg_bold[black]%} $(date +%T)"
     echo -n " $(__user_and_host) $(__working_dir)$(__git_branch) "
     echo
 
-    echo "%{$sidebar_color%} %{$reset_color$vi_mode_color%} ~> %{$reset_color%}"
+    echo "%{$bg_bold[magenta]%} %{$reset_color$vi_mode_color%} ~> %{$reset_color%}"
 }
 
 PROMPT="$(__prompt_command)"
