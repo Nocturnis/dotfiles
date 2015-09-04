@@ -43,6 +43,11 @@ function __git_branch_exported {
 }
 
 function __git_branch {
+    if [ -n "$BW_ZSH_HIDE_BRANCH" ]; then
+        echo -n ""
+        return
+    fi
+
     local git_branch=$(__git_ps1 "%s")
     if [ -n "$git_branch" ]; then
         local color="%{$fg_no_bold[blue]%}"
