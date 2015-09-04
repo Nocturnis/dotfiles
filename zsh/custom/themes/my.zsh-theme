@@ -44,7 +44,7 @@ function __git_branch_exported {
 
 function __git_branch {
     if [ -n "$BW_ZSH_HIDE_BRANCH" ]; then
-        echo -n ""
+        echo -n " %{$fg_bold[black]%}(git branch hidden)"
         return
     fi
 
