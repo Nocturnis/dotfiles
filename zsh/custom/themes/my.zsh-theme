@@ -16,7 +16,12 @@ function __user_and_host {
     elif [[ "$user" != "$self_user" ]]; then
         user_printed="%{$fg_bold[white]%}$user"
     fi
-    local host_printed="%{$fg_bold[white]%}$host"
+    local host_color="${fg_bold[white]}"
+    if [[ -n "${SSH_TTY}" ]]; then
+      host_color="${fg_no_bold[yellow]}"
+    fi
+
+    local host_printed="%{$host_color%}$host"
     if [[ "$host" == "$g_laptop_name" ]]; then
         host_printed="%{$fg_bold[black]%}g-mbp"
     fi
@@ -38,6 +43,11 @@ function __git_branch_exported {
 }
 
 function __git_branch {
+    if [ -n "$BW_ZSH_HIDE_BRANCH" ]; then
+        echo -n " %{$fg_bold[black]%}(git branch hidden)"
+        return
+    fi
+
     local git_branch=$(__git_ps1 "%s")
     if [ -n "$git_branch" ]; then
         local color="%{$fg_no_bold[blue]%}"
@@ -52,11 +62,11 @@ function __git_branch {
 }
 
 function __prompt_command {
-    local vi_mode_color="%{$fg_bold[black]%}"
+    local vi_mode_color="${fg_bold[black]}"
     if [[ "$KEYMAP" == "main" ]]; then
-        vi_mode_color="%{$fg_no_bold[green]%}"
+        vi_mode_color="${fg_no_bold[green]}"
     elif [[ "$KEYMAP" == "vicmd" ]]; then
-        vi_mode_color="%{$fg_bold[black]%}"
+        vi_mode_color="${fg_bold[black]}"
     fi
 
     echo

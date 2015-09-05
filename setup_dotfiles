@@ -98,6 +98,8 @@ if [ -d $DIR ]; then
   select RN in "Replace" "No"; do
     case $RN in
       Replace )
+        cd $DIR
+        git submodule update --init --recursive
         setup_zsh
         erase_dotfiles
         create_symlinks
