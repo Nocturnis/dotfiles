@@ -147,7 +147,7 @@ class BrightnessPart(BarPart):
             brightness_percent = float(backlight_status) / 100
 
             return (brightness_percent, False)
-        except subprocess.CalledProcessError:
+        except (subprocess.CalledProcessError, OSError):
             return (0, True)
 
     def render(self, frame):
