@@ -62,7 +62,7 @@ function __prompt_command {
     echo
     echo -n "%{$bg_bold[magenta]%} "
     echo -n "%{$bg_no_bold[black]$fg_bold[black]%} $(date +%T)"
-    echo -n " $(__user_and_host) $(__working_dir)$(__git_branch) "
+    echo -n " $(__user_and_host) $(__working_dir)$(__git_branch) %{$reset_color%}"
     echo
 
     echo "%{$bg_bold[magenta]%} %{$reset_color$vi_mode_color%} ~> %{$reset_color%}"
