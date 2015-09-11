@@ -41,7 +41,6 @@ if has('autocmd')
   " local settings for specific filetypes
   au FileType make,snippet setlocal ts=8 sts=8 sw=8 noexpandtab
   au FileType go setlocal ts=4 sts=4 sw=4 noexpandtab
-  au FileType go autocmd BufWritePre <buffer> Fmt
 
   " Go to last viewed tab
   let g:lasttab = 1
@@ -63,6 +62,8 @@ if has('autocmd')
   let g:indent_guides_auto_colors = 0
   "let g:indent_guides_start_level = 2
   "let g:indent_guides_guide_size = 1
+
+  let g:go_fmt_fail_silently = 1
 
   augroup BgHighlight
     autocmd!
