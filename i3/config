@@ -128,7 +128,7 @@ bindsym $mod+y border toggle
 bindsym $mod+i exec "i3-input"
 
 # volume controls
-bindsym XF86AudioLowerVolume exec "/usr/bin/amixer -q sset Master '5%-'"
+bindsym XF86AudioLowerVolume exec "/usr/bin/amixer -D pulse -q sset Master '5%-'"
 bindsym XF86AudioRaiseVolume exec "/usr/bin/amixer -D pulse -q sset Master '5%+' unmute"
 bindsym XF86AudioMute exec "/usr/bin/amixer -D pulse -q sset Master '0+' toggle"
 bindsym XF86MonBrightnessDown exec "xbacklight -10%"
