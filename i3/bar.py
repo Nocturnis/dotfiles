@@ -99,7 +99,7 @@ class MemoryPart(BarPart):
 ################################################################################
 # Volume
 class VolumePart(BarPart):
-    def __status(self):
+    def __amixer_status(self):
         try:
             sound_status = subprocess.check_output(['amixer', 'sget', 'Master'])
             match = re.search('Playback [0-9]+ \\[([0-9]+)%\\] \\[(?:.+?)\\] \\[(.+?)\\]', sound_status)
@@ -109,6 +109,33 @@ class VolumePart(BarPart):
             return (volume_percent, muted, False)
         except subprocess.CalledProcessError:
             return (0, False, True)
+
+    def __pacmd_status(self):
+        try:
+            sound_status = subprocess.check_output(['pacmd', 'list-sinks'])
+            start_match = re.search('\* index: [0-9]+', sound_status)
+            start_pos = start_match.end()
+            end_match = re.compile('index: [0-9]+', start_match.end()).search(sound_status, start_pos)
+            end_pos = len(sound_status)
+            if end_match is not None:
+                end_pos = end_match.start()
+            volume_match = re.compile('volume: front-left: [0-9]+ / +([0-9]+)%').search(sound_status, start_pos, end_pos)
+            if volume_match is None:
+                return (0, False, True)
+            volume_percent = float(volume_match.group(1)) / 100
+            muted_match = re.compile('muted: (yes|no)').search(sound_status, start_pos, end_pos)
+            muted = muted_match.group(1) == 'yes'
+            return (volume_percent, muted, False)
+        except subprocess.CalledProcessError:
+            return (0, False, True)
+
+    def __status(self):
+        result = self.__amixer_status()
+        err = result[2]
+        if not err:
+            return result
+        else:
+            return self.__pacmd_status()
 
     def render(self, frame):
         volume_percent, muted, err = self.__status()
