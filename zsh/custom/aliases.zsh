@@ -79,3 +79,12 @@ function screen-inner() {
   echo -ne "\ek$name\e\\"
   screen -S "-${outerName}--${1}" -e ^Aa $args
 }
+
+function do_until_fail() {
+  while true; do
+    $@
+    if [ $? -ne "0" ]; then
+      break
+    fi
+  done
+}
