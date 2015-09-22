@@ -3,6 +3,7 @@
 DIR="$HOME/.dotfiles"
 
 ACK="$HOME/.ackrc"
+AGIGNORE="$HOME/.agignore"
 BP="$HOME/.bash_profile"
 BRC="$HOME/.bashrc"
 INPUTRC="$HOME/.inputrc"
@@ -19,6 +20,7 @@ OHMYZSHCUSTOM="$HOME/.oh-my-zsh/custom"
 function erase_dotfiles {
   # echo "Erasing dotfiles..."
   rm -f $ACK
+  rm -f $AGIGNORE
   rm -f $BP
   rm -f $BRC
   rm -f $INPUTRC
@@ -44,6 +46,7 @@ function erase_dotfiles {
 function create_symlinks {
   # echo "Creating symlinks..."
   ln -s $DIR/ackrc $ACK
+  ln -s $DIR/agignore $AGIGNORE
   ln -s $DIR/bash/profile $BP
   ln -s $DIR/bash/profile $BRC
   ln -s $DIR/bash/input $INPUTRC

@@ -1,0 +1,4 @@
+*.min.js
+*.a
+*_pb2.py
+*.pb.go
