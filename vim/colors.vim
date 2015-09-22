@@ -126,4 +126,4 @@ highlight StatusLinePosition      ctermfg=Gray        ctermbg=DarkGray    cterm=
 highlight StatusLinePositionFaded ctermfg=None        ctermbg=DarkGray    cterm=None
 highlight VertSplit               ctermfg=DarkGray    ctermbg=DarkGray    cterm=None
 
-highlight MatchParen                                  ctermbg=White    cterm=Reverse
+highlight MatchParen              ctermfg=White       ctermbg=Blue        cterm=None
