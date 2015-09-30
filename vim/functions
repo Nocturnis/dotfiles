@@ -34,11 +34,7 @@ function! SetLineLength(length)
 endfunction
 function! SetColorColumn()
   if !exists('b:linelength')
-    if &filetype == 'java'
-      let b:linelength = 100
-    else
-      let b:linelength = 80
-    endif
+    let b:linelength = 100
   endif
   exec "set colorcolumn=" . (b:linelength + 1)
 endfunction
