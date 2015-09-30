@@ -176,7 +176,10 @@ function! Tabline()
         let buftitle .= '*'
       endif
       " let buftitle .= (tabnr == tabpagenr() ? (j + 1) . '/' . winnr() : '')
-      call add(buftitles, buftitle)
+
+      if buftitle != '__Tagbar__'
+        call add(buftitles, buftitle)
+      endif
     endfor
     let tabname = join(buftitles, ', ')
 
