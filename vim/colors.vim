@@ -127,3 +127,4 @@ highlight StatusLinePositionFaded ctermfg=None        ctermbg=DarkGray    cterm=
 highlight VertSplit               ctermfg=DarkGray    ctermbg=DarkGray    cterm=None
 
 highlight MatchParen              ctermfg=White       ctermbg=Blue        cterm=None
+highlight TagbarSignature         ctermfg=DarkBlue
