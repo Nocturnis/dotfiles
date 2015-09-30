@@ -118,6 +118,14 @@ map <leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
     \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
     \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+nmap <leader>gt :TagbarToggle<cr>
+nmap <leader>gd :GoDef<cr>
+nmap <leader>ge :GoDescribe<cr>
+nmap <leader>gi :GoInfo<cr>
+
+nmap <leader>ggo :let g:gitgutter_diff_args='origin/master..HEAD'<cr>:GitGutterSignsToggle<cr>:GitGutterSignsToggle<cr>
+nmap <leader>ggc :let g:gitgutter_diff_args=''<cr>:GitGutterSignsToggle<cr>:GitGutterSignsToggle<cr>
+
 let g:grabbedbufnr=1
 " 'yank' current buffer (save number)
 nmap <leader>by :let g:grabbedbufnr = bufnr('')<cr>
