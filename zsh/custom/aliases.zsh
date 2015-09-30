@@ -10,6 +10,16 @@ fi
 
 alias ag="ag --color-match \"0;35\" --color-path \"0;32\""
 
+function gbl {
+  git branch --list
+}
+function gco {
+  git checkout $@
+}
+function gfr {
+  git fetch && git rebase origin/master
+}
+
 alias chrome="google-chrome"
 # Open chrome with a separate profile
 alias chrome-isolated="google-chrome --user-data-dir=$HOME/.config/google-chrome/Profile\ 1/"
