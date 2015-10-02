@@ -10,12 +10,8 @@ fi
 
 alias ag="ag --color-match \"0;35\" --color-path \"0;32\""
 
-function gbl {
-  git branch --list
-}
-function gco {
-  git checkout $@
-}
+alias gbl="git branch --list"
+alias gco="git checkout"
 function gfr {
   git fetch && git rebase origin/master
 }
