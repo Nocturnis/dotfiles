@@ -5,12 +5,13 @@
   [[default]]
     foreground_color = "#839496"
     palette = "#073642:#cb4c16:#859900:#b58900:#268bd2:#6c70c4:#2aa198:#eee8d5:#586e75:#f18354:#bcd31d:#ecbc2a:#60aadf:#b1b4e8:#62c7c0:#fdf6e3"
+    background_image = /home/bw/Pictures/Yosemite4.jpg
     background_darkness = 0.85
     background_type = transparent
     use_system_font = False
     scroll_background = False
     show_titlebar = False
-    font = Fira Mono Medium 12
+    font = Fira Mono Medium 11
     background_color = "#002b36"
     allow_bold = False
 [layouts]
