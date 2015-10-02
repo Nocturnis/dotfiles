@@ -115,7 +115,7 @@ class VolumePart(BarPart):
             sound_status = subprocess.check_output(['pacmd', 'list-sinks'])
             start_match = re.search('\* index: [0-9]+', sound_status)
             start_pos = start_match.end()
-            end_match = re.compile('index: [0-9]+', start_match.end()).search(sound_status, start_pos)
+            end_match = re.compile('index: [0-9]+').search(sound_status, start_pos)
             end_pos = len(sound_status)
             if end_match is not None:
                 end_pos = end_match.start()
