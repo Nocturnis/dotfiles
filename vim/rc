@@ -151,8 +151,8 @@ nmap <leader>gd :GoDef<cr>
 nmap <leader>ge :GoDescribe<cr>
 nmap <leader>gi :GoInfo<cr>
 
-nmap <leader>ggo :let g:gitgutter_diff_args='origin/master..HEAD'<cr>:GitGutterSignsToggle<cr>:GitGutterSignsToggle<cr>
-nmap <leader>ggc :let g:gitgutter_diff_args=''<cr>:GitGutterSignsToggle<cr>:GitGutterSignsToggle<cr>
+nmap <leader>ggo :let g:gitgutter_diff_args='origin/master'<cr>:GitGutterSignsDisable<cr>:GitGutterSignsEnable<cr>
+nmap <leader>ggc :let g:gitgutter_diff_args=''<cr>:GitGutterSignsDisable<cr>:GitGutterSignsEnable<cr>
 
 let g:grabbedbufnr=1
 " 'yank' current buffer (save number)
