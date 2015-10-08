@@ -25,6 +25,8 @@ function chrome-isolated-proxy() {
   chrome-isolated --proxy-server="http=${proxy_server}"
 }
 
+alias clipboard="xsel --clipboard"
+
 # mkdir, cd into it
 mkcd() {
   mkdir -p "$*"
