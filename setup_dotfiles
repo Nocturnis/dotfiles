@@ -50,34 +50,34 @@ function erase_dotfiles {
 
 function create_symlinks {
   # echo "Creating symlinks..."
-  ln -s $DIR/ackrc $ACK
-  ln -s $DIR/agignore $AGIGNORE
-  ln -s $DIR/bash/profile $BP
-  ln -s $DIR/bash/profile $BRC
-  ln -s $DIR/bash/input $INPUTRC
-  ln -s $DIR/git/config $GC
-  ln -s $DIR/git/ignore $GI
-  ln -s $DIR/vim/grc $GRC
-  ln -s $DIR/screenrc $SCREEN
-  ln -s $DIR/vim $VIM
-  ln -s $DIR/vim/rc $VRC
-  ln -s $DIR/zsh/rc $ZSHRC
-  ln -s $DIR/zsh/oh-my-zsh $OHMYZSH
+  ln -rs $DIR/ackrc $ACK
+  ln -rs $DIR/agignore $AGIGNORE
+  ln -rs $DIR/bash/profile $BP
+  ln -rs $DIR/bash/profile $BRC
+  ln -rs $DIR/bash/input $INPUTRC
+  ln -rs $DIR/git/config $GC
+  ln -rs $DIR/git/ignore $GI
+  ln -rs $DIR/vim/grc $GRC
+  ln -rs $DIR/screenrc $SCREEN
+  ln -rs $DIR/vim $VIM
+  ln -rs $DIR/vim/rc $VRC
+  ln -rs $DIR/zsh/rc $ZSHRC
+  ln -rs $DIR/zsh/oh-my-zsh $OHMYZSH
 
   mkdir -p $TARGET/.i3/
-  ln -s $DIR/i3/config $TARGET/.i3/config
+  ln -rs $DIR/i3/config $TARGET/.i3/config
   mkdir -p $TARGET/.config/terminator
-  ln -s $DIR/settings/terminator/config $TERMINATOR
+  ln -rs $DIR/settings/terminator/config $TERMINATOR
 
   mkdir -p $OHMYZSHCUSTOM
-  ln -s $DIR/zsh/custom/aliases.zsh $OHMYZSHCUSTOM/aliases.zsh
-  ln -s $DIR/zsh/custom/env.zsh $OHMYZSHCUSTOM/env.zsh
-  ln -s $DIR/zsh/custom/highlighting.zsh $OHMYZSHCUSTOM/highlighting.zsh
+  ln -rs $DIR/zsh/custom/aliases.zsh $OHMYZSHCUSTOM/aliases.zsh
+  ln -rs $DIR/zsh/custom/env.zsh $OHMYZSHCUSTOM/env.zsh
+  ln -rs $DIR/zsh/custom/highlighting.zsh $OHMYZSHCUSTOM/highlighting.zsh
   mkdir -p $OHMYZSHCUSTOM/themes
-  ln -s $DIR/zsh/custom/themes/my.zsh-theme $OHMYZSHCUSTOM/themes/my.zsh-theme
+  ln -rs $DIR/zsh/custom/themes/my.zsh-theme $OHMYZSHCUSTOM/themes/my.zsh-theme
   mkdir -p $OHMYZSHCUSTOM/plugins
   for PLUGIN in "$(ls -A $DIR/zsh/custom/plugins/)"; do
-    ln -s $DIR/zsh/custom/plugins/$PLUGIN $OHMYZSHCUSTOM/plugins/$PLUGIN
+    ln -rs $DIR/zsh/custom/plugins/$PLUGIN $OHMYZSHCUSTOM/plugins/$PLUGIN
   done
 }
 
@@ -89,7 +89,7 @@ if [ -d $DIR ]; then
     case $RN in
       Replace )
         cd $DIR
-        git submodule update --init --recursive
+        git submodule update --init --recursive || true
         erase_dotfiles
         create_symlinks
         exit 0
