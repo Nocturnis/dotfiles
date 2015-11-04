@@ -20,3 +20,12 @@ defbce on    # use current bg color for erased chars
 
 maptimeout 0
 defc1 off
+
+#bindkey -k k1 select 0
+#bindkey -k k2 select 1
+#bindkey -k k3 select 2
+#bindkey -k k4 select 3
+#bindkey -k k5 select 4
+#bindkey -k k6 select 5
+bindkey ^A other
+escape ^Xx
