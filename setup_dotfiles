@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
 
-DIR="$HOME/.dotfiles"
+DIR=$(cd $(dirname $0) && pwd)
+TARGET=$(cd $DIR/.. && pwd)
 
-ACK="$HOME/.ackrc"
-AGIGNORE="$HOME/.agignore"
-BP="$HOME/.bash_profile"
-BRC="$HOME/.bashrc"
-INPUTRC="$HOME/.inputrc"
-GC="$HOME/.gitconfig"
-GI="$HOME/.gitignore"
-GRC="$HOME/.gvimrc"
-IRC="$HOME/.irbrc"
-SCREEN="$HOME/.screenrc"
-VIM="$HOME/.vim"
-VRC="$HOME/.vimrc"
-ZSHRC="$HOME/.zshrc"
-TERMINATOR="$HOME/.config/terminator/config"
-OHMYZSHCUSTOM="$HOME/.oh-my-zsh/custom"
+ACK="$TARGET/.ackrc"
+AGIGNORE="$TARGET/.agignore"
+BP="$TARGET/.bash_profile"
+BRC="$TARGET/.bashrc"
+INPUTRC="$TARGET/.inputrc"
+GC="$TARGET/.gitconfig"
+GI="$TARGET/.gitignore"
+GRC="$TARGET/.gvimrc"
+IRC="$TARGET/.irbrc"
+SCREEN="$TARGET/.screenrc"
+VIM="$TARGET/.vim"
+VRC="$TARGET/.vimrc"
+ZSHRC="$TARGET/.zshrc"
+TERMINATOR="$TARGET/.config/terminator/config"
+OHMYZSH="$TARGET/.oh-my-zsh"
+OHMYZSHCUSTOM="$TARGET/.oh-my-zsh/custom"
 
 function erase_dotfiles {
   # echo "Erasing dotfiles..."
@@ -34,8 +36,9 @@ function erase_dotfiles {
   rm -f $ZSHRC
   rm -f $TERMINATOR
 
-  rm -f $HOME/.i3/config
+  rm -f $TARGET/.i3/config
 
+  rm -f $OHMYZSH
   rm -f $OHMYZSHCUSTOM/aliases.zsh
   rm -f $OHMYZSHCUSTOM/env.zsh
   rm -f $OHMYZSHCUSTOM/highlighting.zsh
@@ -60,9 +63,10 @@ function create_symlinks {
   ln -s $DIR/vim/rc $VRC
   ln -s $DIR/zsh/rc $ZSHRC
   ln -s $DIR/settings/terminator/config $TERMINATOR
+  ln -s $DIR/zsh/oh-my-zsh $OH_MY_ZSH
 
-  mkdir -p $HOME/.i3/
-  ln -s $DIR/i3/config $HOME/.i3/config
+  mkdir -p $TARGET/.i3/
+  ln -s $DIR/i3/config $TARGET/.i3/config
 
   mkdir -p $OHMYZSHCUSTOM
   ln -s $DIR/zsh/custom/aliases.zsh $OHMYZSHCUSTOM/aliases.zsh
@@ -76,27 +80,6 @@ function create_symlinks {
   done
 }
 
-function get_google_dotfiles {
-  if [ -f "~/.at_google" ]; then
-    git clone sso://user/bradenw/dotfiles-google ~/.dotfiles-google/
-    ~/.dotfiles-google/setup
-  fi
-}
-
-function setup_zsh {
-  if [[ !(-d ~/.oh-my-zsh) ]]; then
-    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-  fi
-  cd $DIR
-  git submodule init zsh/custom/plugins/zsh-syntax-highlighting
-  git submodule update zsh/custom/plugins/zsh-syntax-highlighting
-
-  which zsh
-  if [[ $? -eq 0 && "$SHELL" != "$(which zsh)" ]]; then
-    sudo chsh -s $(which zsh)
-  fi
-}
-
 # make sure the directory exists
 if [ -d $DIR ]; then
 
@@ -106,7 +89,6 @@ if [ -d $DIR ]; then
       Replace )
         cd $DIR
         git submodule update --init --recursive
-        setup_zsh
         erase_dotfiles
         create_symlinks
         get_google_dotfiles
