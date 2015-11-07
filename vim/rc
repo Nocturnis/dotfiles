@@ -162,6 +162,9 @@ nnoremap * *N
 nmap <leader>ll :LineLength 100<cr>
 nmap <leader>ls :LineLength 80<cr>
 
+" so typing comments doesn't has a dumb
+inoremap # X^H#
+
 " don't autofold, but still allow manual folding
 set foldlevel=100
 
