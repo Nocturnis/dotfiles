@@ -24,7 +24,7 @@
   sync = !legit sync \"$@\"
   publish = !legit publish \"$@\"
   graft = !legit graft \"$@\"
-  one = "log --pretty=format:'%C(yellow)%h  %<(14)%Cred%ad %<(20)%Cblue%an%Cgreen%d %Creset%s' --date=short"
+  one = "log --pretty=format:'%C(yellow)%h  %<(14)%Cred%cd %<(20)%Cblue%an%Cgreen%d %Creset%s' --date=short"
 
 [branch "master"]
   remote = origin
