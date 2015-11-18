@@ -58,6 +58,10 @@ function __git_branch {
         fi
         echo -n " $color$git_branch"
     fi
+
+    if hg branch > /dev/null 2>&1 ; then
+      echo -n " %{$fg_no_bold[blue]%}hg%{$fg_bold[black]%}:%{$fg_bold[white]%}$(hg branch)"
+    fi
     echo -n ""
 }
 
