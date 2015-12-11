@@ -29,7 +29,7 @@ highlight IndentGuidesEven                            ctermbg=Black
 
 highlight PreProc                 ctermfg=DarkGray
 highlight Constant                ctermfg=DarkMagenta
-highlight Comment                 ctermfg=DarkCyan
+highlight Comment                 ctermfg=DarkCyan                        cterm=Reverse
 highlight Operator                ctermfg=DarkGray
 highlight Statement               ctermfg=Brown
 highlight Type                    ctermfg=DarkGreen
