@@ -49,6 +49,9 @@
 [push]
   default = current
 
+[merge]
+  conflictstyle = diff3
+
 [user]
 	name = Braden Walker
 	email = braden.w@live.com

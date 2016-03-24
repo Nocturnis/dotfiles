@@ -109,6 +109,9 @@ highlight shVariable              ctermfg=DarkBlue
 highlight shDerefSimple           ctermfg=LightBlue
 highlight shDerefVar              ctermfg=LightBlue
 
+" zsh
+highlight zshString               ctermfg=LightMagenta
+
 highlight DiffAdd                 ctermfg=Gray        ctermbg=DarkGreen   cterm=None
 highlight DiffDelete              ctermfg=Gray        ctermbg=DarkRed     cterm=None
 highlight DiffChange              ctermfg=DarkGray    ctermbg=Yellow      cterm=None
