@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DIR=$(cd $(dirname $0) && pwd)
-TARGET=$(cd $DIR/.. && pwd)
+TARGET=$(cd && pwd)
 
 ACK="$TARGET/.ackrc"
 AGIGNORE="$TARGET/.agignore"
