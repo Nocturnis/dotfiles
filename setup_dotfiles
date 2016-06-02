@@ -77,6 +77,9 @@ function create_symlinks {
   create_symlink $DIR/settings/terminator/config $TERMINATOR
 
   mkdir -p $OHMYZSHCUSTOM
+  cat > $OHMYZSHCUSTOM/00-machine-env.zsh << EOM
+  export DOTFILES_MAIN="$DIR"
+  EOM
   create_symlink $DIR/zsh/custom/50-aliases.zsh $OHMYZSHCUSTOM/50-aliases.zsh
   create_symlink $DIR/zsh/custom/50-env.zsh $OHMYZSHCUSTOM/50-env.zsh
   create_symlink $DIR/zsh/custom/50-highlighting.zsh $OHMYZSHCUSTOM/50-highlighting.zsh

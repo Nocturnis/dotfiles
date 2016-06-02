@@ -1,8 +1,8 @@
-. ~/.dotfiles/bash/config
-. ~/.dotfiles/bash/env
-. ~/.dotfiles/bash/aliases
-. ~/.dotfiles/bash/tools
-. ~/.dotfiles/bash/git-prompt.sh
+. $DOTFILES_MAIN/bash/config
+. $DOTFILES_MAIN/bash/env
+. $DOTFILES_MAIN/bash/aliases
+. $DOTFILES_MAIN/bash/tools
+. $DOTFILES_MAIN/bash/git-prompt.sh
 if [ -e ~/.at_google ]; then
   . ~/.dotfiles/bash/google
 fi
