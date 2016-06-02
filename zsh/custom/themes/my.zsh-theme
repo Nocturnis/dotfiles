@@ -5,6 +5,11 @@
 autoload -U colors && colors
 
 function __user_and_host {
+    if [[ -n "$DOTFILES_DBX" ]]; then
+        __user_and_host_custom
+        return
+    fi
+
     local host="$(hostname -s)"
     local user="$(id -un)"
     local self_user="bradenw"
