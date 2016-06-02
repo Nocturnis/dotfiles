@@ -98,7 +98,7 @@ let g:tagbar_type_go = {
 \ }
 
 " source custom functions
-so ~/.dotfiles/vim/functions
+exec "source " . $DOTFILES_MAIN . "/vim/functions"
 
 " map ,w to StripTrailingWhitespaces()
 nnoremap <silent> <leader>w :call StripTrailingWhitespaces()<cr>
@@ -222,6 +222,6 @@ function! MakeGetSet()
   call feedkeys("^wyt;opublic pbigetl~$a() {}koreturn kk$byt;jjpa;jopublic void setpblll~$a(kkk^wyt jjj$pa value) {}kkk^wyt;jjothis.pa = kjavalue;kkkkk")
 endfunction
 
-source ~/.dotfiles/vim/tabline.vim
-source ~/.dotfiles/vim/statusline.vim
-source ~/.dotfiles/vim/colors.vim
+exec "source " . $DOTFILES_MAIN . "/vim/tabline.vim"
+exec "source " . $DOTFILES_MAIN . "/vim/statusline.vim"
+exec "source " . $DOTFILES_MAIN . "/vim/colors.vim"
