@@ -49,9 +49,9 @@ function create_symlink {
   link_name="$2"
 
   if [ "$RELATIVE_LINKS" == "1" ]; then
-    ln -rs "$link_name" "$target"
+    ln -rs "$target" "$link_name"
   else
-    ln -s "$link_name" "$target"
+    ln -s "$target" "$link_name"
   fi
 }
 
