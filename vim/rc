@@ -225,7 +225,3 @@ endfunction
 source ~/.dotfiles/vim/tabline.vim
 source ~/.dotfiles/vim/statusline.vim
 source ~/.dotfiles/vim/colors.vim
-
-if !empty($DOTFILES_DBX)
-  source $DOTFILES_DBX + "/vim/rc"
-endif
