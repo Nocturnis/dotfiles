@@ -82,10 +82,6 @@ function create_symlinks {
   create_symlink $DIR/zsh/custom/50-highlighting.zsh $OHMYZSHCUSTOM/50-highlighting.zsh
   mkdir -p $OHMYZSHCUSTOM/themes
   create_symlink $DIR/zsh/custom/themes/my.zsh-theme $OHMYZSHCUSTOM/themes/my.zsh-theme
-  mkdir -p $OHMYZSHCUSTOM/plugins
-  for PLUGIN in "$(ls -A $DIR/zsh/custom/plugins/)"; do
-    create_symlink $DIR/zsh/custom/plugins/$PLUGIN $OHMYZSHCUSTOM/plugins/$PLUGIN
-  done
 }
 
 # make sure the directory exists
