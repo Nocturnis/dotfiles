@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 DIR=$(cd $(dirname $0) && pwd)
-TARGET=$(cd && pwd)
+TARGET="$HOME"
+if [ -n "$DOTFILES_TARGET" ]; then
+  TARGET="$DOTFILES_TARGET"
+fi
 
 ACK="$TARGET/.ackrc"
 AGIGNORE="$TARGET/.agignore"
@@ -38,14 +41,7 @@ function erase_dotfiles {
 
   rm -f $TARGET/.i3/config
 
-  rm -f $OHMYZSHCUSTOM/aliases.zsh
-  rm -f $OHMYZSHCUSTOM/env.zsh
-  rm -f $OHMYZSHCUSTOM/highlighting.zsh
-  rm -f $OHMYZSHCUSTOM/themes/my.zsh-theme
-  for PLUGIN in "$(ls -A $DIR/zsh/custom/plugins/)"; do
-    rm -f $OHMYZSHCUSTOM/plugins/$PLUGIN
-  done
-  rm -f $OHMYZSH
+  rm -rf $OHMYZSH
 }
 
 function create_symlinks {
@@ -70,9 +66,9 @@ function create_symlinks {
   ln -rs $DIR/settings/terminator/config $TERMINATOR
 
   mkdir -p $OHMYZSHCUSTOM
-  ln -rs $DIR/zsh/custom/aliases.zsh $OHMYZSHCUSTOM/aliases.zsh
-  ln -rs $DIR/zsh/custom/env.zsh $OHMYZSHCUSTOM/env.zsh
-  ln -rs $DIR/zsh/custom/highlighting.zsh $OHMYZSHCUSTOM/highlighting.zsh
+  ln -rs $DIR/zsh/custom/50-aliases.zsh $OHMYZSHCUSTOM/50-aliases.zsh
+  ln -rs $DIR/zsh/custom/50-env.zsh $OHMYZSHCUSTOM/50-env.zsh
+  ln -rs $DIR/zsh/custom/50-highlighting.zsh $OHMYZSHCUSTOM/50-highlighting.zsh
   mkdir -p $OHMYZSHCUSTOM/themes
   ln -rs $DIR/zsh/custom/themes/my.zsh-theme $OHMYZSHCUSTOM/themes/my.zsh-theme
   mkdir -p $OHMYZSHCUSTOM/plugins

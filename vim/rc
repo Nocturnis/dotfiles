@@ -1,12 +1,6 @@
 " set the leader key to the comma
 let mapleader=','
 
-if filereadable(expand("~/.at_google"))
-  source ~/.dotfiles-google/vim/google.vim
-else
-  set ts=2 sts=2 sw=2 expandtab
-endif
-
 " Speed up CtrlP with ag
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
     \ --ignore .git
@@ -231,3 +225,7 @@ endfunction
 source ~/.dotfiles/vim/tabline.vim
 source ~/.dotfiles/vim/statusline.vim
 source ~/.dotfiles/vim/colors.vim
+
+if !empty($DOTFILES_DBX)
+  source $DOTFILES_DBX + "/vim/rc"
+endif
