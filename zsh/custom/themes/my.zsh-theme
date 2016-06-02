@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-. ~/.dotfiles/bash/git-prompt.sh
+. $DOTFILES_MAIN/bash/git-prompt.sh
 
 autoload -U colors && colors
 
