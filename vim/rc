@@ -67,6 +67,10 @@ if has('autocmd')
     autocmd WinLeave * set colorcolumn=0
     autocmd WinLeave * set nocursorline
   augroup END
+
+  autocmd BufRead,BufNewFile *.bzl set filetype=python
+  autocmd BufRead,BufNewFile BUILD set filetype=python
+  autocmd BufRead,BufNewFile *.pyst set filetype=python
 endif
 
 let g:tagbar_type_go = {
