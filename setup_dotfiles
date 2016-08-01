@@ -20,12 +20,11 @@ VIM="$TARGET/.vim"
 VRC="$TARGET/.vimrc"
 ZSHRC="$TARGET/.zshrc"
 TERMINATOR="$TARGET/.config/terminator/config"
-OHMYZSH="$TARGET/.oh-my-zsh"
 OHMYZSHCUSTOM="$TARGET/.oh-my-zsh/custom"
 ATOM="$TARGET/.atom"
 
 function erase_dotfiles {
-  # echo "Erasing dotfiles..."
+  echo "Erasing dotfiles..."
   rm -f $ACK
   rm -f $AGIGNORE
   rm -f $BP
@@ -42,7 +41,7 @@ function erase_dotfiles {
 
   rm -f $TARGET/.i3/config
 
-  rm -rf $OHMYZSH
+  rm -rf $OHMYZSHCUSTOM
   rm -f $ATOM
 }
 
@@ -71,19 +70,13 @@ function create_symlinks {
   create_symlink $DIR/vim $VIM
   create_symlink $DIR/vim/rc $VRC
   create_symlink $DIR/zsh/rc $ZSHRC
-  create_symlink $DIR/zsh/oh-my-zsh $OHMYZSH
 
   mkdir -p $TARGET/.i3/
   create_symlink $DIR/i3/config $TARGET/.i3/config
   mkdir -p $TARGET/.config/terminator
   create_symlink $DIR/settings/terminator/config $TERMINATOR
 
-  mkdir -p $OHMYZSHCUSTOM
-  create_symlink $DIR/zsh/custom/50-aliases.zsh $OHMYZSHCUSTOM/50-aliases.zsh
-  create_symlink $DIR/zsh/custom/50-env.zsh $OHMYZSHCUSTOM/50-env.zsh
-  create_symlink $DIR/zsh/custom/50-highlighting.zsh $OHMYZSHCUSTOM/50-highlighting.zsh
-  mkdir -p $OHMYZSHCUSTOM/themes
-  create_symlink $DIR/zsh/custom/themes/my.zsh-theme $OHMYZSHCUSTOM/themes/my.zsh-theme
+  create_symlink $DIR/zsh/custom $OHMYZSHCUSTOM
   create_symlink $DIR/atom $ATOM
 }
 
