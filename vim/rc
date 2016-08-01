@@ -1,12 +1,6 @@
 " set the leader key to the comma
 let mapleader=','
 
-if filereadable(expand("~/.at_google"))
-  source ~/.dotfiles-google/vim/google.vim
-else
-  set ts=2 sts=2 sw=2 expandtab
-endif
-
 " Speed up CtrlP with ag
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
     \ --ignore .git
@@ -73,10 +67,42 @@ if has('autocmd')
     autocmd WinLeave * set colorcolumn=0
     autocmd WinLeave * set nocursorline
   augroup END
+
+  autocmd BufRead,BufNewFile *.bzl set filetype=python
+  autocmd BufRead,BufNewFile BUILD set filetype=python
+  autocmd BufRead,BufNewFile *.pyst set filetype=python
 endif
 
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
 " source custom functions
-so ~/.dotfiles/vim/functions
+source ~/.dotfiles/vim/functions
 
 " map ,w to StripTrailingWhitespaces()
 nnoremap <silent> <leader>w :call StripTrailingWhitespaces()<cr>
@@ -123,8 +149,8 @@ nmap <leader>gd :GoDef<cr>
 nmap <leader>ge :GoDescribe<cr>
 nmap <leader>gi :GoInfo<cr>
 
-nmap <leader>ggo :let g:gitgutter_diff_args='origin/master..HEAD'<cr>:GitGutterSignsToggle<cr>:GitGutterSignsToggle<cr>
-nmap <leader>ggc :let g:gitgutter_diff_args=''<cr>:GitGutterSignsToggle<cr>:GitGutterSignsToggle<cr>
+nmap <leader>ggo :let g:gitgutter_diff_args='origin/master'<cr>:GitGutterSignsDisable<cr>:GitGutterSignsEnable<cr>
+nmap <leader>ggc :let g:gitgutter_diff_args=''<cr>:GitGutterSignsDisable<cr>:GitGutterSignsEnable<cr>
 
 let g:grabbedbufnr=1
 " 'yank' current buffer (save number)

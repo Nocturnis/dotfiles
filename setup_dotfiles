@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 DIR=$(cd $(dirname $0) && pwd)
-TARGET=$(cd $DIR/.. && pwd)
+TARGET="$HOME"
+if [ -n "$DOTFILES_TARGET" ]; then
+  TARGET="$DOTFILES_TARGET"
+fi
 
 ACK="$TARGET/.ackrc"
 AGIGNORE="$TARGET/.agignore"
@@ -39,55 +42,53 @@ function erase_dotfiles {
 
   rm -f $TARGET/.i3/config
 
-  rm -f $OHMYZSHCUSTOM/aliases.zsh
-  rm -f $OHMYZSHCUSTOM/env.zsh
-  rm -f $OHMYZSHCUSTOM/highlighting.zsh
-  rm -f $OHMYZSHCUSTOM/themes/my.zsh-theme
-  for PLUGIN in "$(ls -A $DIR/zsh/custom/plugins/)"; do
-    rm -f $OHMYZSHCUSTOM/plugins/$PLUGIN
-  done
-  rm -f $OHMYZSH
+  rm -rf $OHMYZSH
   rm -f $ATOM
+}
+
+function create_symlink {
+  target="$1"
+  link_name="$2"
+
+  if [ "$RELATIVE_LINKS" == "1" ]; then
+    ln -rs "$target" "$link_name"
+  else
+    ln -s "$target" "$link_name"
+  fi
 }
 
 function create_symlinks {
   # echo "Creating symlinks..."
-  ln -rs $DIR/ackrc $ACK
-  ln -rs $DIR/agignore $AGIGNORE
-  ln -rs $DIR/bash/profile $BP
-  ln -rs $DIR/bash/profile $BRC
-  ln -rs $DIR/bash/input $INPUTRC
-  ln -rs $DIR/git/config $GC
-  ln -rs $DIR/git/ignore $GI
-  ln -rs $DIR/vim/grc $GRC
-  ln -rs $DIR/screenrc $SCREEN
-  ln -rs $DIR/vim $VIM
-  ln -rs $DIR/vim/rc $VRC
-  ln -rs $DIR/zsh/rc $ZSHRC
-  ln -rs $DIR/zsh/oh-my-zsh $OHMYZSH
+  create_symlink $DIR/ackrc $ACK
+  create_symlink $DIR/agignore $AGIGNORE
+  create_symlink $DIR/bash/profile $BP
+  create_symlink $DIR/bash/profile $BRC
+  create_symlink $DIR/bash/input $INPUTRC
+  create_symlink $DIR/git/config $GC
+  create_symlink $DIR/git/ignore $GI
+  create_symlink $DIR/vim/grc $GRC
+  create_symlink $DIR/screenrc $SCREEN
+  create_symlink $DIR/vim $VIM
+  create_symlink $DIR/vim/rc $VRC
+  create_symlink $DIR/zsh/rc $ZSHRC
+  create_symlink $DIR/zsh/oh-my-zsh $OHMYZSH
 
   mkdir -p $TARGET/.i3/
-  ln -rs $DIR/i3/config $TARGET/.i3/config
+  create_symlink $DIR/i3/config $TARGET/.i3/config
   mkdir -p $TARGET/.config/terminator
-  ln -rs $DIR/settings/terminator/config $TERMINATOR
+  create_symlink $DIR/settings/terminator/config $TERMINATOR
 
   mkdir -p $OHMYZSHCUSTOM
-  ln -rs $DIR/zsh/custom/aliases.zsh $OHMYZSHCUSTOM/aliases.zsh
-  ln -rs $DIR/zsh/custom/env.zsh $OHMYZSHCUSTOM/env.zsh
-  ln -rs $DIR/zsh/custom/highlighting.zsh $OHMYZSHCUSTOM/highlighting.zsh
+  create_symlink $DIR/zsh/custom/50-aliases.zsh $OHMYZSHCUSTOM/50-aliases.zsh
+  create_symlink $DIR/zsh/custom/50-env.zsh $OHMYZSHCUSTOM/50-env.zsh
+  create_symlink $DIR/zsh/custom/50-highlighting.zsh $OHMYZSHCUSTOM/50-highlighting.zsh
   mkdir -p $OHMYZSHCUSTOM/themes
-  ln -rs $DIR/zsh/custom/themes/my.zsh-theme $OHMYZSHCUSTOM/themes/my.zsh-theme
-  mkdir -p $OHMYZSHCUSTOM/plugins
-  for PLUGIN in "$(ls -A $DIR/zsh/custom/plugins/)"; do
-    ln -rs $DIR/zsh/custom/plugins/$PLUGIN $OHMYZSHCUSTOM/plugins/$PLUGIN
-  done
-
-  ln -rs $DIR/atom $ATOM
+  create_symlink $DIR/zsh/custom/themes/my.zsh-theme $OHMYZSHCUSTOM/themes/my.zsh-theme
+  create_symlink $DIR/atom $ATOM
 }
 
 # make sure the directory exists
 if [ -d $DIR ]; then
-
   echo "Replace current dotfiles? [1 or 2]"
   select RN in "Replace" "No"; do
     case $RN in

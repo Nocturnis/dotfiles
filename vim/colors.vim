@@ -29,7 +29,7 @@ highlight IndentGuidesEven                            ctermbg=Black
 
 highlight PreProc                 ctermfg=DarkGray
 highlight Constant                ctermfg=DarkMagenta
-highlight Comment                 ctermfg=DarkCyan
+highlight Comment                 ctermfg=DarkCyan                        cterm=Reverse
 highlight Operator                ctermfg=DarkGray
 highlight Statement               ctermfg=Brown
 highlight Type                    ctermfg=DarkGreen
@@ -108,6 +108,9 @@ highlight shFunction              ctermfg=None
 highlight shVariable              ctermfg=DarkBlue
 highlight shDerefSimple           ctermfg=LightBlue
 highlight shDerefVar              ctermfg=LightBlue
+
+" zsh
+highlight zshString               ctermfg=LightMagenta
 
 highlight DiffAdd                 ctermfg=Gray        ctermbg=DarkGreen   cterm=None
 highlight DiffDelete              ctermfg=Gray        ctermbg=DarkRed     cterm=None

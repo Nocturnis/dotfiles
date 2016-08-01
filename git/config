@@ -49,6 +49,9 @@
 [push]
   default = current
 
+[merge]
+  conflictstyle = diff3
+
 [user]
 	name = Braden Walker
 	email = braden.w@live.com
@@ -58,3 +61,5 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[diff "nodiff"]
+	command = /bin/true

@@ -87,6 +87,7 @@ PROMPT="$(__prompt_command)"
 function zle-line-init zle-keymap-select {
     PROMPT="$(__prompt_command)"
     zle reset-prompt
+    zle -R
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
