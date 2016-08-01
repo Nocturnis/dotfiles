@@ -89,6 +89,7 @@
 
 'atom-text-editor.vim-mode-plus.normal-mode':
   ', g d': 'go-debug:toggle-panel'
+  ', d': 'tree-view:show'
 
-'atom-text-editor.vim-mode-plus.normal-mode, .tree-view':
+'.tree-view':
   ', d': 'tree-view:toggle'

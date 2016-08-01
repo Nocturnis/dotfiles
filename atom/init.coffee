@@ -11,6 +11,6 @@
 #     console.log "Saved! #{editor.getPath()}"
 
 atom.commands.add 'atom-workspace', 'custom-commands:dismiss-notifications', ->
-  atom.notifications.getNotifications().forEach (notification) ->
-    notification.dismiss()
-  atom.notifications.clear()
+    atom.notifications.getNotifications().forEach (notification) ->
+        notification.dismiss()
+    atom.notifications.clear()
