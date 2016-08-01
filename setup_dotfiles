@@ -19,6 +19,7 @@ ZSHRC="$TARGET/.zshrc"
 TERMINATOR="$TARGET/.config/terminator/config"
 OHMYZSH="$TARGET/.oh-my-zsh"
 OHMYZSHCUSTOM="$TARGET/.oh-my-zsh/custom"
+ATOM="$TARGET/.atom"
 
 function erase_dotfiles {
   # echo "Erasing dotfiles..."
@@ -46,6 +47,7 @@ function erase_dotfiles {
     rm -f $OHMYZSHCUSTOM/plugins/$PLUGIN
   done
   rm -f $OHMYZSH
+  rm -f $ATOM
 }
 
 function create_symlinks {
@@ -79,6 +81,8 @@ function create_symlinks {
   for PLUGIN in "$(ls -A $DIR/zsh/custom/plugins/)"; do
     ln -rs $DIR/zsh/custom/plugins/$PLUGIN $OHMYZSHCUSTOM/plugins/$PLUGIN
   done
+
+  ln -rs $DIR/atom $ATOM
 }
 
 # make sure the directory exists
@@ -94,7 +98,7 @@ if [ -d $DIR ]; then
         create_symlinks
         exit 0
         ;;
-      
+
       No )
         create_symlinks
         exit 0

@@ -1,0 +1,41 @@
+{
+  "name": "language-bazel",
+  "version": "0.3.2",
+  "description": "Build (bazel.io) language support for Atom",
+  "keywords": [
+    "Bazel",
+    "Build",
+    "Skylark",
+    "BUILD",
+    "Buck"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ptsurko/language-bazel.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {},
+  "readme": "# Bazel language support for atom.\n\nAdds syntax highlighting to Google's Bazel language from [bazel.io](https://bazel.io).\n\n![A screenshot of highlighted soy](https://raw.githubusercontent.com/ptsurko/language-bazel/master/build-screenshot.png)\n\n## Features\n- Syntax Highlighting\n- Snippets\n\n## Snippets\n```\nJava:\njb  ->  java_binary\njl  ->  java_library\njt  ->  java_test\nji  ->  java_import\njp  ->  java_plugin\n\nAndroid:\nab  ->  android_binary\nal  ->  android_library\n\nPython:\npb  ->  py_binary\npl  ->  py_library\npt  ->  py_test\n\nC / C++:\ncb  ->  cc_binary\ncl  ->  cc_library\nct  ->  cc_test\n\nShell:\nsb  ->  sh_binary\nsl  ->  sh_library\nst  ->  sh_test\n\nGeneral:\ngr  ->  genrule\nfg  ->  filegroup\nts  ->  test_suite\n```\n\n## Changelog\n\n### 0.3.2 - 25-07-2016\n* Fixed highlighting for strings\n\n### 0.3.1 - 14-06-2016\n* Added support for WORKSPACE files\n\n### 0.3.0 - 27-04-2016\n* Added support for bzl files\n\n### 0.2.3 - 25-04-2016\n* Handle BUCK build files as well\n\n### 0.2.2 - 08-11-2015\n* Added settings file to configure comments chars\n\n### 0.2.1 - 03-09-2015\n* Added more snippets for java/android/shell rules\n\n### 0.2.0 - 26-08-2015\n* Added snippets for java/c++/python rules\n\n### 0.1.0 - 26-08-2015\n* Added syntax highlighting for BUILD files\n\nContributions are greatly appreciated. Please fork this repository and open a\npull request to add snippets, make grammar tweaks, etc.\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/ptsurko/language-bazel/issues"
+  },
+  "homepage": "https://github.com/ptsurko/language-bazel#readme",
+  "_id": "language-bazel@0.3.2",
+  "_shasum": "43e3025b35a3420a62ad4d1d64eb1ef115753bfb",
+  "_resolved": "file:../d-116630-26225-18xaxl/package.tgz",
+  "_from": "../d-116630-26225-18xaxl/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}

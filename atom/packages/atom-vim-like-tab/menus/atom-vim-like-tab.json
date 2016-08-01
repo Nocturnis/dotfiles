@@ -1,0 +1,34 @@
+{
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "atom-vim-like-tab",
+          "submenu": [
+            {
+              "label": "New",
+              "command": "atom-vim-like-tab:new"
+            },
+            {
+              "label": "Close",
+              "command": "atom-vim-like-tab:close"
+            },
+            {
+              "label": "Next",
+              "command": "atom-vim-like-tab:next"
+            },
+            {
+              "label": "Previous",
+              "command": "atom-vim-like-tab:previous"
+            },
+            {
+              "label": "List",
+              "command": "atom-vim-like-tab:list"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

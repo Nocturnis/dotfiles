@@ -1,0 +1,5 @@
+App load time: 745ms
+(electron) app.getDataPath is deprecated. Use app.getPath instead.
+Created new window in existing browser session.
+Created new window in existing browser session.
+[3497:3497:0730/125218:ERROR:broker_posix.cc(41)] Invalid node channel message

@@ -1,0 +1,55 @@
+"*":
+  core:
+    autoHideMenuBar: true
+    disabledPackages: [
+      "vim-mode"
+    ]
+    themes: [
+      "genesis-ui"
+      "genesis-syntax"
+    ]
+  editor:
+    fontFamily: "Fira Mono"
+    fontSize: 13
+    invisibles: {}
+    preferredLineLength: 100
+    showInvisibles: true
+    tabLength: 4
+  "editor-background":
+    box3d: {}
+    image:
+      backgroundSize: "cover"
+      opacity: 50
+      style: "background-image: url('file:///home/braden/Pictures/Yosemite4.jpg');"
+      url: "/home/braden/Pictures/Yosemite4.jpg"
+    other: {}
+    text: {}
+    video: {}
+  "exception-reporting":
+    userId: "a5e65629-6942-5e10-e7d5-f566959bee1d"
+  linter:
+    showErrorPanel: false
+  minimap: {}
+  pigments: {}
+  welcome:
+    showOnStartup: false
+".build.source":
+  editor:
+    preferredLineLength: 100
+".bzl.source":
+  editor:
+    preferredLineLength: 100
+".go.source":
+  editor:
+    preferredLineLength: 100
+    showIndentGuide: true
+    showInvisibles: false
+    tabLength: 4
+".gohtml.html.text":
+  editor:
+    preferredLineLength: 100
+    tabLength: 24
+".gotemplate.source":
+  editor:
+    preferredLineLength: 100
+    tabLength: 24
