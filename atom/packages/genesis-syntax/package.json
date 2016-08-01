@@ -1,0 +1,15 @@
+{
+  "name": "genesis-syntax",
+  "theme": "syntax",
+  "version": "1.0.7",
+  "description": "A visual hierarchy that even designers can agree with.",
+  "keywords": [
+    "syntax",
+    "theme"
+  ],
+  "repository": "https://github.com/jmcalaway/atom-genesis-syntax.git",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  }
+}
