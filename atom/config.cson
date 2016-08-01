@@ -29,17 +29,12 @@
     userId: "a5e65629-6942-5e10-e7d5-f566959bee1d"
   linter:
     showErrorPanel: false
-  minimap:
-    plugins:
-      cursorline: true
-      cursorlineDecorationsZIndex: 0
-      "find-and-replace": true
-      "find-and-replaceDecorationsZIndex": 0
-      "git-diff": true
-      "git-diffDecorationsZIndex": 0
-      "minimap-hide": true
-      "minimap-hideDecorationsZIndex": 0
+  minimap: {}
   pigments: {}
+  "tree-view": {}
+  "vim-mode-plus":
+    highlightSearch: true
+    useSmartcaseForSearch: true
   welcome:
     showOnStartup: false
 ".build.source":

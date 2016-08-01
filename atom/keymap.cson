@@ -40,9 +40,20 @@
   'ctrl-k ctrl-down': 'unset!'
   'ctrl-k ctrl-left': 'unset!'
   'ctrl-k ctrl-right': 'unset!'
+  'ctrl-tab ^ctrl': 'unset!'
+  'ctrl-shift-tab ^ctrl': 'unset!'
+  'ctrl-tab': 'pane:show-next-item'
+  'ctrl-shift-tab': 'pane:show-previous-item'
+  'ctrl-shift-h': 'pane:move-item-left'
+  'ctrl-shift-l': 'pane:move-item-right'
+  'ctrl-k': 'window:focus-pane-above'
+  'ctrl-j': 'window:focus-pane-below'
+  'ctrl-h': 'window:focus-pane-on-left'
+  'ctrl-l': 'window:focus-pane-on-right'
 'atom-workspace atom-text-editor':
   'ctrl-k ctrl-u': 'unset!'
   'ctrl-k ctrl-l': 'unset!'
+  'ctrl-l': 'unset!'
 'atom-workspace atom-text-editor:not([mini])':
   'ctrl-k ctrl-0': 'unset!'
   'ctrl-k ctrl-1': 'unset!'
@@ -67,14 +78,8 @@
   'ctrl-k j': 'unset!'
 '.platform-win32 atom-text-editor, .platform-linux atom-text-editor':
   'ctrl-k ctrl-d': 'unset!'
-
-'body':
-  'ctrl-shift-h': 'pane:move-item-left'
-  'ctrl-shift-l': 'pane:move-item-right'
-  'ctrl-k': 'window:focus-pane-above'
-  'ctrl-j': 'window:focus-pane-below'
-  'ctrl-h': 'window:focus-pane-on-left'
-  'ctrl-l': 'window:focus-pane-on-right'
+'body.platform-win32 atom-workspace, body.platform-linux atom-workspace':
+  'ctrl-k ctrl-g': 'unset!'
 
 'atom-text-editor.vim-mode-plus:not(.insert-mode)':
   'H': 'pane:show-previous-item'
@@ -82,7 +87,7 @@
   ': w enter': 'core:save'
   ': q enter': 'core:close'
   ': v s enter': 'pane:split-right-and-copy-active-item'
-  ': s enter': 'pane:split-down-and-copy-active-item'
+  ': s p enter': 'pane:split-down-and-copy-active-item'
   ': c': 'command-palette:toggle'
   ', p c': 'pane:close'
   ', n d': 'custom-commands:dismiss-notifications'
@@ -90,6 +95,11 @@
 'atom-text-editor.vim-mode-plus.normal-mode':
   ', g d': 'go-debug:toggle-panel'
   ', d': 'tree-view:show'
+  ', e': 'tree-view:reveal-active-file'
 
 '.tree-view':
+  'd': 'tree-view:cut'
+  'y': 'tree-view:copy'
+  'p': 'tree-view:paste'
   ', d': 'tree-view:toggle'
+  ', e': 'tree-view:reveal-active-file'
